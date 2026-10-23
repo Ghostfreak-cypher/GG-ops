@@ -1,0 +1,280 @@
+{
+  "workspace": {
+    "name": "genegenius.ai",
+    "description": "GeneGenius Asana workspace (scoped export: Zuhra Maksudi's assigned + followed/linked tasks)"
+  },
+  "members": [
+    {
+      "name": "Faraz",
+      "email": "mohdsarfaraz@genegenius.ai",
+      "role": "OWNER"
+    },
+    {
+      "name": "Sagar Gour",
+      "email": "sagar.gour@genegenius.ai",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Shrinjay Shresth",
+      "email": "shrinjayshresth@genegenius.ai",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Anushka Garg",
+      "email": "anushkagarg3008@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Vishvaksen Pendyala",
+      "email": "vishvakpune@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Vansh Goel",
+      "email": "vanshgoel979@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Matthew Dingess",
+      "email": "matthew@genegenius.ai",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Zuhra Maksudi",
+      "email": "zuhra@genegenius.ai",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Sakshi Bhavsar",
+      "email": "sakbhavsar@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Navdeep Mugathihalli Kumaregowda",
+      "email": "navdeepmkn@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Aman",
+      "email": "amanhas4700@gmail.com",
+      "role": "GUEST"
+    },
+    {
+      "name": "Guru Singh",
+      "email": "singh.guru.2712@gmail.com",
+      "role": "MEMBER"
+    },
+    {
+      "name": "Ajmal Husain",
+      "email": "ajmalhusaintech@gmail.com",
+      "role": "GUEST"
+    },
+    {
+      "name": "Shrinjay Shresth (personal)",
+      "email": "shrinjayshresth@gmail.com",
+      "role": "GUEST"
+    }
+  ],
+  "labels": [],
+  "projects": [
+    {
+      "name": "VMIS – CFTR G551D MVP",
+      "description": "CFTR G551D minimum-viable interpretation pipeline",
+      "sections": [
+        {
+          "name": "Untitled section",
+          "tasks": [
+            {
+              "title": "Decide which VMIS fields the user sees (field-set sign-off for Vansh)",
+              "description": "Raised by Vansh in the June 28 sync. On the VMIS frontend, Vansh displayed EVERY field he could because no one specified which fields the end user should see. That's a scientific-display call, and per scope, final scientific approval is Zuhra's.\n\nWHAT'S NEEDED: Zuhra reviews the current VMIS page (everything Vansh has displayed) and marks each field keep or cut — that becomes the locked display set Vansh builds to. Until then, Vansh leaves everything displayed and changes nothing on a guess.\n\nWHY IT MATTERS: this is research-use-only; facts/inferences/hypotheses must stay visually separated, and weak/contradictory evidence must be disclosed not hidden. So the field set isn't just UI polish, it's part of the scientific-integrity surface the demo shows.\n\nDONE WHEN: Zuhra has marked keep/cut on the VMIS field list and handed it to Vansh as the locked display set.",
+              "status": "TODO",
+              "priority": "HIGH",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-29",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            },
+            {
+              "title": "CFTR G551D MVP scientifically approved and ready for demonstration",
+              "description": "Milestone definition. Complete only when the CFTR G551D flagship case has passed full scientific review and is ready to demonstrate as a research-use-only mechanism investigation. Scientific sign-off gate — owner Zuhra. Nothing reaches \"approved\" without her review, per the VMIS provenance rules.\n\nBefore this is marked complete:\n1. Mechanism correct and sourced — primary = reduced-function gating defect (Class III); defective trafficking explicitly rejected; reduced stability noted as secondary hypothesis. Every factual claim carries a PMID/DOI; facts/inferences/hypotheses separated and labeled; confidence justified by evidence.\n2. Variant identifiers pinned/verified — CFTR (HGNC:1884); NM_000492.4 (MANE Select), NP_000483.3; c.1652G>A / p.(Gly551Asp) / G551D; ClinVar VCV000007120 Pathogenic 4-star (NOT VCV000007105); canonical graph ID clinvar:VCV000007120.\n3. Known conflicts resolved/disclosed — ClinVar API misparse (\"Uncertain\" for known-Pathogenic) must not propagate; source from NCBI esummary or local VCF; downstream ACMG \"VUS\" corrected to Pathogenic or disclosed as a known artifact; VEP Ensembl-vs-pinned-RefSeq transcript difference documented.\n4. Safety/scope hold — RUO banner; no diagnosis/prescribing/dosing/\"will work\" language; therapeutic mentions framed as research hypotheses; contradictions preserved as explicit objects.\n5. Demonstrable — cited mechanism note populates the shared VMIS JSON, mechanism graph, phenotype explanation, exportable RUO report; reviewer selects a final outcome via the VMIS scientific review checklist.\n\nDependency chain: Sakshi's cited mechanism note -> mechanism+phenotype JSON fields -> Zuhra's scientific review -> this milestone.\nReference: https://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit",
+              "status": "TODO",
+              "priority": "HIGH",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-26",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": [
+                {
+                  "author": "mohdsarfaraz@genegenius.ai",
+                  "body": "Gate decision — June 25 (GO/NO-GO #2). CFTR is close but not polished tonight. The mechanism note still needs its citations added (lands tomorrow AM), then scientific review. We are one day out — the planned fallback, not a problem.\nTomorrow's order: (1) Sakshi gets the cited mechanism note to Zuhra first thing AM (she needs runway to review before we freeze); (2) Zuhra reviews the same morning — the next link before we lock the demo; (3) Vansh wires it into the frontend once the JSON is locked. Keeps us on the June 26 internal full-draft from a frozen, tested branch.",
+                  "createdAt": "2026-06-25T05:45:59Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Scientific Review",
+          "tasks": [
+            {
+              "title": "Create the VMIS scientific review checklist",
+              "description": "Create the scientific review checklist that must be completed before any VMIS case is approved for demonstration or reporting.\nThe checklist verifies: correct gene/variant; genome assembly; transcript + version; HGVS genomic/coding/protein; protein ID + AA change; ClinVar + population data accurate; normal gene/protein function correct; mechanism specific to the variant; each variant-to-phenotype step biologically reasonable; major claims have evidence; citations support the exact claims; gene-level evidence not shown as variant-specific proof; facts/inferences/hypotheses separated; weak/missing/contradictory evidence visible; confidence matches evidence; competing mechanisms not hidden; phenotype relationships not overstated; therapeutic statements RUO; no diagnosis/prescribing/dosing; RUO disclaimer present; unresolved issues documented before approval.\nReview outcomes: Approved / Approved with revisions / Requires additional evidence / Rejected / Deferred.\nDeliverable: a reusable scientific review checklist + sign-off template, applied first to CFTR G551D then other VMIS cases.\nReference: https://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit",
+              "status": "DONE",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-24",
+              "completedAt": "2026-06-27",
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": [
+                {
+                  "author": "mohdsarfaraz@genegenius.ai",
+                  "body": "This checklist is quietly on tomorrow's critical path. It's overdue, but the bigger point is that it's the tool you use to review Sakshi's cited mechanism note tomorrow. Without it locked, the review has no defined bar. The good news: the description already contains the full checklist — all 20 verification items and the five review outcomes. So this is confirm-and-lock, not build-from-scratch. Lock it so it's ready when Sakshi's note lands in the AM. Confirm here once it's locked.",
+                  "createdAt": "2026-06-25T06:20:06Z"
+                },
+                {
+                  "author": "mohdsarfaraz@genegenius.ai",
+                  "body": "vish, picking this up since Sakshi's whole citation layer sits on it. The passages fixture is in and solid — cases/cftr/g551d_passages.json has STRIVE 22293454, VX-770 in-vitro 21083385, class III gating-defect review 16113672, modulator paper 23757338 (real PMIDs, relevance scores, F508del-vs-G551D distinction). But that's the retrieve() output, not the claim-to-source mapping. The mapping is the structured object tying each of the seven claims to its specific PMID with variant-specific-vs-gene-level flag, contradictory evidence, confidence, review status — the thing Sakshi's citations point into. I can't find that object on main (packages/rag only has init.py + literature_retrieval.py, both under Anushka). Two questions: (1) where's the mapping right now — exact file + branch, or doc link; (2) when Sakshi did her cited note, did she point at your mapping or straight at g551d_passages.json. If it's built and I'm looking in the wrong place, send the path. If it still needs doing on top of the passages, tell me straight and we get it done today — until it's locked Sakshi's citations point at something that can still move.",
+                  "createdAt": "2026-06-27T00:48:45Z"
+                }
+              ]
+            },
+            {
+              "title": "Review the CFTR G551D mechanism note",
+              "description": "Review the completed CFTR G551D mechanism note; confirm the science is accurate, appropriately sourced, and not overstated.\nReview: normal CFTR gene/protein function; selected transcript + protein IDs; G551D substitution; gating-defect classification; protein-level consequence; reduced chloride transport; cell/tissue effects; connection to the CF phenotype; competing/secondary mechanisms; confidence per step; supporting citations + evidence quality; separation of facts/inferences/hypotheses; therapeutic/mechanism research language.\nRequirements: claims specific to G551D where required; citations support the exact claims; flag gene-level evidence used as variant-specific proof; identify weak/incomplete/contradictory evidence; no diagnosis/prescribing/dosing; therapeutic statements RUO; add review comments; select an outcome via the checklist.\nDeliverable: a reviewed note with corrections, unresolved issues, and one final status (Approved / Approved with revisions / Requires additional evidence / Rejected / Deferred).\nReference: https://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit",
+              "status": "TODO",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-25",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            },
+            {
+              "title": "Final scientific sign-off for CFTR G551D MVP",
+              "description": "Complete the final scientific review of the assembled CFTR G551D VMIS case before the MVP demonstration.\nReview the complete output: variant identifiers + transcript selection; normal CFTR function; variant-specific molecular change; mechanism chain; cell/tissue/phenotype effects; claim-to-source mappings; confidence/uncertainty labels; competing hypotheses; contradictory/missing evidence; mechanism-based research hypotheses; frontend wording + visual presentation; human-review status; RUO disclaimer.\nFinal approval requirements: every major claim sourced; citations support exactly what's displayed; facts/inferences/hypotheses separated; weak/contradictory evidence not overstated; no unsupported graph relationship displayed; no diagnosis/prescribing/dosing; therapeutic content limited to research hypotheses; all critical corrections done; any unresolved limitation disclosed.\nDeliverable: one final decision (Approved for MVP demonstration / Approved with documented limitations / Not approved pending corrections) + reviewer comments + date of sign-off.\nReference: https://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit",
+              "status": "TODO",
+              "priority": "HIGH",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-26",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GeneGenius Sprint",
+      "description": "Core product sprint + production incident remediation",
+      "sections": [
+        {
+          "name": "Untitled section",
+          "tasks": [
+            {
+              "title": "Run 5 cold-user tests this weekend",
+              "description": "Every one of us runs 5 real user tests this weekend — people who have never touched genomics. Hand them a VCF file, point them at the platform, tell them to log in and go. We do not help; we watch. From upload to done, note where they hesitate, get stuck, what confuses them, where they'd have quit. Use different VCF files across people. Log everything in the user-testing sheet Shrinjay is setting up, one row per person. With the whole team doing 5 each, plus Aman running 5 with Beata's genomics contacts, that's real volume of honest feedback by Monday.",
+              "status": "DONE",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "mohdsarfaraz@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-06-22",
+              "completedAt": "2026-06-27",
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            },
+            {
+              "title": "Explore + pursue AWS Partner Network (APN) funding benefits",
+              "description": "Explore and pursue AWS Partner Network (APN) funding benefits for GeneGenius, aligned with the live Innovative Solutions engagement. Matt takes it on after KPMG; Sagar on the technical side.\n1. APN partner funding (https://aws.amazon.com/partners/funding/) — AWS funds Partners on training, product/solution development, go-to-market. We're well-positioned: platform live on AWS GPU, NVIDIA Inception member, AWS Activate credits.\n2. Innovative Solutions engagement — milestone-based migration onto EKS GPU, Innovative's services AWS-funded (AJ Rivera ajrivera@innovativesol.com; Sarah at AWS = funding contact). Compute from Zuhra's email to Sarah: WO1 (Jul 1-15) ~$0; WO2 (Jul 15-Aug 15) ~$21,750/mo; WO3 ~$21,750; WO4 ~$22,750; scaling toward ~$261K/yr.\nLIVE DEADLINE: WO1 is assessment-only — a window BEFORE WO2 spend starts July 15 to sort the compute-cost path. Zuhra asked Sarah for 20 min early next week.\nMatt: map which APN benefits we qualify for and how they stack with (not double-claim against) the funded Innovative engagement; support Zuhra's Sarah conversation. Sagar: AWS services/architecture inputs to qualify for build/proficiency + migration funding buckets.\nDONE WHEN: APN benefits identified and mapped, claim-sheet drafted, lined up to support Zuhra's funding conversation with Sarah BEFORE July 15 WO2 spend.",
+              "status": "DONE",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "matthew@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-07-03",
+              "completedAt": "2026-07-01",
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Provisional Patent — Filing & IP Strategy",
+      "description": "Provisional patent filing + IP strategy",
+      "sections": [
+        {
+          "name": "Trade-Secret Boundary",
+          "tasks": [
+            {
+              "title": "Define what we file vs what we keep as trade secret",
+              "description": "The science/research team (Zuhra + Amina) already worked through what is safe to publish vs what must stay protected while writing the Genetics in Medicine benchmarking paper. Capture that split as a written file-vs-trade-secret boundary counsel and the team can work against.\nTRADE SECRET (per Ramesh's June 26 guidance): the exact conflict-resolution mechanism in the MoE engine, the specific weight constants, the tuning. Rule of thumb: disclose the range (e.g. 'k can be 5-10'), keep the optimal value secret.\nCAN BE FILED/PUBLISHED: the high-level architecture, the deterministic-reproducibility claim, the relative prioritization of experts (ordering, not numbers), the existence of the M1-M8 modules and the knowledge graph.\nCROSS-REFERENCE: must line up with GeneGenius_Provisional_Disclosure.pdf Section 6.3 (intentionally not recited). Boundary doc must not contradict the disclosure.\nDONE WHEN: a written file-vs-trade-secret boundary exists, consistent with the disclosure, that counsel and the team can both work against.",
+              "status": "TODO",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-07-03",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            },
+            {
+              "title": "Align the defensive-publication plan (Genetics in Medicine paper) with the filing",
+              "description": "Per the three-layer IP strategy confirmed with Ramesh: patent the architecture, keep the mechanism as trade secret, and use the Genetics in Medicine (GIM) benchmarking paper as DEFENSIVE PUBLICATION (prior art once filed, making it hard for others to patent something similar).\nTWO HARD RULES:\n1. The GIM paper must NOT reveal anything in the trade-secret boundary (see the 'Define what we file vs what we keep as trade secret' task). Check the draft against that boundary before submission.\n2. TIMING: the defensive publication should FOLLOW (not precede) provisional #1. If the paper publishes before we file, it becomes our own blocking prior art and can sink the patent. Sequence: file provisional #1 first, then publish.\nCONTEXT: GIM leads — Shrinjay (benchmarking), Amina (corresponding author), target submit Oct 2026. Provisional #1 targets mid-July 2026, so timing should be fine — confirm the sequence holds.\nDONE WHEN: GIM paper scope checked against the trade-secret boundary AND its submission timing confirmed to fall after the provisional #1 filing date.",
+              "status": "TODO",
+              "priority": "MEDIUM",
+              "type": "TASK",
+              "assignees": [
+                "zuhra@genegenius.ai"
+              ],
+              "labels": [],
+              "dueDate": "2026-07-06",
+              "completedAt": null,
+              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "subtasks": [],
+              "comments": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

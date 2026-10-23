@@ -1,0 +1,16 @@
+# Personal / per-machine Claude Code overrides — never committed
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Environment
+.env
+.env.*
+!.env.example
+graphify-out
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+graphify-out
+Docs
+# Note: my-app/ has its own .gitignore for node_modules, .next, build output, etc.

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Offline — GGOps</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    background: #ffffff;
+    color: #000000;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #0a0a0a; color: #ffffff; }
+  }
+  h1 {
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    color: #666666;
+    max-width: 28rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    p { color: #999999; }
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    padding: 0 1.5rem;
+    border: 3px solid currentColor;
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  @media (prefers-color-scheme: dark) {
+    a { background: #ffffff; color: #000000; }
+  }
+</style>
+</head>
+<body>
+  <h1>You&rsquo;re offline</h1>
+  <p>GGOps needs a connection to load this page. Check your network and try again.</p>
+  <a href="/">Try again</a>
+</body>
+</html>

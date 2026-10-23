@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: npm
+          cache-dependency-path: my-app/package-lock.json
+      - run: npm ci --legacy-peer-deps
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+        env:
+          MONGODB_URI: mongodb://localhost:27017/ci
+          AUTH_SECRET: ci-secret
+          AUTH_GOOGLE_ID: ci-google-id
+          AUTH_GOOGLE_SECRET: ci-google-secret
