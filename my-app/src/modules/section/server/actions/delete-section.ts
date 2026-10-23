@@ -23,7 +23,11 @@ export async function deleteSectionAction(sectionId: string): Promise<ActionResu
 
   await withTransaction(async (s) => {
     // Keep the work: move tasks out of the section, then delete the section.
-    await Task.updateMany({ sectionId: section._id }, { $set: { sectionId: null } }, { session: s });
+    await Task.updateMany(
+      { workspaceId: section.workspaceId, projectId: section.projectId, sectionId: section._id },
+      { $set: { sectionId: null } },
+      { session: s },
+    );
     await Section.deleteOne({ _id: section._id }, { session: s });
   });
   return { ok: true };

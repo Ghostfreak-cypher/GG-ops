@@ -26,6 +26,7 @@ import { createTaskSchema } from "@/modules/task/schemas";
 import { getProjectForUser, assertSectionInProject } from "@/modules/project/server/access";
 import { canEditTasks } from "@/modules/workspace/server/permissions";
 import { nextPosition } from "@/modules/task/position";
+import { invalidTaskRef } from "@/modules/task/server/task-refs";
 import { parseObjectIdOrThrow } from "@/lib/mongo/ids";
 import { logActivity } from "@/modules/activity/log";
 import { enqueueTaskAssignedEmails } from "@/lib/jobs/task-email";
@@ -58,15 +59,28 @@ export async function createTaskForActor(
 
   await connectDB();
   const pid = parseObjectIdOrThrow(projectId);
+  const workspaceId = parseObjectIdOrThrow(access.project.workspaceId);
   const sectionId = d.sectionId ? parseObjectIdOrThrow(d.sectionId) : null;
 
-  const siblings = await Task.find({ projectId: pid, sectionId, isArchived: false })
+  const assigneeIds = d.assigneeIds ?? [];
+  const assigneeOids = assigneeIds.map((id) => parseObjectIdOrThrow(id));
+  const labelOids = (d.labelIds ?? []).map((id) => parseObjectIdOrThrow(id));
+  const parentTaskId = d.parentTaskId ? parseObjectIdOrThrow(d.parentTaskId) : null;
+  const refError = await invalidTaskRef(workspaceId, {
+    assigneeIds: assigneeOids,
+    labelIds: labelOids,
+    parent: parentTaskId ? { taskId: parentTaskId, projectId: pid } : undefined,
+  });
+  if (refError) return { ok: false, error: refError };
+
+  // nextPosition only needs the highest sibling position; the board index serves it directly.
+  const last = await Task.findOne({ workspaceId, projectId: pid, sectionId, isArchived: false })
+    .sort({ position: -1 })
     .select("position")
     .lean();
 
-  const assigneeIds = d.assigneeIds ?? [];
   const task = await Task.create({
-    workspaceId: parseObjectIdOrThrow(access.project.workspaceId),
+    workspaceId,
     projectId: pid,
     sectionId,
     title: d.title,
@@ -75,11 +89,11 @@ export async function createTaskForActor(
     priority: d.priority ?? "MEDIUM",
     type: d.type ?? "TASK",
     dueDate: d.dueDate ?? null,
-    assigneeIds: assigneeIds.map((id) => parseObjectIdOrThrow(id)),
-    labelIds: (d.labelIds ?? []).map((id) => parseObjectIdOrThrow(id)),
-    parentTaskId: d.parentTaskId ? parseObjectIdOrThrow(d.parentTaskId) : null,
+    assigneeIds: assigneeOids,
+    labelIds: labelOids,
+    parentTaskId,
     createdBy: parseObjectIdOrThrow(actor.id),
-    position: nextPosition(siblings.map((t) => t.position ?? 0)),
+    position: nextPosition(last ? [last.position ?? 0] : []),
   });
 
   await logActivity({

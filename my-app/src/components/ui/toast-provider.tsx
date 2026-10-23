@@ -1,23 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-// Window.Pusher type is declared in lib/use-pusher-refresh.ts (single source of truth)
-
-let pusherScriptPromise: Promise<void> | null = null;
-
-function loadPusherScript(): Promise<void> {
-  if (typeof window !== "undefined" && window.Pusher) return Promise.resolve();
-  if (pusherScriptPromise) return pusherScriptPromise;
-  pusherScriptPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = "https://js.pusher.com/8.4.0/pusher.min.js";
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Failed to load Pusher client"));
-    document.head.appendChild(script);
-  });
-  return pusherScriptPromise;
-}
+import { loadPusherScript } from "@/lib/use-pusher-refresh";
 
 type ToastItem = { id: string; title: string; type: string };
 

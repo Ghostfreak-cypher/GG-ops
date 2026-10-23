@@ -230,15 +230,21 @@ export const getTaskDetail = cache(
     if (!access) return null;
 
     const leanTask = task as unknown as LeanTask;
-    const subtasks = await Task.find({ parentTaskId: tid, isArchived: false })
-      .sort({ position: 1 })
-      .lean();
+    // Scoped to the task's workspace, so a foreign parentTaskId/labelId written from another
+    // workspace can't surface here. Labels don't depend on subtasks, so both load together.
+    const [subtasks, labelDocs] = await Promise.all([
+      Task.find({ workspaceId: task.workspaceId, parentTaskId: tid, isArchived: false })
+        .sort({ position: 1 })
+        .lean(),
+      (leanTask.labelIds ?? []).length
+        ? Label.find({ _id: { $in: leanTask.labelIds }, workspaceId: task.workspaceId })
+            .select("name color")
+            .lean()
+        : Promise.resolve([]),
+    ]);
     const leanSubs = subtasks as unknown as LeanTask[];
 
     const userById = await usersFor([leanTask, ...leanSubs]);
-    const labelDocs = (leanTask.labelIds ?? []).length
-      ? await Label.find({ _id: { $in: leanTask.labelIds } }).select("name color").lean()
-      : [];
 
     return {
       ...mapTask(leanTask, userById),

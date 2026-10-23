@@ -30,14 +30,30 @@ export async function publish(
   const signature = createHmac("sha256", env.PUSHER_SECRET!).update(stringToSign).digest("hex");
   params.set("auth_signature", signature);
 
-  const res = await fetch(
-    `https://api-${env.PUSHER_CLUSTER}.pusher.com${path}?${params.toString()}`,
-    { method: "POST", headers: { "Content-Type": "application/json" }, body },
-  );
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Pusher publish failed (${res.status}): ${text.slice(0, 300)}`);
+  // Best-effort: every caller publishes after its write has committed, so a Pusher outage
+  // must not turn a saved change into an error (and skip the emails/notifications after it).
+  try {
+    const res = await fetch(
+      `https://api-${env.PUSHER_CLUSTER}.pusher.com${path}?${params.toString()}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body },
+    );
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      logger.warn("realtime.publish failed", {
+        channel,
+        event,
+        status: res.status,
+        body: text.slice(0, 300),
+      });
+      return;
+    }
+  } catch (error) {
+    logger.warn("realtime.publish failed", {
+      channel,
+      event,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return;
   }
 
   logger.info("realtime.published", { channel, event });

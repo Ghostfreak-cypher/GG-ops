@@ -4,8 +4,6 @@ import { getProjectForUser } from "@/modules/project/server/access";
 import { getProjectBoard } from "@/modules/task/server/queries";
 import { getProjectDependencies } from "@/modules/task/server/queries/project-dependencies";
 import { canEditTasks, canArchiveProject } from "@/modules/workspace/server/permissions";
-import { listMembers } from "@/modules/workspace/server/queries";
-import { listLabels } from "@/modules/label/server/queries";
 import { ProjectHeader } from "../project-header";
 import { TimelineView } from "./timeline-view";
 import type { TaskDTO } from "@/modules/task/server/dto";
@@ -36,24 +34,8 @@ export default async function TimelinePage({
     ...board.unsectioned,
   ];
 
-  const [deps, members, labels] = await Promise.all([
-    getProjectDependencies(access.project.workspaceId, projectId),
-    listMembers(access.project.workspaceId),
-    listLabels(access.project.workspaceId),
-  ]);
-
-  const assignable = members.map((m) => ({
-    id: m.userId,
-    name: m.name,
-    email: m.email,
-    image: m.image ?? null,
-  }));
-
-  const labelOptions = labels.map((l) => ({
-    id: l.id,
-    name: l.name,
-    color: l.color ?? null,
-  }));
+  // TimelineView never used members or labels, so they are no longer fetched or sent.
+  const deps = await getProjectDependencies(access.project.workspaceId, projectId);
 
   return (
     <div className="mx-auto max-w-7xl space-y-4 pb-24">
@@ -72,9 +54,6 @@ export default async function TimelinePage({
         sections={board.sections}
         tasks={allTasks}
         dependencies={deps}
-        editable={editable}
-        members={assignable}
-        labels={labelOptions}
       />
     </div>
   );

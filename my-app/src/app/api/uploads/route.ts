@@ -1,15 +1,13 @@
-import { handle } from "@/lib/api/handler";
+import { handleAuthed } from "@/lib/api/handler";
 import { ok, err } from "@/lib/api/response";
 import { rateLimit } from "@/lib/rate-limit";
 import { uploadFile, isAllowedContentType } from "@/lib/upload";
-import { getCurrentUser } from "@/modules/auth/server/session";
 
 const MAX_BYTES = 25 * 1024 * 1024; // 25 MB
 
-export const POST = handle(async (req: Request) => {
-  const user = await getCurrentUser();
-  if (!user) return err("Unauthorized", 401);
-
+// handleAuthed, not handle + getCurrentUser: it enforces API-key write scope and the per-key
+// hourly limit, so a read-only key could otherwise upload.
+export const POST = handleAuthed(async (req: Request, user) => {
   const limited = await rateLimit(`upload:${user.id}`, 60, 3600);
   if (!limited.allowed) return err("Too Many Requests", 429);
 

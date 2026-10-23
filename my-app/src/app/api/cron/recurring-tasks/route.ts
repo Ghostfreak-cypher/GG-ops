@@ -57,13 +57,19 @@ async function spawnRecurringTasks(): Promise<{ spawned: number }> {
     .lean()
     .then((docs) => docs as unknown as RecurringTaskLean[]);
 
+  // One lookup for every existing child instead of one query per task.
+  const spawnedFrom = new Set(
+    (
+      await Task.distinct("recurrenceParentId", {
+        recurrenceParentId: { $in: tasks.map((t) => t._id) },
+      })
+    ).map(String),
+  );
+
   let spawned = 0;
 
   for (const task of tasks) {
-    const childExists = await Task.exists({
-      recurrenceParentId: task._id,
-    });
-    if (childExists) continue;
+    if (spawnedFrom.has(String(task._id))) continue;
 
     const baseDate = task.dueDate ?? task.completedAt ?? new Date();
     const nextDue = computeNextDueDate(task.recurrenceRule, baseDate);

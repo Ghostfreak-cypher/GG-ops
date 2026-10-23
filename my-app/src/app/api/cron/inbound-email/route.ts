@@ -14,7 +14,8 @@ import { ingestInboundEmail } from "@/modules/inbound-email/ingest";
  */
 async function run(req: Request) {
   if (!isCronAuthorized(req)) return err("Unauthorized", 401);
-  const limited = await rateLimit(`cron:${clientIp(req)}:${new URL(req.url).pathname}`, 10, 3600);
+  // 30/h like cron/jobs: the documented 5-minute poll is 12/h, so 10/h rejected two runs an hour.
+  const limited = await rateLimit(`cron:${clientIp(req)}:${new URL(req.url).pathname}`, 30, 3600);
   if (!limited.allowed) return err("Too Many Requests", 429);
   return ok(await ingestInboundEmail());
 }

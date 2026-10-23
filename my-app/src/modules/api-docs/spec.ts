@@ -340,6 +340,3 @@ export function buildOpenApiSpec(): Record<string, unknown> {
     },
   };
 }
-
-/** Built once — the document is static for the process lifetime. */
-export const openApiSpec = buildOpenApiSpec();

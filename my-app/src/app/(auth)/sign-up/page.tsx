@@ -9,11 +9,7 @@ import { signUpAction } from "@/modules/auth/server/actions/sign-up";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-function nextUrl() {
-  if (typeof window === "undefined") return "/";
-  return new URLSearchParams(window.location.search).get("next") || "/";
-}
+import { nextUrl } from "@/modules/auth/next-url";
 
 export default function SignUpPage() {
   // useSearchParams needs a Suspense boundary, same as reset-password/page.tsx.

@@ -8,6 +8,7 @@ import { getProjectForUser } from "@/modules/project/server/access";
 import { canEditTasks } from "@/modules/workspace/server/permissions";
 import { parseObjectIdOrThrow, isValidObjectId } from "@/lib/mongo/ids";
 import { requireUser } from "@/modules/auth/server/session";
+import { invalidTaskRef } from "@/modules/task/server/task-refs";
 import type { ActionResult } from "@/lib/action-result";
 
 const bulkPatchSchema = z.object({
@@ -15,6 +16,13 @@ const bulkPatchSchema = z.object({
   priority: z.enum(TASK_PRIORITIES).optional(),
   assigneeIds: z.array(z.string()).optional(),
 });
+
+/** Whether the user can edit tasks in every project these tasks belong to. */
+async function canEditAll(tasks: { projectId: unknown }[], userId: string): Promise<boolean> {
+  const projectIds = [...new Set(tasks.map((t) => String(t.projectId)))];
+  const accesses = await Promise.all(projectIds.map((pid) => getProjectForUser(pid, userId)));
+  return accesses.every((access) => !!access && canEditTasks(access.role));
+}
 
 export async function bulkUpdateTasksAction(
   taskIds: string[],
@@ -36,16 +44,12 @@ export async function bulkUpdateTasksAction(
   if (!validIds.length) return { ok: false, error: "No valid task IDs." };
 
   const tasks = await Task.find({ _id: { $in: validIds }, isArchived: false })
-    .select("projectId")
+    .select("projectId workspaceId")
     .lean();
   if (!tasks.length) return { ok: false, error: "Tasks not found." };
 
-  const projectIds = [...new Set(tasks.map((t) => String(t.projectId)))];
-  for (const pid of projectIds) {
-    const access = await getProjectForUser(pid, user.id);
-    if (!access || !canEditTasks(access.role)) {
-      return { ok: false, error: "You don't have permission to edit some tasks." };
-    }
+  if (!(await canEditAll(tasks, user.id))) {
+    return { ok: false, error: "You don't have permission to edit some tasks." };
   }
 
   const updateDoc: Record<string, unknown> = {};
@@ -56,11 +60,19 @@ export async function bulkUpdateTasksAction(
   }
   if (d.priority !== undefined) updateDoc.priority = d.priority;
   if (d.assigneeIds !== undefined) {
-    updateDoc.assigneeIds = d.assigneeIds.filter(isValidObjectId).map(parseObjectIdOrThrow);
+    const assigneeIds = d.assigneeIds.filter(isValidObjectId).map(parseObjectIdOrThrow);
+    const workspaceIds = [...new Set(tasks.map((t) => String(t.workspaceId)))];
+    const refErrors = await Promise.all(
+      workspaceIds.map((ws) => invalidTaskRef(parseObjectIdOrThrow(ws), { assigneeIds })),
+    );
+    const refError = refErrors.find((e) => e !== null);
+    if (refError) return { ok: false, error: refError };
+    updateDoc.assigneeIds = assigneeIds;
   }
   updateDoc.updatedBy = parseObjectIdOrThrow(user.id);
 
-  await Task.updateMany({ _id: { $in: validIds } }, { $set: updateDoc });
+  // Only the tasks permission-checked above — not every id the client sent.
+  await Task.updateMany({ _id: { $in: tasks.map((t) => t._id) } }, { $set: updateDoc });
   return { ok: true };
 }
 
@@ -74,16 +86,12 @@ export async function bulkArchiveTasksAction(taskIds: string[]): Promise<ActionR
     .select("projectId")
     .lean();
 
-  const projectIds = [...new Set(tasks.map((t) => String(t.projectId)))];
-  for (const pid of projectIds) {
-    const access = await getProjectForUser(pid, user.id);
-    if (!access || !canEditTasks(access.role)) {
-      return { ok: false, error: "You don't have permission to archive some tasks." };
-    }
+  if (!(await canEditAll(tasks, user.id))) {
+    return { ok: false, error: "You don't have permission to archive some tasks." };
   }
 
   await Task.updateMany(
-    { _id: { $in: validIds } },
+    { _id: { $in: tasks.map((t) => t._id) } },
     { $set: { isArchived: true, updatedBy: parseObjectIdOrThrow(user.id) } },
   );
   return { ok: true };

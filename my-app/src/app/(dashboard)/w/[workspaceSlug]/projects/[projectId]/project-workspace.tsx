@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
 import type { BoardData, TaskDTO } from "@/modules/task/server/dto";
-import { useProjectView, filterAndSortTasks, EMPTY_FILTERS } from "@/modules/task/use-project-view";
+import { useProjectView, filterAndSortTasks } from "@/modules/task/use-project-view";
 import type { ViewFilters, SortKey, GroupKey } from "@/modules/task/use-project-view";
 import type { SavedViewDTO } from "@/modules/saved-view/server/queries";
 import { SavedViewsBar } from "./saved-views-bar";
@@ -19,6 +19,10 @@ import { usePusherRefresh } from "@/lib/use-pusher-refresh";
 
 type Member = { id: string; name: string; image?: string | null };
 type LabelOpt = { id: string; name: string; color: string | null };
+
+// Module scope, so usePusherRefresh's effect deps stay stable: the React Compiler skips this
+// component (eslint suppression below), and a fresh array per render reconnected the socket.
+const TASK_EVENTS = ["task.changed"];
 
 interface ProjectWorkspaceProps {
   board: BoardData;
@@ -47,7 +51,7 @@ export function ProjectWorkspace({
 }: ProjectWorkspaceProps) {
   // Covers BoardView too — it's only ever rendered as a child of this component, so its
   // own former copy of this same subscription was a duplicate (see board-view.tsx).
-  usePusherRefresh(`project-${board.projectId}`, ["task.changed"]);
+  usePusherRefresh(`project-${board.projectId}`, TASK_EVENTS);
   const router = useRouter();
   const pathname = usePathname();
   const {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,11 +27,11 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <SessionProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider delayDuration={150}>{children}</TooltipProvider>
-        </QueryClientProvider>
-      </SessionProvider>
+      {/* No SessionProvider: nothing calls useSession, and it refetched /api/auth/session
+          on every page load and tab refocus. signIn/signOut work without it. */}
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider delayDuration={150}>{children}</TooltipProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

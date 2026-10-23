@@ -4,10 +4,11 @@ import type { ActionResult } from "@/lib/action-result";
 import { rateLimit } from "@/lib/rate-limit";
 import { requireUser } from "@/modules/auth/server/session";
 import { resendVerificationSchema } from "@/modules/auth/schemas";
-import { consumeVerificationToken, sendVerificationEmail } from "@/lib/auth-security";
+import { consumeVerificationToken, hashToken, sendVerificationEmail } from "@/lib/auth-security";
 
 export async function verifyEmailAction(token: string): Promise<ActionResult> {
-  const limited = await rateLimit(`verify-email:${token}`, 10, 3600);
+  // Keyed on the token's hash: rate-limit keys are stored in Redis and logged on failure.
+  const limited = await rateLimit(`verify-email:${hashToken(token)}`, 10, 3600);
   if (!limited.allowed) return { ok: false, error: "Too many attempts. Try again later." };
 
   const userId = await consumeVerificationToken(token);

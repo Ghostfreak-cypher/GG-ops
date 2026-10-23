@@ -56,16 +56,14 @@ export async function issueAuthToken(userId: string, type: AuthTokenType): Promi
 
 export async function consumeAuthToken(token: string, type: AuthTokenType): Promise<string | null> {
   await connectDB();
-  const doc = await AuthToken.findOne({
-    tokenHash: hashToken(token),
-    type,
-    consumedAt: null,
-    expiresAt: { $gt: new Date() },
-  });
-  if (!doc) return null;
-  doc.consumedAt = new Date();
-  await doc.save();
-  return String(doc.userId);
+  // One atomic claim, so two concurrent requests can't both spend the same token.
+  const doc = await AuthToken.findOneAndUpdate(
+    { tokenHash: hashToken(token), type, consumedAt: null, expiresAt: { $gt: new Date() } },
+    { $set: { consumedAt: new Date() } },
+  )
+    .select("userId")
+    .lean();
+  return doc ? String(doc.userId) : null;
 }
 
 export async function sendPasswordResetEmail(userId: string): Promise<void> {
@@ -229,16 +227,6 @@ export async function listRecentLogins(userId: string): Promise<
     userAgent: event.userAgent ?? null,
     occurredAt: event.occurredAt.toISOString(),
   }));
-}
-
-export async function isEmailVerifiedForAccess(userId: string): Promise<boolean> {
-  await connectDB();
-  const user = await User.findById(parseObjectIdOrThrow(userId))
-    .select("emailVerifiedAt passwordHash")
-    .lean();
-  if (!user) return false;
-  if (!user.passwordHash) return true;
-  return user.emailVerifiedAt === undefined || user.emailVerifiedAt !== null;
 }
 
 export function logSecurityError(message: string, error: unknown): void {

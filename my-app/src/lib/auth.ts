@@ -7,7 +7,7 @@ import { connectDB } from "@/lib/db";
 import { User } from "@/models/User";
 import { enqueue } from "@/lib/queue";
 import { absoluteUrl } from "@/lib/urls";
-import { normalizeEmail, recordLoginEvent } from "@/lib/auth-security";
+import { logSecurityError, normalizeEmail, recordLoginEvent } from "@/lib/auth-security";
 
 const credentialsSchema = z.object({
   email: z.email(),
@@ -31,7 +31,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const valid = await bcrypt.compare(parsed.data.password, user.passwordHash);
         if (!valid) return null;
 
-        void recordLoginEvent({ userId: String(user._id), provider: "credentials", request });
+        void recordLoginEvent({ userId: String(user._id), provider: "credentials", request }).catch(
+          (error) => logSecurityError("recordLoginEvent failed", error),
+        );
 
         return {
           id: String(user._id),
@@ -78,7 +80,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         if (user.id) {
-          void recordLoginEvent({ userId: user.id, provider: "google" });
+          void recordLoginEvent({ userId: user.id, provider: "google" }).catch((error) =>
+            logSecurityError("recordLoginEvent failed", error),
+          );
         }
       }
       return true;

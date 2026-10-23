@@ -7,11 +7,7 @@ import { AlertCircle, Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-function nextUrl() {
-  if (typeof window === "undefined") return "/";
-  return new URLSearchParams(window.location.search).get("next") || "/";
-}
+import { nextUrl } from "@/modules/auth/next-url";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");

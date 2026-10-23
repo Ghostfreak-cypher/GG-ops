@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import DOMPurify from "dompurify";
 import { cn } from "@/lib/utils";
+import { RICH_ATTRS, RICH_TAGS, isSafeRichHtml } from "@/lib/rich-html";
 
 interface RichTextContentProps {
   html: string | null | undefined;
@@ -12,26 +13,25 @@ interface RichTextContentProps {
   emptyText?: string;
 }
 
+const subscribeNoop = () => () => {};
+
 export function RichTextContent({
   html,
   className,
   lineClamp,
   emptyText,
 }: RichTextContentProps) {
+  // false on the server and while hydrating, true after. DOMPurify needs a DOM, so until then
+  // only markup that is already safe is rendered; anything else appears, sanitized, right after
+  // hydration (it used to be server-rendered raw — a stored-XSS hole).
+  const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const clean = useMemo(() => {
     if (!html || html === "<p></p>") return "";
-    if (typeof window === "undefined") return html; // SSR: skip sanitize
-    return DOMPurify.sanitize(html, {
-      ALLOWED_TAGS: [
-        "p", "br", "strong", "em", "s", "u", "code", "pre",
-        "ul", "ol", "li", "a", "span",
-        "h1", "h2", "h3", "h4", "blockquote", "hr",
-      ],
-      ALLOWED_ATTR: ["href", "target", "rel", "class", "data-id", "data-type"],
-    });
-  }, [html]);
+    if (!hydrated) return isSafeRichHtml(html) ? html : null;
+    return DOMPurify.sanitize(html, { ALLOWED_TAGS: RICH_TAGS, ALLOWED_ATTR: RICH_ATTRS });
+  }, [html, hydrated]);
 
-  if (!clean) {
+  if (clean === "") {
     if (!emptyText) return null;
     return (
       <p className={cn("text-sm text-muted-foreground", className)}>{emptyText}</p>
@@ -50,7 +50,7 @@ export function RichTextContent({
         lineClamp && `line-clamp-${lineClamp}`,
         className,
       )}
-      dangerouslySetInnerHTML={{ __html: clean }}
+      dangerouslySetInnerHTML={{ __html: clean ?? "" }}
     />
   );
 }

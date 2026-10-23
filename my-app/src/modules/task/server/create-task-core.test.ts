@@ -12,8 +12,10 @@ const NEW_TASK_ID = "507f1f77bcf86cd799439055";
 const mocks = vi.hoisted(() => ({
   getProjectForUser: vi.fn(),
   assertSectionInProject: vi.fn(),
-  taskFind: vi.fn(),
+  taskFindOne: vi.fn(),
   taskCreate: vi.fn(),
+  memberCount: vi.fn(),
+  labelCount: vi.fn(),
   logActivity: vi.fn(),
   publish: vi.fn(),
   enqueueTaskAssignedEmails: vi.fn(),
@@ -27,8 +29,12 @@ vi.mock("@/modules/project/server/access", () => ({
   assertSectionInProject: mocks.assertSectionInProject,
 }));
 vi.mock("@/models/Task", () => ({
-  Task: { find: mocks.taskFind, create: mocks.taskCreate },
+  Task: { findOne: mocks.taskFindOne, create: mocks.taskCreate },
 }));
+vi.mock("@/models/WorkspaceMember", () => ({
+  WorkspaceMember: { countDocuments: mocks.memberCount },
+}));
+vi.mock("@/models/Label", () => ({ Label: { countDocuments: mocks.labelCount } }));
 vi.mock("@/modules/activity/log", () => ({ logActivity: mocks.logActivity }));
 vi.mock("@/lib/pusher", () => ({ publish: mocks.publish }));
 vi.mock("@/lib/jobs/task-email", () => ({
@@ -48,7 +54,15 @@ beforeEach(() => {
     role: "MEMBER",
   });
   mocks.assertSectionInProject.mockResolvedValue(true);
-  mocks.taskFind.mockReturnValue({ select: () => ({ lean: async () => [] }) });
+  // The highest-sibling-position lookup: an empty section.
+  mocks.taskFindOne.mockReturnValue({
+    sort: () => ({ select: () => ({ lean: async () => null }) }),
+  });
+  // By default every referenced assignee and label belongs to the workspace.
+  mocks.memberCount.mockImplementation(
+    async (q: { userId: { $in: string[] } }) => q.userId.$in.length,
+  );
+  mocks.labelCount.mockImplementation(async (q: { _id: { $in: string[] } }) => q._id.$in.length);
   mocks.taskCreate.mockImplementation(async (doc: Record<string, unknown>) => ({
     _id: NEW_TASK_ID,
     ...doc,
@@ -127,6 +141,32 @@ describe("createTaskForActor", () => {
     expect(notified).toHaveLength(1);
     expect(notified[0]?.userId).toBe(ASSIGNEE_ID);
     expect(notified[0]?.title).toContain("Ada");
+  });
+
+  it("rejects assignees who are not active members of the project's workspace", async () => {
+    mocks.memberCount.mockResolvedValue(1);
+
+    const result = await createTaskForActor({ id: ACTOR_ID, name: "Ada" }, PROJECT_ID, {
+      title: "Review",
+      assigneeIds: [ASSIGNEE_ID, OUTSIDER_ID],
+    });
+
+    expect(result).toEqual({ ok: false, error: "Assignees must be members of this workspace." });
+    expect(mocks.taskCreate).not.toHaveBeenCalled();
+    const query = mocks.memberCount.mock.calls[0]?.[0] as { workspaceId: unknown; status: string };
+    expect(String(query.workspaceId)).toBe(WORKSPACE_ID);
+    expect(query.status).toBe("ACTIVE");
+  });
+
+  it("positions the task after the highest sibling in its section", async () => {
+    mocks.taskFindOne.mockReturnValue({
+      sort: () => ({ select: () => ({ lean: async () => ({ position: 3000 }) }) }),
+    });
+
+    await createTaskForActor({ id: ACTOR_ID, name: "Ada" }, PROJECT_ID, { title: "Next" });
+
+    const created = mocks.taskCreate.mock.calls[0]?.[0] as { position: number };
+    expect(created.position).toBe(4000);
   });
 });
 

@@ -3,7 +3,7 @@
 import { useState, useMemo, useRef, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { ViewMode } from "gantt-task-react";
+import type { ViewMode } from "gantt-task-react";
 import type { Task as GanttTask } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 import { Calendar, ZoomIn, ZoomOut } from "lucide-react";
@@ -45,8 +45,6 @@ const PRIORITY_COLORS: Record<string, string> = {
   LOW: "#9ca3af",
 };
 
-type Member = { id: string; name: string; image: string | null };
-type LabelOpt = { id: string; name: string; color: string | null };
 
 function taskToGantt(task: TaskDTO, projectName: string, depIds: string[]): GanttTask | null {
   if (!task.dueDate && !task.startDate) return null;
@@ -96,7 +94,12 @@ function taskToGantt(task: TaskDTO, projectName: string, depIds: string[]): Gant
   };
 }
 
-const ZOOM_MODES: ViewMode[] = [ViewMode.Day, ViewMode.Week, ViewMode.Month];
+// ViewMode is a string enum. Importing it as a value pulled all of gantt-task-react into this
+// page's initial bundle and defeated the dynamic() import below, so use its string values.
+const DAY = "Day" as ViewMode;
+const WEEK = "Week" as ViewMode;
+const MONTH = "Month" as ViewMode;
+const ZOOM_MODES: ViewMode[] = [DAY, WEEK, MONTH];
 const ZOOM_LABELS = ["Day", "Week", "Month"];
 
 // Lazy-load the Gantt component to avoid SSR issues (it references window/document)
@@ -111,21 +114,15 @@ export function TimelineView({
   sections,
   tasks,
   dependencies,
-  editable: _editable,
-  members: _members,
-  labels: _labels,
 }: {
   workspaceSlug: string;
   projectId: string;
   sections: BoardSection[];
   tasks: TaskDTO[];
   dependencies: DependencyEdge[];
-  editable: boolean;
-  members: Member[];
-  labels: LabelOpt[];
 }) {
   const router = useRouter();
-  const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Month);
+  const [viewMode, setViewMode] = useState<ViewMode>(MONTH);
   const isNarrow = useSyncExternalStore(
     subscribeNarrow,
     () => window.matchMedia(NARROW).matches,
@@ -264,7 +261,7 @@ export function TimelineView({
             onDoubleClick={(task) => openTask(task.id)}
             onClick={isCoarse ? (task) => openTask(task.id) : undefined}
             listCellWidth={isNarrow ? "" : "200px"}
-            columnWidth={viewMode === ViewMode.Day ? 40 : viewMode === ViewMode.Week ? 60 : 120}
+            columnWidth={viewMode === DAY ? 40 : viewMode === WEEK ? 60 : 120}
             barFill={75}
             ganttHeight={isCoarse ? undefined : Math.min(ganttTasks.length * 50 + 50, 600)}
             todayColor="rgba(239, 68, 68, 0.1)"

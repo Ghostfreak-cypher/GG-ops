@@ -24,15 +24,11 @@ const nextConfig: NextConfig = {
       "cmdk",
     ],
   },
-  // Forward-looking: takes effect once avatars/previews migrate from <img> to
-  // next/image. Hosts: Google profile pics, Google Drive links, S3 buckets.
+  // No remotePatterns on purpose: next/image only serves the local logo today, and
+  // /_next/image is public (the proxy skips it), so each allowed remote host — `**.amazonaws.com`
+  // was one — made it an open image proxy. Add hosts back when avatars/previews move to next/image.
   images: {
     formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      { protocol: "https", hostname: "lh3.googleusercontent.com" },
-      { protocol: "https", hostname: "drive.google.com" },
-      { protocol: "https", hostname: "**.amazonaws.com" },
-    ],
   },
   // The task/project REST routes moved under /api/v1 (W0.2 contract). 308 — not 307/302 —
   // because it is the only redirect status that permanently preserves the method AND body,

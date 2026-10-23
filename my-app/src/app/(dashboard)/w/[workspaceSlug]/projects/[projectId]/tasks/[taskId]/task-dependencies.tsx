@@ -193,7 +193,6 @@ export function TaskDependencies({
 function DepRow({
   task,
   slug,
-  projectId,
   workspaceId: _workspaceId,
   editable,
   pending,

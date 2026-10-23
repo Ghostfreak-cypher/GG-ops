@@ -4,13 +4,14 @@ import bcrypt from "bcryptjs";
 import type { ActionResult } from "@/lib/action-result";
 import { rateLimit } from "@/lib/rate-limit";
 import { resetPasswordSchema } from "@/modules/auth/schemas";
-import { consumePasswordResetToken } from "@/lib/auth-security";
+import { consumePasswordResetToken, hashToken } from "@/lib/auth-security";
 
 export async function resetPasswordAction(input: unknown): Promise<ActionResult> {
   const parsed = resetPasswordSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
 
-  const limited = await rateLimit(`reset-password:${parsed.data.token}`, 10, 3600);
+  // Keyed on the token's hash: rate-limit keys are stored in Redis and logged on failure.
+  const limited = await rateLimit(`reset-password:${hashToken(parsed.data.token)}`, 10, 3600);
   if (!limited.allowed) return { ok: false, error: "Too many attempts. Try again later." };
 
   const passwordHash = await bcrypt.hash(parsed.data.password, 10);

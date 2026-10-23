@@ -5,7 +5,7 @@ import { env } from "@/lib/env";
  * Gmail access for the inbound-email → task pipeline.
  *
  * Reuses the `google.auth.OAuth2` + refresh-token shape already proven in
- * `lib/upload/google-oauth.ts`, but with its own client id/secret: the Drive adapter and
+ * `lib/upload.ts` (`uploadGoogleOAuth`), but with its own client id/secret: the Drive adapter and
  * this need different scopes, and a single credential granting both mailbox and Drive
  * access is a wider blast radius than either feature needs.
  *

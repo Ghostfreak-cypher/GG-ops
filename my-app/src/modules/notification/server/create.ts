@@ -30,7 +30,9 @@ export async function notify(entries: NotificationInput[]): Promise<void> {
     })),
   );
 
-  for (const e of entries) {
-    await publish(`user-${e.userId}`, "notification.created", { type: e.type, title: e.title });
-  }
+  await Promise.all(
+    entries.map((e) =>
+      publish(`user-${e.userId}`, "notification.created", { type: e.type, title: e.title }),
+    ),
+  );
 }

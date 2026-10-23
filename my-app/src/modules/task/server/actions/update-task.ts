@@ -6,6 +6,7 @@ import { updateTaskSchema } from "@/modules/task/schemas";
 import { getProjectForUser, assertSectionInProject } from "@/modules/project/server/access";
 import { canEditTasks } from "@/modules/workspace/server/permissions";
 import { parseObjectIdOrThrow } from "@/lib/mongo/ids";
+import { invalidTaskRef } from "@/modules/task/server/task-refs";
 import { requireUser } from "@/modules/auth/server/session";
 import { logActivity } from "@/modules/activity/log";
 import { enqueueTaskAssignedEmails, enqueueTaskCompletedEmails } from "@/lib/jobs/task-email";
@@ -40,6 +41,17 @@ export async function updateTaskAction(
   }
 
   const previousAssigneeIds = new Set((task.assigneeIds ?? []).map((id) => String(id)));
+  const previousLabelIds = new Set((task.labelIds ?? []).map((id) => String(id)));
+  // Only ids being added are checked, so a member who has since left can stay assigned.
+  const refError = await invalidTaskRef(task.workspaceId, {
+    assigneeIds: d.assigneeIds
+      ?.filter((id) => !previousAssigneeIds.has(id))
+      .map((id) => parseObjectIdOrThrow(id)),
+    labelIds: d.labelIds
+      ?.filter((id) => !previousLabelIds.has(id))
+      .map((id) => parseObjectIdOrThrow(id)),
+  });
+  if (refError) return { ok: false, error: refError };
   const previousDescription = task.description ?? "";
   let newlyAssignedIds: string[] = [];
 
