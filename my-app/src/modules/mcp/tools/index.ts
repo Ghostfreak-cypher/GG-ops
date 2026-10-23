@@ -5,6 +5,8 @@ import { getProjectBoard, getTaskDetail, searchTasks } from "@/modules/task/serv
 import { getMyTasks } from "@/modules/dashboard/server/queries";
 import { listComments } from "@/modules/comment/server/queries";
 import { createTaskAction } from "@/modules/task/server/actions/create-task";
+import { createProjectFor } from "@/modules/project/server/create-project-core";
+import { absoluteUrl } from "@/lib/urls";
 import { updateTaskAction } from "@/modules/task/server/actions/update-task";
 import { createCommentAction } from "@/modules/comment/server/actions/create-comment";
 import { upsertDsrFor, todayKey } from "@/modules/dsr/server/upsert";
@@ -215,6 +217,33 @@ const getTask = defineTool({
 });
 
 // ── Write tools ─────────────────────────────────────────────────────────────────
+
+const createProject = defineTool({
+  name: "create_project",
+  title: "Create a project",
+  description:
+    "Create a new project in a workspace, e.g. before splitting a piece of work into tasks. " +
+    "Returns the project's exact name, which is what create_task's `project` expects. " +
+    "Check list_projects first so you don't create a duplicate.",
+  inputSchema: z.object({
+    workspace: workspaceArg,
+    name: z.string().min(1).max(80).describe("Project name, unique enough to pass to create_task."),
+    description: z.string().max(500).optional().describe("One or two sentences on what the project is."),
+  }),
+  scope: "write",
+  handler: async ({ workspace, name, description }, { user }) => {
+    const ws = await resolveWorkspace(user.id, workspace);
+    const created = unwrap(await createProjectFor(ws, user.id, { name, description }), "created");
+    const id = (created as { id: string }).id;
+    return {
+      created: true,
+      projectId: id,
+      project: (created as { name: string }).name,
+      workspace: ws.name,
+      url: absoluteUrl(`/w/${ws.slug}/projects/${id}`),
+    };
+  },
+});
 
 const createTask = defineTool({
   name: "create_task",
@@ -568,6 +597,7 @@ export const MCP_TOOLS: readonly McpTool[] = [
   listMyTasks,
   getProjectBoardTool,
   getTask,
+  createProject,
   createTask,
   updateTask,
   completeTask,
