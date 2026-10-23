@@ -1,22 +1,22 @@
 {
   "workspace": {
-    "name": "genegenius.ai",
-    "description": "GeneGenius Asana workspace (full workspace export — all projects, all tasks)"
+    "name": "gg.ai",
+    "description": "GG Asana workspace (full workspace export — all projects, all tasks)"
   },
   "members": [
     {
       "name": "Faraz",
-      "email": "mohdsarfaraz@genegenius.ai",
+      "email": "mohdsarfaraz@gg.ai",
       "role": "OWNER"
     },
     {
       "name": "Sagar Gour",
-      "email": "sagar.gour@genegenius.ai",
+      "email": "sagar.gour@gg.ai",
       "role": "MEMBER"
     },
     {
       "name": "Shrinjay Shresth",
-      "email": "shrinjayshresth@genegenius.ai",
+      "email": "shrinjayshresth@gg.ai",
       "role": "MEMBER"
     },
     {
@@ -36,12 +36,12 @@
     },
     {
       "name": "Matthew Dingess",
-      "email": "matthew@genegenius.ai",
+      "email": "matthew@gg.ai",
       "role": "MEMBER"
     },
     {
       "name": "Zuhra Maksudi",
-      "email": "zuhra@genegenius.ai",
+      "email": "zuhra@gg.ai",
       "role": "MEMBER"
     },
     {
@@ -96,7 +96,7 @@
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -107,12 +107,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -123,22 +123,22 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Please find this validation report.",
                   "createdAt": "2026-06-29T06:55:54Z"
                 },
                 {
                   "author": "vishvakpune@gmail.com",
-                  "body": "cite-to-source mapping bug found and fixed and pushed to codebase.\nPR #5 in genegenius-vmis is the fix. All self-contained: _search_pubmed uses _build_query's output (with mechanism terms) directly against E-utilities, no backend change needed.\n\nPMIDs in the fixture are clean (verified above), and PR #5 fixes the live retrieval pulling irrelevant papers. Ready for review.",
+                  "body": "cite-to-source mapping bug found and fixed and pushed to codebase.\nPR #5 in gg-vmis is the fix. All self-contained: _search_pubmed uses _build_query's output (with mechanism terms) directly against E-utilities, no backend change needed.\n\nPMIDs in the fixture are clean (verified above), and PR #5 fixes the live retrieval pulling irrelevant papers. Ready for review.",
                   "createdAt": "2026-06-29T18:36:03Z"
                 },
                 {
@@ -147,12 +147,12 @@
                   "createdAt": "2026-06-30T01:49:25Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Let's merge it then !",
                   "createdAt": "2026-06-30T06:17:33Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "This task is already completed by the team, awaiting sagar's merge.",
                   "createdAt": "2026-07-01T08:10:12Z"
                 }
@@ -160,17 +160,17 @@
             },
             {
               "title": "Confirm VariantType enum vs string in backend report.py, report to Vansh",
-              "description": "sagar, this is a quick one but it gates the adapter design, so it can't stay unknown. it came out of vansh's report-format compatibility check (the doc mapping the vmis json against the genegenius report schema): https://github.com/GeneGeniusinc/genegenius-vmis/blob/main/docs/vmis/REPORT_FORMAT_COMPATIBILITY_CHECK.md (section 7, Q3 and remaining items). vansh couldn't answer it himself because the file in question lives in the backend repo, not the frontend one he reviewed.\n\nthe problem in plain terms: in g551d_base.json our variant_type value is \"missense_variant\". the backend report schema app/schemas/report.py has a field called VariantType. if VariantType is a strict pydantic enum (only accepts a fixed set like SNV/indel), then handing it \"missense_variant\" makes the report-generation call throw a validation error and the report never renders. if VariantType is just a free-text string, \"missense_variant\" passes fine and there's nothing to fix. nobody has actually looked, so we're designing the adapter on a guess.\n\nwhat to actually do: open app/schemas/report.py in the backend repo, read the VariantType definition, and answer one question, is it a strict enum or a free string. then tell\n if strict enum: the adapter must convert/derive the SNV/indel class from ref/alt allele lengths before sending, and keep the VEP consequence (missense_variant) in molecular_consequence. the json already separates molecular_consequence from variant_type exactly so this conversion is possible, so this would just confirm the adapter design is right.\n if free string: no conversion needed, adapter passes it straight through.\n\ndone = you've read report.py, posted \"enum\" or \"string\" here (paste the VariantType definition if you can), and vansh has what he needs to finalize the adapter.\n\nblocks: report adapter design depends on this answer.",
+              "description": "sagar, this is a quick one but it gates the adapter design, so it can't stay unknown. it came out of vansh's report-format compatibility check (the doc mapping the vmis json against the gg report schema): https://github.com/GGinc/gg-vmis/blob/main/docs/vmis/REPORT_FORMAT_COMPATIBILITY_CHECK.md (section 7, Q3 and remaining items). vansh couldn't answer it himself because the file in question lives in the backend repo, not the frontend one he reviewed.\n\nthe problem in plain terms: in g551d_base.json our variant_type value is \"missense_variant\". the backend report schema app/schemas/report.py has a field called VariantType. if VariantType is a strict pydantic enum (only accepts a fixed set like SNV/indel), then handing it \"missense_variant\" makes the report-generation call throw a validation error and the report never renders. if VariantType is just a free-text string, \"missense_variant\" passes fine and there's nothing to fix. nobody has actually looked, so we're designing the adapter on a guess.\n\nwhat to actually do: open app/schemas/report.py in the backend repo, read the VariantType definition, and answer one question, is it a strict enum or a free string. then tell\n if strict enum: the adapter must convert/derive the SNV/indel class from ref/alt allele lengths before sending, and keep the VEP consequence (missense_variant) in molecular_consequence. the json already separates molecular_consequence from variant_type exactly so this conversion is possible, so this would just confirm the adapter design is right.\n if free string: no conversion needed, adapter passes it straight through.\n\ndone = you've read report.py, posted \"enum\" or \"string\" here (paste the VariantType definition if you can), and vansh has what he needs to finalize the adapter.\n\nblocks: report adapter design depends on this answer.",
               "status": "TODO",
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-27",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [
                 {
                   "title": "Vansh: confirm the adapter renders a G551D report without a ValidationError",
@@ -183,19 +183,19 @@
                   ],
                   "labels": [],
                   "completedAt": null,
-                  "createdBy": "mohdsarfaraz@genegenius.ai",
+                  "createdBy": "mohdsarfaraz@gg.ai",
                   "subtasks": [],
                   "comments": []
                 }
               ],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Answer: STRICT ENUM (not a free string). So the adapter conversion IS required — your design is correct, just confirmed.\n\napp/schemas/report.py (v2-accelerated), line 74:\n\nclass VariantType(str, Enum):\n SNV = \"SNV\"\n INSERTION = \"Insertion\"\n DELETION = \"Deletion\"\n INDEL = \"Indel\"\n CNV = \"Copy Number Variant\"\n COMPLEX = \"Complex\"\n\nUsed at line 503 (required field): variant_type: VariantType = Field(..., description=\"Variant type\")\n\nSo handing it \"missense_variant\" WILL throw a pydantic ValidationError and the report won't render — that value is a VEP molecular consequence, not a variant type. Adapter must:\n derive variant_type (SNV / Insertion / Deletion / Indel) from ref/alt allele lengths before sending, and\n keep the VEP consequence (missense_variant) in molecular_consequence.\n\nFor CFTR G551D (7:117587806 G>A, single nucleotide) → send \"SNV\". Accepted values: SNV, Insertion, Deletion, Indel, \"Copy Number Variant\", Complex.\n\n you're unblocked to finalize the adapter.",
                   "createdAt": "2026-06-28T02:14:57Z"
                 },
                 {
-                  "author": "sagar.gour@genegenius.ai",
+                  "author": "sagar.gour@gg.ai",
                   "body": "Answer: STRICT ENUM (not a free string). So the adapter conversion IS required — Vansh's design is correct, just confirmed.\n\napp/schemas/report.py (v2-accelerated), line 74:\n\nclass VariantType(str, Enum):\n SNV = \"SNV\"\n INSERTION = \"Insertion\"\n DELETION = \"Deletion\"\n INDEL = \"Indel\"\n CNV = \"Copy Number Variant\"\n COMPLEX = \"Complex\"\n\nUsed at line 503 (required field):\n variant_type: VariantType = Field(..., description=\"Variant type\")\n\nWhat this means:\n- Handing it \"missense_variant\" throws a pydantic ValidationError and the report never renders. \"missense_variant\" is a VEP molecular consequence, not a variant type.\n- Adapter must (1) derive variant_type (SNV / Insertion / Deletion / Indel) from ref/alt allele lengths before sending, and (2) keep the VEP consequence (missense_variant) in molecular_consequence. The JSON already separates these, so the planned adapter design is correct.\n- For CFTR G551D (7:117587806 G>A, single nucleotide) → send \"SNV\".\n- Accepted values: SNV, Insertion, Deletion, Indel, \"Copy Number Variant\", Complex.\n\n@Vansh — you're unblocked to finalize the adapter.",
                   "createdAt": "2026-06-28T02:27:52Z"
                 }
@@ -203,7 +203,7 @@
             },
             {
               "title": "Add job_id to CFTR case doc (resolve case_id → job_id)",
-              "description": "anushka, this came out of vansh's report-format compatibility check. that's the doc where anushka mapped the vmis json against the existing genegenius report schema and vansh reviewed whether it fits. it's here: https://github.com/GeneGeniusinc/genegenius-vmis/blob/main/docs/vmis/REPORT_FORMAT_COMPATIBILITY_CHECK.md (see section 7, Q4 and the \"remaining before vish/sakshi build\" list). flagging this now because it quietly blocks the report adapter and nobody owns it yet.\n\nthe problem in plain terms: everything downstream that turns a case into an actual report (the report generator, the evidence-trace, the progress stepper) looks data up by job_id. that's the /api/v1/variant-report/{job_id} pattern the rest of the system already uses. but g551d_base.json only carries case_id (cftr_g551d). there is no job_id anywhere in the file and no way to get from case_id to job_id. so right now if anyone tries to generate a report from this case, they have a case_id in hand and every function they call wants a job_id. the two ends don't connect, and the adapter can't be built on top until they do.\n\nwhat to actually do (pick the one that matches the backend):\n option A: add a job_id field directly into g551d_base.json, a fixed job id for this demo case\n option B: add a small resolver so case_id cftr_g551d maps to the correct job_id\n\nyou can't pick A vs B blind, it depends on how jobs are keyed in the backend (is a job_id minted per analysis run, or is it stable for a fixture case). that's why is on this. coordinate with him to get the job keying pattern, then once he gives it to you, you can make the change yourself, it's a data-layer edit on your file.\n\ndone = the case doc either carries a job_id or can resolve case_id to a job_id, so a report can actually be generated from cftr_g551d. drop the path or PR here when it's in.\n\nblocks: report adapter (vish/vansh) cannot be safely built until this lands.",
+              "description": "anushka, this came out of vansh's report-format compatibility check. that's the doc where anushka mapped the vmis json against the existing gg report schema and vansh reviewed whether it fits. it's here: https://github.com/GGinc/gg-vmis/blob/main/docs/vmis/REPORT_FORMAT_COMPATIBILITY_CHECK.md (see section 7, Q4 and the \"remaining before vish/sakshi build\" list). flagging this now because it quietly blocks the report adapter and nobody owns it yet.\n\nthe problem in plain terms: everything downstream that turns a case into an actual report (the report generator, the evidence-trace, the progress stepper) looks data up by job_id. that's the /api/v1/variant-report/{job_id} pattern the rest of the system already uses. but g551d_base.json only carries case_id (cftr_g551d). there is no job_id anywhere in the file and no way to get from case_id to job_id. so right now if anyone tries to generate a report from this case, they have a case_id in hand and every function they call wants a job_id. the two ends don't connect, and the adapter can't be built on top until they do.\n\nwhat to actually do (pick the one that matches the backend):\n option A: add a job_id field directly into g551d_base.json, a fixed job id for this demo case\n option B: add a small resolver so case_id cftr_g551d maps to the correct job_id\n\nyou can't pick A vs B blind, it depends on how jobs are keyed in the backend (is a job_id minted per analysis run, or is it stable for a fixture case). that's why is on this. coordinate with him to get the job keying pattern, then once he gives it to you, you can make the change yourself, it's a data-layer edit on your file.\n\ndone = the case doc either carries a job_id or can resolve case_id to a job_id, so a report can actually be generated from cftr_g551d. drop the path or PR here when it's in.\n\nblocks: report adapter (vish/vansh) cannot be safely built until this lands.",
               "status": "DONE",
               "priority": "HIGH",
               "type": "TASK",
@@ -213,7 +213,7 @@
               "labels": [],
               "dueDate": "2026-06-27",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [
                 {
                   "title": "Shrinjay: manually validate before this goes green",
@@ -222,16 +222,16 @@
                   "priority": "MEDIUM",
                   "type": "TASK",
                   "assignees": [
-                    "shrinjayshresth@genegenius.ai"
+                    "shrinjayshresth@gg.ai"
                   ],
                   "labels": [],
                   "dueDate": "2026-06-29",
                   "completedAt": "2026-06-30",
-                  "createdBy": "mohdsarfaraz@genegenius.ai",
+                  "createdBy": "mohdsarfaraz@gg.ai",
                   "subtasks": [],
                   "comments": [
                     {
-                      "author": "shrinjayshresth@genegenius.ai",
+                      "author": "shrinjayshresth@gg.ai",
                       "body": "Confirmed\nchr7:117587806 G>A is the correct canonical G551D position. Confirmed across 6+ independent code locations in this repo:\n demo_vcf_files/m1_structural_demo_multigene.vcf:20 — EXPECT=CFTR_p.Gly551Asp\n tests/unit/test_vmis_annotation_fixes.py:121 — direct assertion position == 117587806\n scripts/vmis_tier1_smoke.py:18 — (\"CFTR G551D\", \"7\", 117587806, \"G\", \"A\")\n docs/VMIS_VALIDATION_REPORT_2026-06-29.md:205 — explicitly: \"Do not let anyone correct this to 117559593 or VCV000007105\"\n117559593 is F508del (CFTR p.Phe508del) — a completely different variant. Anyone who touches this should be sent back.\n\nVariant-report render — PARTIAL\nFrom VMIS_VALIDATION_REPORT_2026-06-29.md section 6, already validated earlier today:\n\nEndpoint\nStatus\nGET /api/v1/variant-report/7b13a5ff.../json\n200 ✅\nGET /api/v1/variant-report/7b13a5ff... (PDF)\n500 ❌\n\nThe PDF 500 is a known one-line bug: app/api/v1/variant_report.py:1398 calls pdf_generator_v2.generate_pdf_report(...) but the DI parameter is named pdf_generator. Not deployed yet.\n\n — Add \"job_id\": \"7b13a5ff-47a6-45a3-bc39-72f2bac3267f\" to the CFTR G551D case document in the VMIS repo (wherever case_id currently lives). This is the only implementation step for this Asana task.\n — Deploy the one-line fix: variant_report.py:1398, change pdf_generator_v2 → pdf_generator. Until that lands, the PDF endpoint stays broken for all jobs, not just this one. The JSON endpoint is already 200.\nGate to close this task green: JSON is already 200 (confirmed). Mark it green now if you're ok with the JSON endpoint as the validation bar.",
                       "createdAt": "2026-06-29T07:54:12Z"
                     },
@@ -241,7 +241,7 @@
                       "createdAt": "2026-06-30T01:39:15Z"
                     },
                     {
-                      "author": "shrinjayshresth@genegenius.ai",
+                      "author": "shrinjayshresth@gg.ai",
                       "body": "LGTM!",
                       "createdAt": "2026-06-30T06:17:01Z"
                     }
@@ -250,8 +250,8 @@
               ],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "job_id (Option A — pinned clean demo job): 7b13a5ff-47a6-45a3-bc39-72f2bac3267f\n\nCreated a single-variant CFTR G551D job on dev/staging (:8100):\n 1 variant: CFTR chr7:117587806 G>A = your 7:117587806:G>A (coords confirmed; note stored chr-prefixed as chr7).\n GET /api/v1/variant-report/{job_id}/status → 200 (renders).\n\nPut this in cases/cftr/g551d_base.json → report_integration.job_id and close ISSUE-005.\n\nKey fact: the backend has no case_id concept — job_id (UUID) is the only key, resolved via db.jobs.find_one({\"job_id\":...}). So VMIS owns the case_id→job_id mapping (this pin, or a links file). If you ever need fresh-run resolution: query the variants collection by coords → its job_id field (no API endpoint exists for case_id→job_id).\n\nAuth for the:8100 API (it's gated): m1.demo@genegenius.dev / M1Demo@2026. Example: http://3.210.147.26:8100/api/v1/variant-report/7b13a5ff-47a6-45a3-bc39-72f2bac3267f\n\nCaveat: this job lives in genegenius_dev; if dev gets re-seeded the UUID would need re-pinning. you're unblocked for report generation.",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "job_id (Option A — pinned clean demo job): 7b13a5ff-47a6-45a3-bc39-72f2bac3267f\n\nCreated a single-variant CFTR G551D job on dev/staging (:8100):\n 1 variant: CFTR chr7:117587806 G>A = your 7:117587806:G>A (coords confirmed; note stored chr-prefixed as chr7).\n GET /api/v1/variant-report/{job_id}/status → 200 (renders).\n\nPut this in cases/cftr/g551d_base.json → report_integration.job_id and close ISSUE-005.\n\nKey fact: the backend has no case_id concept — job_id (UUID) is the only key, resolved via db.jobs.find_one({\"job_id\":...}). So VMIS owns the case_id→job_id mapping (this pin, or a links file). If you ever need fresh-run resolution: query the variants collection by coords → its job_id field (no API endpoint exists for case_id→job_id).\n\nAuth for the:8100 API (it's gated): m1.demo@gg.dev / M1Demo@2026. Example: http://3.210.147.26:8100/api/v1/variant-report/7b13a5ff-47a6-45a3-bc39-72f2bac3267f\n\nCaveat: this job lives in gg_dev; if dev gets re-seeded the UUID would need re-pinning. you're unblocked for report generation.",
                   "createdAt": "2026-06-28T02:16:19Z"
                 },
                 {
@@ -273,7 +273,7 @@
               "labels": [],
               "dueDate": "2026-06-27",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [
                 {
                   "title": "Shrinjay: manually validate before this goes green",
@@ -282,21 +282,21 @@
                   "priority": "MEDIUM",
                   "type": "TASK",
                   "assignees": [
-                    "shrinjayshresth@genegenius.ai"
+                    "shrinjayshresth@gg.ai"
                   ],
                   "labels": [],
                   "dueDate": "2026-06-29",
                   "completedAt": "2026-07-01",
-                  "createdBy": "mohdsarfaraz@genegenius.ai",
+                  "createdBy": "mohdsarfaraz@gg.ai",
                   "subtasks": [],
                   "comments": [
                     {
-                      "author": "shrinjayshresth@genegenius.ai",
-                      "body": "run — 2026-06-29\nAll 4 gate items confirmed:\n✅ Staging health — GET /api/v1/health → 200, status: healthy, database_connected: true (Note: correct path is /api/v1/health, not /health)\n✅ Smoke test — ran scripts/vmis_tier1_smoke.py on dev EC2 (/opt/genegenius/backend-dev). ClinVar API returned Pathogenic for all 3 demos (CFTR G551D, HBB E6V, LMNA silent). CFTR gnomAD resolved via source=local_file. Exit 0.\n✅ Actionability 422 — POST /api/v1/actionability/analyze with bad payload returns 422 with all 5 missing-field errors. Not 500.\n✅ PRs #61 and #63 — both commits confirmed in origin/v2-accelerated via git log.\n\nNon-blocking flags for ops (not blocking green):\n HBB E6V has no hit in the local ClinVar VCF (API covers it, but local VCF appears to be missing this variant)\n gnomAD chr1 index is stale (index file is older than the data file) — needs tabix -p vcf rebuild on the chr1 file; causing LMNA gnomAD miss\n gnomAD not resolving for HBB (chr11) and LMNA (chr1) via local tabix — likely tied to the stale index\nMarking green. Ops items above should be tracked separately.",
+                      "author": "shrinjayshresth@gg.ai",
+                      "body": "run — 2026-06-29\nAll 4 gate items confirmed:\n✅ Staging health — GET /api/v1/health → 200, status: healthy, database_connected: true (Note: correct path is /api/v1/health, not /health)\n✅ Smoke test — ran scripts/vmis_tier1_smoke.py on dev EC2 (/opt/gg/backend-dev). ClinVar API returned Pathogenic for all 3 demos (CFTR G551D, HBB E6V, LMNA silent). CFTR gnomAD resolved via source=local_file. Exit 0.\n✅ Actionability 422 — POST /api/v1/actionability/analyze with bad payload returns 422 with all 5 missing-field errors. Not 500.\n✅ PRs #61 and #63 — both commits confirmed in origin/v2-accelerated via git log.\n\nNon-blocking flags for ops (not blocking green):\n HBB E6V has no hit in the local ClinVar VCF (API covers it, but local VCF appears to be missing this variant)\n gnomAD chr1 index is stale (index file is older than the data file) — needs tabix -p vcf rebuild on the chr1 file; causing LMNA gnomAD miss\n gnomAD not resolving for HBB (chr11) and LMNA (chr1) via local tabix — likely tied to the stale index\nMarking green. Ops items above should be tracked separately.",
                       "createdAt": "2026-06-29T08:38:24Z"
                     },
                     {
-                      "author": "shrinjayshresth@genegenius.ai",
+                      "author": "shrinjayshresth@gg.ai",
                       "body": "Please see for Non-blocking flags",
                       "createdAt": "2026-07-01T16:42:05Z"
                     }
@@ -306,17 +306,17 @@
               "comments": [
                 {
                   "author": "anushkagarg3008@gmail.com",
-                  "body": "Blocker fixed in PR #59 (live Pathogenic for all 3 demos + VEP HGVS wired); waiting merge. Full audit closure still needs staging gnomAD/ClinVar VCF deploy + genegenius-vmis doc/fixture updates (HBB/LMNA base JSONs, CFTR conflicts_and_gaps refresh).",
+                  "body": "Blocker fixed in PR #59 (live Pathogenic for all 3 demos + VEP HGVS wired); waiting merge. Full audit closure still needs staging gnomAD/ClinVar VCF deploy + gg-vmis doc/fixture updates (HBB/LMNA base JSONs, CFTR conflicts_and_gaps refresh).",
                   "createdAt": "2026-06-25T20:37:41Z"
                 },
                 {
                   "author": "anushkagarg3008@gmail.com",
-                  "body": "ClinVar parser blocker — fixed. PR #59 merged. All 3 demos (CFTR G551D, HBB E6V, LMNA) now return Pathogenic from the ClinVar API (no more false \"Uncertain\").\n VEP annotate_hgvs — done. Added to existing VEPService in PR #59; RefSeq pin enforced in case pack fixtures.\n LMNA coord — fixed. Updated to chr1:156138613 C>T in case packs.\n Identifier map — committed in genegenius-vmis with canonical UniProt (P13569 / P68871 / P02545), HGNC, and ClinVar VCVs. Not relying on gene_to_uniprot.\n gene_to_uniprot isoform bug — fixed in PR #59 (reviewed:true filter).\n CFTR demo ClinVar data is now trustworthy on the API path.\n Still open (ops, not code): gnomAD tabix + ClinVar local VCF on staging — handed off to Sagar; smoke script ready (scripts/vmis_tier1_smoke.py).\n genegenius-vmis docs updated — audit §8 reflects what's done vs what's pending.\n Separate: PR #61 open for actionability /analyze 500 on dev — Sagar to merge + deploy.",
+                  "body": "ClinVar parser blocker — fixed. PR #59 merged. All 3 demos (CFTR G551D, HBB E6V, LMNA) now return Pathogenic from the ClinVar API (no more false \"Uncertain\").\n VEP annotate_hgvs — done. Added to existing VEPService in PR #59; RefSeq pin enforced in case pack fixtures.\n LMNA coord — fixed. Updated to chr1:156138613 C>T in case packs.\n Identifier map — committed in gg-vmis with canonical UniProt (P13569 / P68871 / P02545), HGNC, and ClinVar VCVs. Not relying on gene_to_uniprot.\n gene_to_uniprot isoform bug — fixed in PR #59 (reviewed:true filter).\n CFTR demo ClinVar data is now trustworthy on the API path.\n Still open (ops, not code): gnomAD tabix + ClinVar local VCF on staging — handed off to Sagar; smoke script ready (scripts/vmis_tier1_smoke.py).\n gg-vmis docs updated — audit §8 reflects what's done vs what's pending.\n Separate: PR #61 open for actionability /analyze 500 on dev — Sagar to merge + deploy.",
                   "createdAt": "2026-06-25T23:27:05Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "Staging deploy done — ClinVar + gnomAD tabix + analyze-500 fix are live on:8100.\n\nDeployed v2-accelerated HEAD to dev/staging (:8100, restarted, health 200):\n PR #63 (gnomAD local tabix wiring) — merged + deployed. Smoke (scripts/vmis_tier1_smoke.py, real data): all 24 gnomAD chroms register; CFTR G551D now resolves gnomAD via source=local_file tier=local_tabix (AF=0.000276) — the old source=unknown bug is fixed. ClinVar Pathogenic for all 3 demos (CFTR/HBB/LMNA).\n PR #61 (null-safe actionability formatting) — already merged; /actionability/analyze now returns 422 on bad input instead of the post-#60 500.\n ClinVar VCF present and used (/opt/genegenius/data/clinvar/clinvar.vcf.gz, ClinVar local lookups confirmed in the smoke).\n\nNote: gnomAD shows ~13 benign hts_idx_load3 \"index older than data\" warnings — indexes are valid (static gnomAD v4.1), ignore them.\n\n ClinVar task should be clear — staging has everything; ready for your validation.",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "Staging deploy done — ClinVar + gnomAD tabix + analyze-500 fix are live on:8100.\n\nDeployed v2-accelerated HEAD to dev/staging (:8100, restarted, health 200):\n PR #63 (gnomAD local tabix wiring) — merged + deployed. Smoke (scripts/vmis_tier1_smoke.py, real data): all 24 gnomAD chroms register; CFTR G551D now resolves gnomAD via source=local_file tier=local_tabix (AF=0.000276) — the old source=unknown bug is fixed. ClinVar Pathogenic for all 3 demos (CFTR/HBB/LMNA).\n PR #61 (null-safe actionability formatting) — already merged; /actionability/analyze now returns 422 on bad input instead of the post-#60 500.\n ClinVar VCF present and used (/opt/gg/data/clinvar/clinvar.vcf.gz, ClinVar local lookups confirmed in the smoke).\n\nNote: gnomAD shows ~13 benign hts_idx_load3 \"index older than data\" warnings — indexes are valid (static gnomAD v4.1), ignore them.\n\n ClinVar task should be clear — staging has everything; ready for your validation.",
                   "createdAt": "2026-06-28T02:21:11Z"
                 },
                 {
@@ -333,49 +333,49 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-27",
               "completedAt": "2026-07-01",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Up for your review - sent on watsapp",
                   "createdAt": "2026-06-26T05:55:44Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "shrinjay this is strong, want to say that first. the architecture is genuinely well thought through. the neo4j/mongo split is clean and right, the write-gate rule (no factual edge without source + evidence_label + retrieval_date) is exactly the kind of enforcement that protects our scientific credibility at the data layer, and the reuse decisions are disciplined, you resisted rebuilding things we already have. this is the kind of reference the sprint needed. approved on the architecture, no changes\n\none thing to fix before we lock it, and it's narrow, section 7.2. it lists four pmids as the proof that pubmed covers our cftr literature: 22293454, 21083385, 16113672, 23757338. i pulled all four off pubmed directly and three don't resolve to cftr papers:\n\n- 22293454 is a cardiology paper on uric acid and atrial fibrillation\n- 16113672 is a stem-cell transplant paper\n- 23757338 is an hiv paper\n- only 21083385 (accurso 2010, vx-770 in g551d) is the real cftr paper\n\nso the literature-sufficiency proof in 7.2 is resting on three citations pointing to unrelated fields. that section is the part we'd show a clinical reviewer to demonstrate our sourcing is rigorous, so it has to be airtight. and it's the same citation issue we hit with sakshi's doc tonight, which makes me want to check where these ids came from, if the retrieval pipeline emitted them rather than a copy-paste slip, that's worth knowing because it's the same path that feeds the product\n\nbefore lock:\n1. regenerate the 7.2 pmids from the actual cftr fixture, confirm each resolves to a real cftr paper\n2. quick trace on where the four came from, doc-level vs pipeline-level\n3. clean 7.2 and i sign off same day\n\neverything else is locked from my side. great architecture, just need the literature section to match the quality of the rest",
                   "createdAt": "2026-06-28T04:47:31Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Up for your review",
                   "createdAt": "2026-06-29T06:22:31Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Marking this complete",
                   "createdAt": "2026-07-01T08:05:27Z"
                 }
               ]
             },
             {
-              "title": "Stand up the dedicated genegenius-vmis repository",
-              "description": "Why this exists:\nThe operating manual specifies a dedicated genegenius-vmis repo with a cases/cftr structure, but that repo was never actually created. As a result VMIS files are scattered across the backend repo and branches, and there is no single home for the shared JSON, sources, mechanism, and eval work. This caused a real problem on June 25: Anushka's locked g551d_base.json was referenced at cases/cftr/g551d_base.json but could not be found in the backend repo.\n\nDo NOT start this tonight or before the June 25 gate. This is a this-week cleanup, scheduled after the gate so it does not disrupt in-flight sprint work.\n\nWhat to build (from the operating manual repo blueprint):\ngenegenius-vmis/\n apps/ (api = FastAPI, web = Next.js, jobs = reuse existing async job pattern)\n packages/ (normalization, graph, sources, mechanism, rag, evidence, shared)\n cases/ (cftr/, hbb/, lmna/ with fixtures)\n eval/ (trap suite, benchmark harness)\n infra/ (docker-compose, env templates, CI)\n docs/ (ADRs, source matrix, teach-backs)\n.github/ (workflows, PR template, CODEOWNERS)\n\nSteps:\n1. Create the genegenius-vmis private repo with the structure above\n2. Migrate the in-flight VMIS files into it (Anushka's base JSON, Vansh's frontend shell, Vish's retrieval work, Sakshi's mechanism work) so everyone builds from one place\n3. Set CODEOWNERS so reviews route correctly\n4. Confirm the locked cases/cftr/g551d_base.json lives here and tell Sakshi + Vish the exact path + branch to build on\n\nDeliverable: a single VMIS repo that matches the manual blueprint, with all current VMIS work migrated and one confirmed path for the shared CFTR JSON.\n\nReason this matters: stops the where-is-the-file scavenger hunt and gives the sprint one source of truth. Owner: Shrinjay. Supervised by Faraz.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "title": "Stand up the dedicated gg-vmis repository",
+              "description": "Why this exists:\nThe operating manual specifies a dedicated gg-vmis repo with a cases/cftr structure, but that repo was never actually created. As a result VMIS files are scattered across the backend repo and branches, and there is no single home for the shared JSON, sources, mechanism, and eval work. This caused a real problem on June 25: Anushka's locked g551d_base.json was referenced at cases/cftr/g551d_base.json but could not be found in the backend repo.\n\nDo NOT start this tonight or before the June 25 gate. This is a this-week cleanup, scheduled after the gate so it does not disrupt in-flight sprint work.\n\nWhat to build (from the operating manual repo blueprint):\ngg-vmis/\n apps/ (api = FastAPI, web = Next.js, jobs = reuse existing async job pattern)\n packages/ (normalization, graph, sources, mechanism, rag, evidence, shared)\n cases/ (cftr/, hbb/, lmna/ with fixtures)\n eval/ (trap suite, benchmark harness)\n infra/ (docker-compose, env templates, CI)\n docs/ (ADRs, source matrix, teach-backs)\n.github/ (workflows, PR template, CODEOWNERS)\n\nSteps:\n1. Create the gg-vmis private repo with the structure above\n2. Migrate the in-flight VMIS files into it (Anushka's base JSON, Vansh's frontend shell, Vish's retrieval work, Sakshi's mechanism work) so everyone builds from one place\n3. Set CODEOWNERS so reviews route correctly\n4. Confirm the locked cases/cftr/g551d_base.json lives here and tell Sakshi + Vish the exact path + branch to build on\n\nDeliverable: a single VMIS repo that matches the manual blueprint, with all current VMIS work migrated and one confirmed path for the shared CFTR JSON.\n\nReason this matters: stops the where-is-the-file scavenger hunt and gives the sprint one source of truth. Owner: Shrinjay. Supervised by Faraz.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": "2026-06-26",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -386,16 +386,16 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Gate decision — June 25 (GO/NO-GO #2)\n\nCFTR is close but not polished tonight. The mechanism note still needs its citations added, which lands tomorrow morning, then scientific review. So we are not calling tonight a finished CFTR demo — we are one day out, and that is the planned fallback, not a problem.\n\nTomorrow's order:\n1. gets the cited mechanism note to first thing AM (not end of day — she needs runway to review before we freeze)\n2. reviews the same morning — you are the next link before we can lock the demo\n3. Vansh wires it into the frontend once the JSON is locked\n\nThis keeps us on the June 26 internal full-draft, delivered from a frozen, tested branch.",
                   "createdAt": "2026-06-25T05:45:59Z"
                 }
@@ -412,7 +412,7 @@
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": "2026-06-25",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -423,28 +423,28 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "VMIS scope and shared JSON structure finalized",
-              "description": "VMIS Phase 1 scope and shared JSON structure are locked as of June 23.\n\nScope. Phase 1 is one variant, CFTR G551D, on one pinned transcript, NM_000492.4. We reuse existing GeneGenius services and build nothing that already exists. New work is limited to the VMIS layer only: provenance mapper, graph-write gate, review/sign-off state machine, mechanism layer, and the frontend mechanism graph.\nSource: GeneGenius VMIS Operating Manual, §4–4A.\n\nReuse confirmed against live code. Auth, MongoDB, Neo4j, VEP, ClinVar, gnomAD, HGVS, ACMG classifier, and PubMed/BioBERT are all real and in production, reuse as-is. No PostgreSQL, Celery, or pgvector introduced. The only genuinely new frontend piece is the mechanism graph library (Cytoscape/react-flow), owner Vansh.\nSource: VMIS Architecture Review, Shrinjay, June 22 — verdict \"Approved,\" §1, §4, §7, §8.\n\nLocked top-level fields: gene, genome_build, variant, transcript, protein, hgvs, clinvar, dbsnp, gnomad, acmg, provenance.\nLocked provenance wrapper (every field): canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status.\nSource: GeneGenius VMIS Operating Manual — shared JSON structure / provenance spec.\n\nBase object status. g551d_base.json reviewed and signed off, pending three field-name fixes before final lock:\n genome_assembly → genome_build\n genomic_coordinates → moved under a single variant field\n provenance added as its own top-level field, wrapper aligned to the locked spec (canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status)\nHBB and LMNA follow the same structure once corrected.\nSource: VMIS Annotation Reuse Audit and g551d_base.json, Anushka, June 23.\n\nOpen items (documented, not blocking this milestone):\n ClinVar API returns \"Uncertain\" for known-pathogenic variants; fix the parser before any ClinVar evidence is written. (Reuse Audit §4; g551d_base conflicts.)\n ACMG must be re-run after the ClinVar fix (it returned VUS only because it was fed the bad ClinVar input). (g551d_base, acmg.status: conflict.)\n Case pack VCV corrected to VCV000007120 (NCBI-verified); old VCV000007105 is wrong. (g551d_base, clinvar.)\n CFTR fixture-to-report-schema check still to run, owners Anushka + Vansh, ~30 min. (Architecture Review §6.)",
+              "description": "VMIS Phase 1 scope and shared JSON structure are locked as of June 23.\n\nScope. Phase 1 is one variant, CFTR G551D, on one pinned transcript, NM_000492.4. We reuse existing GG services and build nothing that already exists. New work is limited to the VMIS layer only: provenance mapper, graph-write gate, review/sign-off state machine, mechanism layer, and the frontend mechanism graph.\nSource: GG VMIS Operating Manual, §4–4A.\n\nReuse confirmed against live code. Auth, MongoDB, Neo4j, VEP, ClinVar, gnomAD, HGVS, ACMG classifier, and PubMed/BioBERT are all real and in production, reuse as-is. No PostgreSQL, Celery, or pgvector introduced. The only genuinely new frontend piece is the mechanism graph library (Cytoscape/react-flow), owner Vansh.\nSource: VMIS Architecture Review, Shrinjay, June 22 — verdict \"Approved,\" §1, §4, §7, §8.\n\nLocked top-level fields: gene, genome_build, variant, transcript, protein, hgvs, clinvar, dbsnp, gnomad, acmg, provenance.\nLocked provenance wrapper (every field): canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status.\nSource: GG VMIS Operating Manual — shared JSON structure / provenance spec.\n\nBase object status. g551d_base.json reviewed and signed off, pending three field-name fixes before final lock:\n genome_assembly → genome_build\n genomic_coordinates → moved under a single variant field\n provenance added as its own top-level field, wrapper aligned to the locked spec (canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status)\nHBB and LMNA follow the same structure once corrected.\nSource: VMIS Annotation Reuse Audit and g551d_base.json, Anushka, June 23.\n\nOpen items (documented, not blocking this milestone):\n ClinVar API returns \"Uncertain\" for known-pathogenic variants; fix the parser before any ClinVar evidence is written. (Reuse Audit §4; g551d_base conflicts.)\n ACMG must be re-run after the ClinVar fix (it returned VUS only because it was fed the bad ClinVar input). (g551d_base, acmg.status: conflict.)\n Case pack VCV corrected to VCV000007120 (NCBI-verified); old VCV000007105 is wrong. (g551d_base, clinvar.)\n CFTR fixture-to-report-schema check still to run, owners Anushka + Vansh, ~30 min. (Architecture Review §6.)",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-06-25",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -455,22 +455,22 @@
           "tasks": [
             {
               "title": "Freeze VMIS Phase 1 scope",
-              "description": "Confirm and document the Phase 1 boundaries.\n\nAcceptance criteria:\n CFTR G551D is the flagship case\n One confirmed variant and one transcript\n No full VCF upload\n No manual variant input in the first demo\n No diagnosis, prescribing, or dosing language\n Existing GeneGenius services must be reused\n Frontend must read from the shared sample JSON\n Every major scientific claim must have supporting evidence\n Facts, assumptions, and research ideas must be clearly separated\n Final scientific approval must come from Zuhra",
+              "description": "Confirm and document the Phase 1 boundaries.\n\nAcceptance criteria:\n CFTR G551D is the flagship case\n One confirmed variant and one transcript\n No full VCF upload\n No manual variant input in the first demo\n No diagnosis, prescribing, or dosing language\n Existing GG services must be reused\n Frontend must read from the shared sample JSON\n Every major scientific claim must have supporting evidence\n Facts, assumptions, and research ideas must be clearly separated\n Final scientific approval must come from Zuhra",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-25",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "Phase 1 scope frozen and confirmed. Documented boundaries:\n\nFlagship case: CFTR G551D only. One confirmed variant, one pinned transcript (NM_000492.4). Mode-B single-variant investigator.\n\nOut of scope for Phase 1: full VCF upload, manual variant entry, Mode A / candidate-gene discovery, CNV/SV/repeat expansions, more than the three demo cases.\n\nHard rules: existing GeneGenius services reused (no rebuild), frontend reads from the shared sample JSON with no hardcoded science, every major scientific claim carries supporting evidence, facts/inferences/research hypotheses kept separate, RUO only with no diagnosis/prescribing/dosing language, final scientific approval from Zuhra.\n\nThis has been the operating premise of the sprint since kickoff. Scope is locked; any change requires explicit Faraz approval per the change-control rule.",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "Phase 1 scope frozen and confirmed. Documented boundaries:\n\nFlagship case: CFTR G551D only. One confirmed variant, one pinned transcript (NM_000492.4). Mode-B single-variant investigator.\n\nOut of scope for Phase 1: full VCF upload, manual variant entry, Mode A / candidate-gene discovery, CNV/SV/repeat expansions, more than the three demo cases.\n\nHard rules: existing GG services reused (no rebuild), frontend reads from the shared sample JSON with no hardcoded science, every major scientific claim carries supporting evidence, facts/inferences/research hypotheses kept separate, RUO only with no diagnosis/prescribing/dosing language, final scientific approval from Zuhra.\n\nThis has been the operating premise of the sprint since kickoff. Scope is locked; any change requires explicit Faraz approval per the change-control rule.",
                   "createdAt": "2026-06-25T06:14:28Z"
                 }
               ]
@@ -482,16 +482,16 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Status on the shared CFTR JSON, and what closes this task.\n\nThe combined file merges three contributors. Current state:\n base/variant/database layer \\u2014 done. g551d_base.json is the foundation everyone builds on.\n evidence fields (claim-to-source, PMIDs) \\u2014 landing tomorrow AM. This is what Sakshi's citations link through.\n mechanism + phenotype fields \\u2014 landing tomorrow once the cited note is ready.\n\nOne schema rule, non-negotiable, or the merge breaks: every layer uses the same corrected provenance wrapper \\u2014 canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status. Anushka's base is on it; Vish and Sakshi build to the exact same shape, no variations.\n\nSequence tomorrow: Vish posts evidence fields and pings Sakshi \\u2192 Sakshi merges her mechanism fields + citations \\u2192 combined JSON reviewed against the wrapper \\u2192 then builds the full screen from it.\n\nThis task closes only when all three layers are merged into one file, no duplicate fields, no missing required fields, every field owned, on the single wrapper. Until then it stays open. Vish and Sakshi: confirm here once your fields are in.",
                   "createdAt": "2026-06-25T06:16:03Z"
                 }
@@ -504,7 +504,7 @@
           "tasks": [
             {
               "title": "Audit reusable annotation services",
-              "description": "Review the existing GeneGenius annotation services and confirm what VMIS can reuse.\n\nCheck:\n VEP\n ClinVar\n gnomAD\n HGVS normalization\n Any existing transcript or protein mapping services\nDo not rebuild any existing service.\n\nFor each service, document:\n What already works\n Which endpoint is used\n What information it returns\n Current limitations\n Whether VMIS can reuse it\n What important information is still missing\n What change is required, if any\n\nDeliverable:\nOne simple reuse table with these columns:\n Existing capability\n Current endpoint\n Current output\n Reusable for VMIS?\n Missing information\n Required change\n Owner",
+              "description": "Review the existing GG annotation services and confirm what VMIS can reuse.\n\nCheck:\n VEP\n ClinVar\n gnomAD\n HGVS normalization\n Any existing transcript or protein mapping services\nDo not rebuild any existing service.\n\nFor each service, document:\n What already works\n Which endpoint is used\n What information it returns\n Current limitations\n Whether VMIS can reuse it\n What important information is still missing\n What change is required, if any\n\nDeliverable:\nOne simple reuse table with these columns:\n Existing capability\n Current endpoint\n Current output\n Reusable for VMIS?\n Missing information\n Required change\n Owner",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -514,7 +514,7 @@
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-06-23",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
@@ -523,22 +523,22 @@
                   "createdAt": "2026-06-23T04:55:54Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "> anushka this is excellent, approved. testing live all three cases instead of reading code is exactly what i wanted. three things you flagged are important and i want them tracked: the clinvar parser returning uncertain for all three pathogenic cases, the wrong uniprot isoforms, and the lmna coordinate fix. log those so they dont get lost. one thing before you move to provenance fields, do the 30 min check with vansh on whether your json fits into the existing report format. once thats done youre clear to proceed. really good work",
                   "createdAt": "2026-06-23T17:03:18Z"
                 },
                 {
                   "author": "anushkagarg3008@gmail.com",
-                  "body": "Thank you Faraz for the approval.\nI confirmed the live testing all three cases (CFTR G551D, HBB E6V, LMNA silent) via existing GeneGenius services + external APIs, not code-only review. Full write-up in VMIS annotation reuse audit tab.\nThree flagged items logged in VMIS Open Issues Log so they don’t get lost.\nAlso cross-linked from the audit doc errata table.\nVansh 30-min check: In progress - I have shared the report check and base json file with him. Pre-check: partial fit to VariantInterpretation; likely a thin adapter, not a schema merge. Will update once Vansh signs off.\nFYI: Consolidated everything in the shared Google Doc (tabbed) for easy reference- https://docs.google.com/document/d/10UhdjZ30XyQ5KKo9ZGNBCfxCeII_qDtZqTBUAYoGo1M/edit?usp=sharing",
+                  "body": "Thank you Faraz for the approval.\nI confirmed the live testing all three cases (CFTR G551D, HBB E6V, LMNA silent) via existing GG services + external APIs, not code-only review. Full write-up in VMIS annotation reuse audit tab.\nThree flagged items logged in VMIS Open Issues Log so they don’t get lost.\nAlso cross-linked from the audit doc errata table.\nVansh 30-min check: In progress - I have shared the report check and base json file with him. Pre-check: partial fit to VariantInterpretation; likely a thin adapter, not a schema merge. Will update once Vansh signs off.\nFYI: Consolidated everything in the shared Google Doc (tabbed) for easy reference- https://docs.google.com/document/d/10UhdjZ30XyQ5KKo9ZGNBCfxCeII_qDtZqTBUAYoGo1M/edit?usp=sharing",
                   "createdAt": "2026-06-24T23:09:56Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "closing the open thread from the 24th. the last update here was waiting on vansh signing off the report-format check. that's done now\n\nverified across the board: vansh signed off on the 25th, thin adapter not a schema merge, exactly as your pre-check predicted. it's recorded on the base data object task (confirmed_vansh 2026-06-25) and reflected in the json report_variant_id and variant_type notes. also confirmed live in the jun 25 sync where the format check and adapter call were walked through directly\n\nthe three flagged bugs are all tracked too: ISSUE-001 clinvar parser returning uncertain for pathogenic, ISSUE-002 wrong uniprot isoform, and the lmna coordinate fix. all in the base json conflicts_and_gaps and the open issues doc\n\naudit deliverable itself is solid, reuse matrix with all the required columns, all three demo variants live-tested not code-read. validated end to end, nothing left open here",
                   "createdAt": "2026-06-26T23:05:10Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "correcting myself, i said this was done with nothing left open and that was wrong. the format check is signed off but review still has two open items i skipped, and one of them is yours to fix\n\n signed off on the 25th (docs/vmis/REPORT_FORMAT_COMPATIBILITY_CHECK.md). his Q1 and Q3 changes are already in g551d_base.json, checked the live file, both there. but section 7 of that doc lists two things still open before the adapter can be built:\n the case doc has no job_id. the report, evidence trace and progress stepper all pull data by job_id, but g551d_base.json only has case_id, so there's nothing for them to join on. anushka, add a job_id to the case doc (or a way to resolve case_id to job_id). coordinate with on how jobs are keyed since it follows the variant-report/{job_id} pattern, and if you can do it yourself once he gives you the pattern, go ahead\n backend variant_type isn't confirmed. report.py might be a strict enum that rejects missense_variant. vansh couldn't see the backend repo to check. tagging on this one, he needs to open report.py, confirm enum or free string, and tell\nthe three data bugs (clinvar parser, uniprot isoform, lmna coords) are separate and already tracked in conflicts_and_gaps",
                   "createdAt": "2026-06-26T23:28:58Z"
                 },
@@ -551,7 +551,7 @@
             },
             {
               "title": "Create CFTR base data object",
-              "description": "Create the structured base data object for the CFTR G551D flagship case using existing GeneGenius services and verified scientific sources.\n\nInclude:\n Gene symbol and approved gene name\n Genome assembly\n Chromosome and genomic coordinates\n Reference and alternate alleles\n Selected transcript and transcript version\n HGVS genomic, coding, and protein notation\n Variant type\n ClinVar identifier and classification\n dbSNP identifier, if available\n gnomAD population frequency\n Protein identifier and amino-acid change\n Existing ACMG classification output\n Source and retrieval date for every field\n\nRequirements:\n Reuse existing VEP, ClinVar, gnomAD, HGVS, and ACMG services\n Do not rebuild or manually recreate existing annotation services\n Use one confirmed transcript consistently\n Mark missing or conflicting information clearly\n Do not include mechanism conclusions in this object\n Add the results to the shared VMIS JSON structure\n Confirm field names with Faraz before finalizing\n\nDeliverable:\nA validated CFTR G551D base JSON object that can later be combined with Vish’s evidence fields and Sakshi’s mechanism fields.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Create the structured base data object for the CFTR G551D flagship case using existing GG services and verified scientific sources.\n\nInclude:\n Gene symbol and approved gene name\n Genome assembly\n Chromosome and genomic coordinates\n Reference and alternate alleles\n Selected transcript and transcript version\n HGVS genomic, coding, and protein notation\n Variant type\n ClinVar identifier and classification\n dbSNP identifier, if available\n gnomAD population frequency\n Protein identifier and amino-acid change\n Existing ACMG classification output\n Source and retrieval date for every field\n\nRequirements:\n Reuse existing VEP, ClinVar, gnomAD, HGVS, and ACMG services\n Do not rebuild or manually recreate existing annotation services\n Use one confirmed transcript consistently\n Mark missing or conflicting information clearly\n Do not include mechanism conclusions in this object\n Add the results to the shared VMIS JSON structure\n Confirm field names with Faraz before finalizing\n\nDeliverable:\nA validated CFTR G551D base JSON object that can later be combined with Vish’s evidence fields and Sakshi’s mechanism fields.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -561,16 +561,16 @@
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-06-24",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
                   "author": "anushkagarg3008@gmail.com",
-                  "body": "Hi Faraz,\nCFTR G551D base JSON draft (schema sign-off needed)\nI’ve created the CFTR G551D base annotation object for VMIS as g551d_base.json. It reuses existing GeneGenius services (VEP, gnomAD, ClinVar API, HGVS generator, ACMG classifier) with per-field provenance. No mechanism conclusions included - reserved for Vish/Sakshi via extensions.\nPlease confirm before I finalize:\n Top-level field names match the shared VMIS JSON structure\n Provenance wrapper shape: { value, source, source_id, retrieval_date, status, notes? }\n Canonical graph ID: clinvar:VCV000007120 (NCBI-verified for c.1652G>A) vs case pack VCV000007105\n Whether conflict/audit fields (vep_*, api_classification, conflicts_and_gaps) belong in the base layer\n extensions.evidence / extensions.mechanism null placeholders — correct for downstream merge?\nKnown conflicts documented in the file (not blocking schema review):\n ClinVar API returned Uncertain → ACMG classifier returned VUS\n VEP uses Ensembl transcript; pinned RefSeq is NM_000492.4\n Local ClinVar VCF missing on dev\nOnce you confirm field names, I’ll update field_name_confirmation and align HBB/LMNA fixtures to the same structure.",
+                  "body": "Hi Faraz,\nCFTR G551D base JSON draft (schema sign-off needed)\nI’ve created the CFTR G551D base annotation object for VMIS as g551d_base.json. It reuses existing GG services (VEP, gnomAD, ClinVar API, HGVS generator, ACMG classifier) with per-field provenance. No mechanism conclusions included - reserved for Vish/Sakshi via extensions.\nPlease confirm before I finalize:\n Top-level field names match the shared VMIS JSON structure\n Provenance wrapper shape: { value, source, source_id, retrieval_date, status, notes? }\n Canonical graph ID: clinvar:VCV000007120 (NCBI-verified for c.1652G>A) vs case pack VCV000007105\n Whether conflict/audit fields (vep_*, api_classification, conflicts_and_gaps) belong in the base layer\n extensions.evidence / extensions.mechanism null placeholders — correct for downstream merge?\nKnown conflicts documented in the file (not blocking schema review):\n ClinVar API returned Uncertain → ACMG classifier returned VUS\n VEP uses Ensembl transcript; pinned RefSeq is NM_000492.4\n Local ClinVar VCF missing on dev\nOnce you confirm field names, I’ll update field_name_confirmation and align HBB/LMNA fixtures to the same structure.",
                   "createdAt": "2026-06-23T05:22:41Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "hey anushka, good build. answers below:\n names need a few tweaks to match our structure. genome_assembly should be genome_build. genomic_coordinates goes under variant, we use one variant field not a separate coords one. and add provenance as its own top field.\n provenance wrapper is close but not ours. ours is canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status. so your source_id becomes source_object_id, your status becomes review_status, and add version, evidence_label, canonical_id. keep value and notes, those are fine.\n yep use VCV000007120. flag the case pack so 007105 gets fixed.\n keep the conflict fields in for now. we clean them out after the clinvar parser fix.\n yep null evidence and mechanism placeholders are right.\nthe data and the catches are solid. just get the names matching before vish and sakshi build on it lock it after that and do hbb and lmna the same way",
                   "createdAt": "2026-06-24T01:52:50Z"
                 },
@@ -580,8 +580,8 @@
                   "createdAt": "2026-06-24T23:10:50Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "hey anushka, the data and the conflict catches here are genuinely strong, especially flagging the clinvar api misparse and correcting the case-pack VCV. that's exactly the fail-closed discipline we want.\n\none thing i couldn't resolve: i went looking for the locked version at cases/cftr/g551d_base.json and it's not showing in the backend repo. the file attached to this task is still the pre-feedback draft (it has genome_assembly, the old provenance wrapper, schema_version draft_pending_faraz).\n\ncan you point me to where the locked version actually lives, which repo and which branch. sakshi and vish need to build on that exact file so i want to confirm the real one before they do.\n\nseparate heads up: shrinjay is standing up a dedicated genegenius-vmis repo this week so we stop scattering vmis files. once that's up the locked cftr json moves there as the single source of truth.",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "hey anushka, the data and the conflict catches here are genuinely strong, especially flagging the clinvar api misparse and correcting the case-pack VCV. that's exactly the fail-closed discipline we want.\n\none thing i couldn't resolve: i went looking for the locked version at cases/cftr/g551d_base.json and it's not showing in the backend repo. the file attached to this task is still the pre-feedback draft (it has genome_assembly, the old provenance wrapper, schema_version draft_pending_faraz).\n\ncan you point me to where the locked version actually lives, which repo and which branch. sakshi and vish need to build on that exact file so i want to confirm the real one before they do.\n\nseparate heads up: shrinjay is standing up a dedicated gg-vmis repo this week so we stop scattering vmis files. once that's up the locked cftr json moves there as the single source of truth.",
                   "createdAt": "2026-06-25T05:30:59Z"
                 },
                 {
@@ -590,15 +590,15 @@
                   "createdAt": "2026-06-25T20:38:54Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "closing the loop on the where-does-it-live question from the 25th. verified now: the locked file is at cases/cftr/g551d_base.json in the genegenius-vmis repo, merged to main via PR #1 (vmis-grounding sync). pulled the live file and checked it directly\n\nit's the corrected version, not the old draft. genome_build not genome_assembly, full nine-field wrapper (value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes), schema_version vmis_base_v0. draft_pending_faraz is gone\n\ndata checks out: VCV000007120 as canonical with case-pack 007105 correctly flagged as conflict not used, NM_000492.4 c.1652G>A, p.(Gly551Asp), clinvar 4-star practice guideline, P13569 not gene_to_uniprot. ISSUE-001 (clinvar misparse) and ISSUE-002 (uniprot isoform) both showing fixed post backend #59. clinvar review string correctly in clinvar_review_status not the wrapper field\n\nvalidated end to end. nothing else open on this one. strong work anushka",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "closing the loop on the where-does-it-live question from the 25th. verified now: the locked file is at cases/cftr/g551d_base.json in the gg-vmis repo, merged to main via PR #1 (vmis-grounding sync). pulled the live file and checked it directly\n\nit's the corrected version, not the old draft. genome_build not genome_assembly, full nine-field wrapper (value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes), schema_version vmis_base_v0. draft_pending_faraz is gone\n\ndata checks out: VCV000007120 as canonical with case-pack 007105 correctly flagged as conflict not used, NM_000492.4 c.1652G>A, p.(Gly551Asp), clinvar 4-star practice guideline, P13569 not gene_to_uniprot. ISSUE-001 (clinvar misparse) and ISSUE-002 (uniprot isoform) both showing fixed post backend #59. clinvar review string correctly in clinvar_review_status not the wrapper field\n\nvalidated end to end. nothing else open on this one. strong work anushka",
                   "createdAt": "2026-06-26T23:02:10Z"
                 }
               ]
             },
             {
               "title": "Define VMIS identifiers and provenance fields",
-              "description": "Define the standard identifiers and provenance fields that every VMIS scientific object must use.\n\nInclude standards for:\n Gene identifier\n Transcript identifier and version\n Genomic HGVS\n Coding HGVS\n Protein HGVS\n ClinVar Variation ID\n dbSNP ID, when available\n Protein identifier\n Disease and phenotype identifiers\n Publication identifier, including PMID or DOI\n Source database\n Source URL\n Retrieval date\n Evidence type\n Evidence strength\n Review status\n Conflicting or contradictory evidence\n Curator notes\n\nRequirements:\n Reuse current GeneGenius field names where possible\n Avoid duplicate identifiers for the same biological entity\n Clearly distinguish database facts from inferred VMIS conclusions\n Every scientific claim must be traceable to its source\n Missing information must be represented explicitly, not guessed\n Confirm the final field names with Faraz before implementation\n Make sure the structure can later support Neo4j relationships and MongoDB workflow state\n\nDeliverable:\nA documented field dictionary and one completed CFTR G551D example showing how identifiers, sources, evidence, and review status will be stored.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Define the standard identifiers and provenance fields that every VMIS scientific object must use.\n\nInclude standards for:\n Gene identifier\n Transcript identifier and version\n Genomic HGVS\n Coding HGVS\n Protein HGVS\n ClinVar Variation ID\n dbSNP ID, when available\n Protein identifier\n Disease and phenotype identifiers\n Publication identifier, including PMID or DOI\n Source database\n Source URL\n Retrieval date\n Evidence type\n Evidence strength\n Review status\n Conflicting or contradictory evidence\n Curator notes\n\nRequirements:\n Reuse current GG field names where possible\n Avoid duplicate identifiers for the same biological entity\n Clearly distinguish database facts from inferred VMIS conclusions\n Every scientific claim must be traceable to its source\n Missing information must be represented explicitly, not guessed\n Confirm the final field names with Faraz before implementation\n Make sure the structure can later support Neo4j relationships and MongoDB workflow state\n\nDeliverable:\nA documented field dictionary and one completed CFTR G551D example showing how identifiers, sources, evidence, and review status will be stored.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -608,7 +608,7 @@
               "labels": [],
               "dueDate": "2026-06-23",
               "completedAt": "2026-06-24",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
@@ -617,13 +617,13 @@
                   "createdAt": "2026-06-24T23:12:54Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Reviewed. The field dictionary covers everything the task asked for, the two example files are aligned to the wrapper, and the conflict fields are retained as instructed. This is approved.\n\nOne thing to confirm so the schema doesn't fork: the wrapper in this dictionary must be the corrected one (canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status), not the first draft wrapper. The identifier dictionary and the locked base JSON have to be on the exact same wrapper or downstream breaks.\n\nConfirm here: is this dictionary already on the corrected wrapper, yes or no. If yes, this is fully locked and Sakshi and Vish build identifiers from it. If no, update it to match the base JSON and then it's locked.",
                   "createdAt": "2026-06-25T06:01:49Z"
                 },
                 {
                   "author": "anushkagarg3008@gmail.com",
-                  "body": "Hi Faraz, confirming your approval: the identifier dictionary is on the corrected wrapper (same nine fields as g551d_base.json: value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes) - not the first draft. Dictionary + both CFTR examples are aligned; conflict fields are retained as requested.\n Locked for Sakshi/Vish(under genegenius-vmis repo): docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json\n Wrapper: Faraz-approved ScientificValue; ClinVar review string lives in clinvar_review_status, not wrapper review_status\n Report path: Vansh confirmed (confirmed_vansh, 2026-06-25) - thin adapter, not schema merge\n Still open (not a schema fork): ClinVar API / ACMG conflicts in base JSON until backend PR #59 merges + live re-run (VMIS_OPEN_ISSUES.md)",
+                  "body": "Hi Faraz, confirming your approval: the identifier dictionary is on the corrected wrapper (same nine fields as g551d_base.json: value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes) - not the first draft. Dictionary + both CFTR examples are aligned; conflict fields are retained as requested.\n Locked for Sakshi/Vish(under gg-vmis repo): docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json\n Wrapper: Faraz-approved ScientificValue; ClinVar review string lives in clinvar_review_status, not wrapper review_status\n Report path: Vansh confirmed (confirmed_vansh, 2026-06-25) - thin adapter, not schema merge\n Still open (not a schema fork): ClinVar API / ACMG conflicts in base JSON until backend PR #59 merges + live re-run (VMIS_OPEN_ISSUES.md)",
                   "createdAt": "2026-06-25T20:47:35Z"
                 },
                 {
@@ -632,7 +632,7 @@
                   "createdAt": "2026-06-25T23:28:16Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "validated this against the actual deliverable, not just the thread. went through both files end to end (IDENTIFIER_AND_PROVENANCE_DICTIONARY.md and g551d_identifier_example.json)\n\ndictionary covers every required field: gene, transcript+version, hgvs g/c/p, clinvar vcv, dbsnp, protein, disease/phenotype (mondo/omim/medgen/orphanet/hpo), pmid/doi, source db, source url, retrieval date, evidence type, evidence strength, review status, conflicts, curator notes. all 18. wrapper is the corrected nine-field one matching g551d_base.json, so the yes/no i asked you on the 25th is a clean yes. source urls handled right, off the wrapper and onto evidence_records.source_url per the schema\n\nthe example file handles the conflict case the way the gate is meant to. the clinvar esummary pathogenic record and the clinvar-api uncertain record are stored separately and marked conflicts_with each other. the api one has neo4j_edge null and the ISSUE-001 note, and graph_write_allowed is false, so the bad edge doesn't get written. hpo phenotype_ids are marked missing and handed to vish\n\none fix needed: §4.3 of the dictionary still has a field labeled genome_assembly in the genomic-hgvs table. everywhere else (§3, §9) correctly says genome_build. it's a leftover from the old draft, just a stale label, but rename it so the doc doesn't contradict itself\n\ntwo things to be aware of, not on this task but they sit downstream of this schema and both came out of vansh's format check: the case doc still has no job_id ( and backend variant_type enum isn't confirmed yet ( linked so they don't get lost\n\nschema validated and locked. solid work",
                   "createdAt": "2026-06-26T23:43:37Z"
                 }
@@ -645,7 +645,7 @@
           "tasks": [
             {
               "title": "Evaluate PubMed and BioBERT retrieval for VMIS",
-              "description": "Evaluate the existing GeneGenius PubMed retrieval and BioBERT scoring pipeline for VMIS before introducing any new retrieval system.\n\nTest it using:\n CFTR G551D\n HBB Glu6Val\n One additional well-documented pathogenic variant\n\nFor each case, assess:\n Whether the most relevant mechanism papers are retrieved\n Whether BioBERT ranks the strongest papers highly\n Whether the retrieved evidence supports the exact variant-specific mechanism\n Whether claims can be mapped to a PMID, DOI, or source passage\n Whether unsupported claims can be rejected\n Whether contradictory evidence is surfaced\n What important evidence is missing\n\nRequirements:\n Reuse the current PubMed and BioBERT implementation\n Do not introduce pgvector or a new database\n Do not add Europe PMC unless a clear PubMed coverage gap is demonstrated\n Separate retrieval quality issues from reasoning or generation issues\n Record the query, retrieved papers, scores, selected evidence, and failure cases\n Coordinate output fields with Faraz for the shared VMIS JSON\n\nDeliverable:\nA short evaluation report covering all three variants, including retrieval results, major gaps, failure cases, and a recommendation on whether the existing system is sufficient for the MVP.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Evaluate the existing GG PubMed retrieval and BioBERT scoring pipeline for VMIS before introducing any new retrieval system.\n\nTest it using:\n CFTR G551D\n HBB Glu6Val\n One additional well-documented pathogenic variant\n\nFor each case, assess:\n Whether the most relevant mechanism papers are retrieved\n Whether BioBERT ranks the strongest papers highly\n Whether the retrieved evidence supports the exact variant-specific mechanism\n Whether claims can be mapped to a PMID, DOI, or source passage\n Whether unsupported claims can be rejected\n Whether contradictory evidence is surfaced\n What important evidence is missing\n\nRequirements:\n Reuse the current PubMed and BioBERT implementation\n Do not introduce pgvector or a new database\n Do not add Europe PMC unless a clear PubMed coverage gap is demonstrated\n Separate retrieval quality issues from reasoning or generation issues\n Record the query, retrieved papers, scores, selected evidence, and failure cases\n Coordinate output fields with Faraz for the shared VMIS JSON\n\nDeliverable:\nA short evaluation report covering all three variants, including retrieval results, major gaps, failure cases, and a recommendation on whether the existing system is sufficient for the MVP.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -655,11 +655,11 @@
               "labels": [],
               "dueDate": "2026-06-23",
               "completedAt": "2026-06-28",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Status. This is the foundation under your claim-to-source mapping - it evaluates whether the existing PubMed + BioBERT retrieval is good enough for VMIS before anyone builds on it.\n\nShrinjay's architecture review already confirmed the backend reuse: existing PubMed retrieval and BioBERT scoring are real and in production (ai_literature.py). So the question this task answers isn't \"does it exist,\" it's \"is it sufficient for the three demo variants, or is there a coverage gap.\"\n\nWhat's needed: run CFTR G551D, HBB E6V, and one more pathogenic variant through the existing pipeline. Record query, retrieved papers, BioBERT scores, selected evidence, and failure cases. Land on a yes/no recommendation: is the existing system sufficient for the MVP.\n\nTwo guardrails from the task: do not introduce pgvector or a new database, and do not add Europe PMC unless you demonstrate a clear PubMed coverage gap. The architecture review flagged Europe PMC as conditional - only if PubMed+BioBERT proves insufficient on these three cases.\n\nThis feeds the claim-to-source mapping, so it should land alongside or just before it. Confirm here with your sufficiency recommendation.",
                   "createdAt": "2026-06-25T06:31:52Z"
                 }
@@ -677,11 +677,11 @@
               "labels": [],
               "dueDate": "2026-06-23",
               "completedAt": "2026-06-28",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Status, so the task matches reality. This is the one on tomorrow's critical path.\n\nLast night you took on the backend security work and closed it - port locked, keys rotated. The right call, and done. You committed the claim-to-source mapping for first thing this morning.\n\nWhy this is the critical one of your three: Sakshi's mechanism note citations link directly through this mapping. Her cited note is due this morning too, and it can't be properly cited until your mapping exists. So you two are sequential - your mapping first, then her citations point into it.\n\nThe moment your mapping is up, ping Sakshi directly so she can wire her citations to it. Don't work in parallel silos or the citations won't line up with your structure.\n\nUse Anushka's identifier and source fields, and the corrected provenance wrapper (canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status) so it merges cleanly into the shared JSON.\n\nConfirm here when the mapping is posted and you've pinged Sakshi.",
                   "createdAt": "2026-06-25T06:31:42Z"
                 }
@@ -699,11 +699,11 @@
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-28",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Status. This defines the rule that protects the whole product: when the system must cite, label as inference, flag for review, reject, or abstain. This is the cite-or-abstain policy - the thing that stops VMIS from ever presenting an unsupported claim as fact. It's the core of our scientific credibility, not a side task.\n\nWhat's needed: the written policy plus machine-readable decision fields, covering variant-specific vs gene-level claims, mechanism, pathway, phenotype, therapeutic/hypothesis claims, conflicting literature, missing citations, citations that don't support the exact claim, and weak/indirect evidence. Plus at least five CFTR G551D test examples - one each for accepted, inferred, rejected, contradictory, and insufficient-evidence.\n\nHard rules from the task: every accepted claim maps to a verifiable source, the system never invents citations or relationships, variant-specific claims cannot lean on gene-level evidence alone, inferences labeled separately from facts, and abstain when minimum evidence isn't met. Define machine-readable rejection reasons so they carry into the shared JSON.\n\nThis is the rule Sakshi's confidence levels and the graph-write gate both enforce against, so it underpins her work and Anushka's gate. Coordinate the decision fields with the shared wrapper. Confirm here when the policy and the five test examples are posted.",
                   "createdAt": "2026-06-25T06:32:04Z"
                 }
@@ -726,11 +726,11 @@
               "labels": [],
               "dueDate": "2026-06-23",
               "completedAt": "2026-06-25",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Status, so the task matches reality. Draft reviewed. The mechanism classification is correct - gating defect primary, trafficking rejected, reduced stability secondary is the right call for G551D.\n\nThe gap: no citations yet. Every claim in the evidence rows and every confidence axis needs a PMID or DOI behind it, or it fails the graph-write gate. The confidence profile is currently all \"strong\" with nothing supporting it - each level needs its evidence. Science is there, sourcing isn't.\n\nCommitted: cited version to Zuhra by tomorrow AM (not end of day - she needs runway to review before the freeze).\n\nTwo dependencies gate this: citations link through Vish's claim-to-source mapping (he posts it AM, sync with him), and identifiers reuse Anushka's fields. This note is the top of the chain - your JSON fields, Zuhra's review, and the frontend all sit behind it.\n\nConfirm here when the cited note is submitted for review.",
                   "createdAt": "2026-06-25T06:30:12Z"
                 }
@@ -748,11 +748,11 @@
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-28",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "This is the third leg of your bundle and it's the output end - it converts the cited mechanism note into the structured JSON fields that merge into the shared file. Sequence: cited note first, then these fields, then they merge into the shared CFTR JSON with Anushka's and Vish's layers.\n\nTwo hard dependencies the task names: reuse Anushka's identifiers and source fields, and link every claim through Vish's claim-to-source mapping. So this can't finalize until Vish posts his mapping in the AM - your supporting claim IDs and PMIDs point into it. Sync with him before you lock the fields.\n\nNon-negotiable: same corrected provenance wrapper as the base JSON (canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status). This object is the merge point for all three layers, so a wrapper mismatch here breaks the whole shared file.\n\nDeliver this with the note and the uncertainty rules as one set tomorrow. Confirm here once the fields are built and merged into the shared JSON.",
                   "createdAt": "2026-06-25T06:29:06Z"
                 }
@@ -770,11 +770,11 @@
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-28",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "This rides with your cited mechanism note, not as a separate stream. Your mechanism draft already has most of this - the competing-hypothesis table (gating primary, trafficking rejected, reduced stability secondary) and the confidence profile are exactly what this task asks for.\n\nWhat's missing is the same gap as the note: the machine-readable status definitions and the citations behind each confidence level. So finish this alongside the note tomorrow, not separately.\n\nDeliver together: for each output type (strong, moderate, weak, competing, contradictory, missing, gene-level-used-as-variant, research hypothesis, needs-review, withheld) give the display label, machine-readable status, confidence range, whether it can appear in the graph, the report, and whether human approval is required. Use Anushka's provenance fields and Vish's cite-or-abstain rules so it's consistent with the shared JSON.\n\nPost both here and on the note task when they're ready for Zuhra. Confirm here once they're submitted for review.",
                   "createdAt": "2026-06-25T06:28:09Z"
                 }
@@ -787,7 +787,7 @@
           "tasks": [
             {
               "title": "Build the VMIS frontend page shell",
-              "description": "Build the initial VMIS frontend page inside the existing GeneGenius application.\n\nThe first version should include:\n VMIS entry point within the current GeneGenius navigation\n Prefilled CFTR G551D flagship-case card or button\n Normal gene and protein function section\n Variant summary section\n Normal-versus-mutated comparison\n Mechanism chain or graph area\n Evidence and citation panel\n Phenotype explanation section\n Research-hypothesis section\n Confidence and uncertainty indicators\n Human-review and sign-off status\n Research-use-only disclaimer\n Loading, empty, and error states\n\nRequirements:\n Reuse the current GeneGenius authentication\n Reuse existing design components and styling\n Reuse current API and MongoDB workflow patterns\n Do not create a new database\n Do not add full VCF upload or manual variant entry for the first demo\n Read all scientific content from the shared CFTR sample JSON\n Do not hardcode scientific claims into frontend components\n Use committed fixtures until backend responses are ready\n Keep the first version limited to the CFTR G551D demo\n Make sure source links and evidence are accessible from the relevant claims\n\nDeliverable:\nA working VMIS page shell connected to a committed sample JSON fixture, with all major sections visible and ready for detailed integration.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Build the initial VMIS frontend page inside the existing GG application.\n\nThe first version should include:\n VMIS entry point within the current GG navigation\n Prefilled CFTR G551D flagship-case card or button\n Normal gene and protein function section\n Variant summary section\n Normal-versus-mutated comparison\n Mechanism chain or graph area\n Evidence and citation panel\n Phenotype explanation section\n Research-hypothesis section\n Confidence and uncertainty indicators\n Human-review and sign-off status\n Research-use-only disclaimer\n Loading, empty, and error states\n\nRequirements:\n Reuse the current GG authentication\n Reuse existing design components and styling\n Reuse current API and MongoDB workflow patterns\n Do not create a new database\n Do not add full VCF upload or manual variant entry for the first demo\n Read all scientific content from the shared CFTR sample JSON\n Do not hardcode scientific claims into frontend components\n Use committed fixtures until backend responses are ready\n Keep the first version limited to the CFTR G551D demo\n Make sure source links and evidence are accessible from the relevant claims\n\nDeliverable:\nA working VMIS page shell connected to a committed sample JSON fixture, with all major sections visible and ready for detailed integration.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -797,11 +797,11 @@
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-23",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "This is marked done but there's no evidence on the task, so right now it can't be verified without asking you directly. A completed task should prove itself. Drop four things here:\n\n1. A screenshot or short screen recording of the shell rendering\n2. The commit hash or branch it's on\n3. The exact command to run it on the dev server\n4. Confirmation it reads from the committed sample JSON fixture, not hardcoded science\n\nThe task lists 13 sections the shell must contain (VMIS nav entry, CFTR card, normal-vs-mutated, mechanism graph area, evidence panel, phenotype, research-hypothesis, confidence indicators, review status, RUO disclaimer, loading/empty/error states). The screenshot covers most of that in one look.\n\nDo this same evidence drop on your detail-flow and verify-on-dev-server tasks too, both due today. Those are the demo-critical ones, so the proof matters most there.",
                   "createdAt": "2026-06-25T06:21:51Z"
                 },
@@ -814,7 +814,7 @@
             },
             {
               "title": "Build the CFTR G551D detail flow from shared JSON",
-              "description": "Connect the VMIS frontend page to the shared CFTR G551D sample JSON and build the complete detail flow.\n\nThe page should display:\n Gene and variant summary\n Selected transcript and HGVS identifiers\n Normal CFTR function\n Variant-specific molecular change\n Normal-versus-mutated comparison\n Mechanism chain from variant to phenotype\n Evidence linked to each major claim\n Confidence and uncertainty labels\n Competing hypotheses or contradictory evidence\n Phenotype explanation\n Mechanism-based research hypotheses\n Human scientific review status\n Research-use-only disclaimer\n\nRequirements:\n Read all scientific information from the shared JSON fixture\n Do not hardcode variant facts, claims, citations, or mechanism text\n Reuse the existing GeneGenius UI, authentication, routing, and API patterns\n Keep the first flow limited to CFTR G551D\n Source links must open from the relevant claim or evidence panel\n Clearly distinguish established facts, inferences, and research hypotheses\n Show safe fallback states for missing, weak, or rejected evidence\n Coordinate any missing or unclear JSON fields with Faraz\n Do not create a new backend service or database for this task\n\nDeliverable:\nA working CFTR G551D detail page that renders the complete VMIS story from the committed shared JSON fixture.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Connect the VMIS frontend page to the shared CFTR G551D sample JSON and build the complete detail flow.\n\nThe page should display:\n Gene and variant summary\n Selected transcript and HGVS identifiers\n Normal CFTR function\n Variant-specific molecular change\n Normal-versus-mutated comparison\n Mechanism chain from variant to phenotype\n Evidence linked to each major claim\n Confidence and uncertainty labels\n Competing hypotheses or contradictory evidence\n Phenotype explanation\n Mechanism-based research hypotheses\n Human scientific review status\n Research-use-only disclaimer\n\nRequirements:\n Read all scientific information from the shared JSON fixture\n Do not hardcode variant facts, claims, citations, or mechanism text\n Reuse the existing GG UI, authentication, routing, and API patterns\n Keep the first flow limited to CFTR G551D\n Source links must open from the relevant claim or evidence panel\n Clearly distinguish established facts, inferences, and research hypotheses\n Show safe fallback states for missing, weak, or rejected evidence\n Coordinate any missing or unclear JSON fields with Faraz\n Do not create a new backend service or database for this task\n\nDeliverable:\nA working CFTR G551D detail page that renders the complete VMIS story from the committed shared JSON fixture.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -824,11 +824,11 @@
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "one thing to close while you build this from the shared JSON: shared her base JSON and the report-format check with you on the audit task, and her last word was she was waiting on your sign-off on whether it fits the existing report format.\n\nHer pre-check said it's a partial fit to VariantInterpretation \\u2014 likely a thin adapter, not a full schema merge. As you wire her JSON into the detail flow, confirm that's actually the case and drop a quick yes/no here: does her base JSON drop in cleanly with a thin adapter, or does it need schema changes.\n\nThis was an informal check that never got tracked, so logging it here so it doesn't fall through. It matters because if her JSON doesn't fit the report format, we want to know now, not after Sakshi and Vish build their layers on top of it.",
                   "createdAt": "2026-06-25T05:52:33Z"
                 },
@@ -841,7 +841,7 @@
             },
             {
               "title": "Verify VMIS frontend on the development server",
-              "description": "Verify that the CFTR G551D VMIS frontend works correctly in the GeneGenius development environment.\n\nTest:\n VMIS navigation entry opens correctly\n CFTR G551D case loads from the shared JSON fixture\n All required sections render\n Normal-versus-mutated comparison displays correctly\n Mechanism chain or graph renders correctly\n Evidence links open from the correct claims\n Confidence and uncertainty labels appear correctly\n Weak, missing, contradictory, and rejected evidence states display safely\n Human-review status is visible\n Research-use-only disclaimer is visible\n Loading, empty, and error states work\n Page works after a fresh application start\n No scientific facts are hardcoded in frontend components\n Existing GeneGenius pages continue to work\n\nRequirements:\n Test using the latest committed branch\n Record any console, API, routing, or rendering errors\n Add screenshots or a short screen recording to the task\n Document the exact commands used to run the frontend\n Confirm the tested commit or pull request\n Do not mark complete while critical errors remain\n\nDeliverable:\nA verified development-server build with screenshots or a recording, test notes, the tested commit, and a list of remaining issues.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Verify that the CFTR G551D VMIS frontend works correctly in the GG development environment.\n\nTest:\n VMIS navigation entry opens correctly\n CFTR G551D case loads from the shared JSON fixture\n All required sections render\n Normal-versus-mutated comparison displays correctly\n Mechanism chain or graph renders correctly\n Evidence links open from the correct claims\n Confidence and uncertainty labels appear correctly\n Weak, missing, contradictory, and rejected evidence states display safely\n Human-review status is visible\n Research-use-only disclaimer is visible\n Loading, empty, and error states work\n Page works after a fresh application start\n No scientific facts are hardcoded in frontend components\n Existing GG pages continue to work\n\nRequirements:\n Test using the latest committed branch\n Record any console, API, routing, or rendering errors\n Add screenshots or a short screen recording to the task\n Document the exact commands used to run the frontend\n Confirm the tested commit or pull request\n Do not mark complete while critical errors remain\n\nDeliverable:\nA verified development-server build with screenshots or a recording, test notes, the tested commit, and a list of remaining issues.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
@@ -851,7 +851,7 @@
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -867,22 +867,22 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "This checklist is quietly on tomorrow's critical path. It's overdue, but the bigger point is that it's the tool you use to review Sakshi's cited mechanism note tomorrow. Without it locked, the review has no defined bar.\n\nThe good news: the task description already contains the full checklist - all 20 verification items and the five review outcomes (Approved / Approved with revisions / Requires additional evidence / Rejected / Deferred). So this is confirm-and-lock, not build-from-scratch.\n\nLock it so it's ready when Sakshi's note lands in the AM. Her note plus your review against this checklist is what closes the scientific package and the demo milestone. Confirm here once it's locked.",
                   "createdAt": "2026-06-25T06:20:06Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
-                  "body": "vish, picking this one up since sakshi's whole citation layer sits on it, and i want it pinned down on the task properly\nso the passages fixture is in and it's solid. cases/cftr/g551d_passages.json (https://github.com/GeneGeniusinc/genegenius-vmis/blob/main/cases/cftr/g551d_passages.json) has the STRIVE trial 22293454, the VX-770 in-vitro work 21083385, the class III gating-defect review 16113672, the modulator paper 23757338. real PMIDs, relevance scores, the F508del vs G551D distinction is all there. but that's the literature pool, the retrieve output. it's not the claim-to-source mapping\nthe mapping is the structured object: each of the seven claims (normal function, G551D change, gating defect, reduced chloride, cell/tissue effect, phenotype, research hypothesis) tied to its specific PMID, with the variant-specific vs gene-level flag, contradictory evidence, confidence and review status. that's the thing sakshi's citations point into\ni can't find that object on main. packages/rag (https://github.com/GeneGeniusinc/genegenius-vmis/tree/main/packages/rag) only has init.py and literature_retrieval.py, and both of those are committed under anushka, not you. no mapping commit from you in the main history either. so it's either on a branch that hasn't merged, in the doc, or still to be built on top of the passages\ntwo questions and we're sorted:\n where's the mapping right now, exact file and branch, or the doc link if that's where it is\n when sakshi did her cited note, did she point at your mapping or straight at g551d_passages.json. she got the note done so she wired to something, i just want to know what\nif it's built and i'm looking in the wrong place, send me the path and we close this in two minutes. if it still needs doing on top of the passages, tell me straight and we get it done today, because until it's locked sakshi's citations are pointing at something that can still move",
+                  "author": "mohdsarfaraz@gg.ai",
+                  "body": "vish, picking this one up since sakshi's whole citation layer sits on it, and i want it pinned down on the task properly\nso the passages fixture is in and it's solid. cases/cftr/g551d_passages.json (https://github.com/GGinc/gg-vmis/blob/main/cases/cftr/g551d_passages.json) has the STRIVE trial 22293454, the VX-770 in-vitro work 21083385, the class III gating-defect review 16113672, the modulator paper 23757338. real PMIDs, relevance scores, the F508del vs G551D distinction is all there. but that's the literature pool, the retrieve output. it's not the claim-to-source mapping\nthe mapping is the structured object: each of the seven claims (normal function, G551D change, gating defect, reduced chloride, cell/tissue effect, phenotype, research hypothesis) tied to its specific PMID, with the variant-specific vs gene-level flag, contradictory evidence, confidence and review status. that's the thing sakshi's citations point into\ni can't find that object on main. packages/rag (https://github.com/GGinc/gg-vmis/tree/main/packages/rag) only has init.py and literature_retrieval.py, and both of those are committed under anushka, not you. no mapping commit from you in the main history either. so it's either on a branch that hasn't merged, in the doc, or still to be built on top of the passages\ntwo questions and we're sorted:\n where's the mapping right now, exact file and branch, or the doc link if that's where it is\n when sakshi did her cited note, did she point at your mapping or straight at g551d_passages.json. she got the note done so she wired to something, i just want to know what\nif it's built and i'm looking in the wrong place, send me the path and we close this in two minutes. if it still needs doing on top of the passages, tell me straight and we get it done today, because until it's locked sakshi's citations are pointing at something that can still move",
                   "createdAt": "2026-06-27T00:48:45Z"
                 }
               ]
@@ -894,12 +894,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -910,12 +910,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -926,21 +926,21 @@
           "tasks": [
             {
               "title": "Review VMIS architecture and existing-system reuse",
-              "description": "Review the VMIS MVP architecture and confirm that it fits into the existing GeneGenius platform without duplicating current services.\n\nReview the planned use of:\n Existing authentication and user access\n Existing API patterns\n VEP, ClinVar, gnomAD, and HGVS services\n Existing ACMG workflow\n PubMed retrieval and BioBERT scoring\n MongoDB for run state, workflow, reviews, and sign-off\n Neo4j for supported biological relationships\n Shared CFTR G551D JSON fixture\n Existing frontend components and report patterns\n\nConfirm:\n What already exists and can be reused\n What exists but requires modification\n What is genuinely new for VMIS\n Whether any proposed component conflicts with the current architecture\n Whether any duplicate service or database is being introduced\n Whether frontend and backend responsibilities are clearly separated\n Whether the proposed shared JSON can later map to production APIs\n Whether provenance, review state, and scientific sign-off are preserved\n\nRestrictions:\n Do not build VMIS implementation as part of this task\n Do not introduce PostgreSQL, Celery, pgvector, or another database without an approved architecture decision\n Do not replace existing services unless a documented technical gap is proven\n Complete this review after urgent production-stability work is under control\n Record unresolved risks and recommended owners\n\nDeliverable:\nA short architecture review containing:\n Approved reuse decisions\n Identified conflicts\n Missing technical components\n Required changes\n Deferred decisions\n Final recommendation: approved, approved with changes, or blocked\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Review the VMIS MVP architecture and confirm that it fits into the existing GG platform without duplicating current services.\n\nReview the planned use of:\n Existing authentication and user access\n Existing API patterns\n VEP, ClinVar, gnomAD, and HGVS services\n Existing ACMG workflow\n PubMed retrieval and BioBERT scoring\n MongoDB for run state, workflow, reviews, and sign-off\n Neo4j for supported biological relationships\n Shared CFTR G551D JSON fixture\n Existing frontend components and report patterns\n\nConfirm:\n What already exists and can be reused\n What exists but requires modification\n What is genuinely new for VMIS\n Whether any proposed component conflicts with the current architecture\n Whether any duplicate service or database is being introduced\n Whether frontend and backend responsibilities are clearly separated\n Whether the proposed shared JSON can later map to production APIs\n Whether provenance, review state, and scientific sign-off are preserved\n\nRestrictions:\n Do not build VMIS implementation as part of this task\n Do not introduce PostgreSQL, Celery, pgvector, or another database without an approved architecture decision\n Do not replace existing services unless a documented technical gap is proven\n Complete this review after urgent production-stability work is under control\n Record unresolved risks and recommended owners\n\nDeliverable:\nA short architecture review containing:\n Approved reuse decisions\n Identified conflicts\n Missing technical components\n Required changes\n Deferred decisions\n Final recommendation: approved, approved with changes, or blocked\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-23",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "I am providing the VMIS Architecture review as a PDF. I will also, send a copy to your email",
                   "createdAt": "2026-06-23T10:11:56Z"
                 }
@@ -948,21 +948,21 @@
             },
             {
               "title": "Approve shared JSON-to-backend mapping",
-              "description": "Review the shared CFTR G551D sample JSON and confirm how each field should map to the existing GeneGenius backend.\n\nReview fields contributed by:\n Anushka: variant identifiers, annotations, normalization, and provenance\n Vish: evidence, citations, claim-to-source mappings, and rejection reasons\n Sakshi: mechanism, phenotype, confidence, uncertainty, and research hypotheses\n Zuhra: scientific review and sign-off status\n\nFor every major field, document:\n Field name\n Data type\n Source or owner\n Existing GeneGenius endpoint or service\n MongoDB storage location, when applicable\n Neo4j node or relationship, when applicable\n Frontend display requirement\n Whether the field is temporary for the fixture or required in production\n Any naming, schema, or integration conflict\n\nRequirements:\n Reuse existing backend and database patterns\n Do not create a new database\n Avoid duplicate fields for the same information\n Preserve claim-level provenance and scientific-review state\n Confirm that the frontend fixture can later be replaced by real API responses\n Flag fields that should not be stored in Neo4j because they are workflow state\n Flag unsupported biological relationships that must not be written to the graph\n Record required schema changes before implementation begins\n\nDeliverable:\nAn approved mapping table connecting the shared VMIS JSON to existing APIs, MongoDB, Neo4j, and frontend components.\n\nRecord one final status:\n Approved\n Approved with required changes\n Blocked pending architecture decisions\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Review the shared CFTR G551D sample JSON and confirm how each field should map to the existing GG backend.\n\nReview fields contributed by:\n Anushka: variant identifiers, annotations, normalization, and provenance\n Vish: evidence, citations, claim-to-source mappings, and rejection reasons\n Sakshi: mechanism, phenotype, confidence, uncertainty, and research hypotheses\n Zuhra: scientific review and sign-off status\n\nFor every major field, document:\n Field name\n Data type\n Source or owner\n Existing GG endpoint or service\n MongoDB storage location, when applicable\n Neo4j node or relationship, when applicable\n Frontend display requirement\n Whether the field is temporary for the fixture or required in production\n Any naming, schema, or integration conflict\n\nRequirements:\n Reuse existing backend and database patterns\n Do not create a new database\n Avoid duplicate fields for the same information\n Preserve claim-level provenance and scientific-review state\n Confirm that the frontend fixture can later be replaced by real API responses\n Flag fields that should not be stored in Neo4j because they are workflow state\n Flag unsupported biological relationships that must not be written to the graph\n Record required schema changes before implementation begins\n\nDeliverable:\nAn approved mapping table connecting the shared VMIS JSON to existing APIs, MongoDB, Neo4j, and frontend components.\n\nRecord one final status:\n Approved\n Approved with required changes\n Blocked pending architecture decisions\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "compiled, pls share it with me.",
                   "createdAt": "2026-06-26T18:17:29Z"
                 },
@@ -985,16 +985,16 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-26",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Draft external-review questionnaire for the CFTR G551D VMIS MVP. Ready to deploy the moment the demo is polished. Review and adjust wording as needed.\n\n— — —\n\nREVIEWER INTRODUCTION\n\nThank you for reviewing this demonstration. A few things to set context before you begin:\n\nVMIS (Variant-to-Mechanism Intelligence System) takes a single confirmed pathogenic variant and reconstructs the chain from the variant to its molecular mechanism, to the affected pathway and cellular consequence, to the patient phenotype, and finally to mechanism-matched research hypotheses. It explains why a variant is pathogenic, not just that it is.\n\nCFTR G551D is our first demonstration case. You are looking at one variant, one transcript, end to end.\n\nThis system is research-use-only. It does not provide diagnosis, prescribing, dosing, or treatment recommendations, and we are not asking you to make any clinical judgment.\n\nWhat we are asking you to evaluate is clarity, scientific defensibility, and usefulness — whether the explanation holds up, whether the evidence is verifiable, and whether this would be useful in your work.\n\nThe questionnaire is short. Please answer as critically as you would for a paper you were reviewing.\n\n— — —\n\nREVIEWER BACKGROUND\nName / role / field (e.g. genomics researcher, clinician-scientist, molecular biologist):\n\n— — —\n\nQUESTIONS (rate 1–5 where noted, with space to explain)\n\n1. Is the variant-to-mechanism explanation scientifically clear? Could you follow it without prior briefing?\n\n2. Is the mechanism chain (variant → gating defect → reduced chloride transport → phenotype) biologically convincing?\n\n3. Is the distinction between established facts, inferences, and research hypotheses clear and correctly applied?\n\n4. Are the citations easy to verify, and do they support the exact claims they are attached to?\n\n5. Are the confidence and uncertainty labels understandable and appropriately calibrated to the evidence?\n\n6. Is weak, missing, or contradictory evidence presented responsibly, rather than hidden or smoothed over?\n\n7. Is the phenotype explanation useful without overstating causality?\n\n8. Is the mechanism graph easy to follow?\n\n9. Is the research-use-only boundary clear throughout?\n\n10. Is any scientific or product feature missing that you would expect or need?\n\n11. Would this output be useful to you in your work as a researcher, clinician-scientist, or genomics professional? Why or why not?\n\n12. Overall: would you trust this as a starting point for mechanistic investigation? What would raise that trust?\n\n— — —\n\nOPEN COMMENTS\nAnything else you would change, add, or flag:",
                   "createdAt": "2026-06-25T06:24:25Z"
                 }
@@ -1002,17 +1002,17 @@
             },
             {
               "title": "Select external reviewers and schedule VMIS feedback",
-              "description": "Identify and contact a small group of external reviewers for the CFTR G551D VMIS MVP.\n\nPrioritize reviewers with experience in:\n Genomics\n Variant interpretation\n Molecular biology\n Clinical genetics\n Translational research\n Bioinformatics\n Genomic product design\n\nFor each reviewer, record:\n Name\n Organization\n Role or expertise\n Why they are relevant\n Contact method\n Date contacted\n Response status\n Review date\n Feedback received\n\nRequirements:\n Select 3 to 5 qualified reviewers\n Include at least one reviewer with strong biological or clinical genetics expertise\n Include at least one reviewer who can assess product usability\n Share only the approved research-use-only MVP\n Make clear that no patient diagnosis or treatment recommendation is being requested\n Use the external validation questionnaire prepared in the previous task\n Do not share confidential GeneGenius information unnecessarily\n Record all major feedback in Asana\n Convert important feedback into separate follow-up tasks\n\nDeliverable:\nA confirmed reviewer list, scheduled feedback sessions, and a summary of all external feedback received.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
+              "description": "Identify and contact a small group of external reviewers for the CFTR G551D VMIS MVP.\n\nPrioritize reviewers with experience in:\n Genomics\n Variant interpretation\n Molecular biology\n Clinical genetics\n Translational research\n Bioinformatics\n Genomic product design\n\nFor each reviewer, record:\n Name\n Organization\n Role or expertise\n Why they are relevant\n Contact method\n Date contacted\n Response status\n Review date\n Feedback received\n\nRequirements:\n Select 3 to 5 qualified reviewers\n Include at least one reviewer with strong biological or clinical genetics expertise\n Include at least one reviewer who can assess product usability\n Share only the approved research-use-only MVP\n Make clear that no patient diagnosis or treatment recommendation is being requested\n Use the external validation questionnaire prepared in the previous task\n Do not share confidential GG information unnecessarily\n Record all major feedback in Asana\n Convert important feedback into separate follow-up tasks\n\nDeliverable:\nA confirmed reviewer list, scheduled feedback sessions, and a summary of all external feedback received.\n\nReference document:\nhttps://docs.google.com/document/d/1VQPHVYBdoW1fQFRlWhUZNJv_gVLoo1ouG1ujxNsGkfQ/edit?usp=sharing",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1023,16 +1023,16 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "matthew@genegenius.ai"
+                "matthew@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Matt, this is on the board dated today, but it's not urgent and doesn't need to touch your day. The plan is outreach for the CFTR demo, and the demo isn't polished yet, so there's nothing to take to reviewers regardless. It's correctly behind the build.\n\nSet a realistic date for it yourself, or tell me one and I'll move it. It stays on the board so it doesn't get lost, just off today. Confirm the date and I'll lock it.",
                   "createdAt": "2026-06-25T06:27:02Z"
                 }
@@ -1043,7 +1043,7 @@
       ]
     },
     {
-      "name": "GeneGenius Sprint",
+      "name": "GG Sprint",
       "description": "Core product sprint + production incident remediation",
       "sections": [
         {
@@ -1056,12 +1056,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-05",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1077,27 +1077,27 @@
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
-              "title": "Validate → benchmark → represent: full GeneGenius capability audit (1 week)",
-              "description": "Agreed with Shrinjay in the June 28 sync. The goal: by ~next week, have a validated, benchmarked, and properly-represented picture of everything GeneGenius does end to end, so we can demo and pitch (Johns Hopkins, pilots, investors) without hand-waving. Driven by the principle: if a feature isn't visible and validated, it's worth zero.\n\nSTRUCTURE (so it doesn't bottleneck on Shrinjay or Sagar):\n- Shrinjay shares the June 28 meeting transcript with each module owner.\n- Each MODULE OWNER documents their own module/functional area: what it does, every number it claims (e.g. structural-impact 78.8), HOW that number was reached (formula/method/compute steps), what the standard is, and how far we are from it. Owner is accountable for their own part's documentation.\n- Shrinjay compiles the per-owner docs into one structured reference.\n- Then: validate each claim (manual where needed, AI where appropriate), benchmark it, and confirm it's backed by real knowledge not vague claims.\n\nSCOPE (end to end): FASTQ→VCF (incl. rice genome), variant annotation at scale (1M variants), the 28 ACMG criteria (which fire on which datasets), the 8 modules (M1-M8: what triggers each, what inputs each needs), VMIS / into-mechanism, and pharmacogenomics (drug-response). Every claim validated, benchmarked, and then represented on the dashboard + landing page.\n\nTIMELINE: ~1 week. Target the numbers/benchmarks compiled by mid-week (Wed/Thu), then 1-2 days on the front-end representation, so the full validated picture is ready by next week. Not to be rushed in a day. After tomorrow's demo, propose the plan to the team for consensus so everyone's aligned and no one becomes a bottleneck.\n\nNOTE: this is the week's main workstream AFTER tomorrow's demo. Faraz is not adding new scope beyond what already exists; this is about validating and surfacing what's already built.\n\nDONE WHEN: every capability has an owner-written doc (claim + method + benchmark), Shrinjay has compiled them into one structured reference, claims are validated/benchmarked, and the dashboard + landing page accurately represent what's real.",
+              "title": "Validate → benchmark → represent: full GG capability audit (1 week)",
+              "description": "Agreed with Shrinjay in the June 28 sync. The goal: by ~next week, have a validated, benchmarked, and properly-represented picture of everything GG does end to end, so we can demo and pitch (Johns Hopkins, pilots, investors) without hand-waving. Driven by the principle: if a feature isn't visible and validated, it's worth zero.\n\nSTRUCTURE (so it doesn't bottleneck on Shrinjay or Sagar):\n- Shrinjay shares the June 28 meeting transcript with each module owner.\n- Each MODULE OWNER documents their own module/functional area: what it does, every number it claims (e.g. structural-impact 78.8), HOW that number was reached (formula/method/compute steps), what the standard is, and how far we are from it. Owner is accountable for their own part's documentation.\n- Shrinjay compiles the per-owner docs into one structured reference.\n- Then: validate each claim (manual where needed, AI where appropriate), benchmark it, and confirm it's backed by real knowledge not vague claims.\n\nSCOPE (end to end): FASTQ→VCF (incl. rice genome), variant annotation at scale (1M variants), the 28 ACMG criteria (which fire on which datasets), the 8 modules (M1-M8: what triggers each, what inputs each needs), VMIS / into-mechanism, and pharmacogenomics (drug-response). Every claim validated, benchmarked, and then represented on the dashboard + landing page.\n\nTIMELINE: ~1 week. Target the numbers/benchmarks compiled by mid-week (Wed/Thu), then 1-2 days on the front-end representation, so the full validated picture is ready by next week. Not to be rushed in a day. After tomorrow's demo, propose the plan to the team for consensus so everyone's aligned and no one becomes a bottleneck.\n\nNOTE: this is the week's main workstream AFTER tomorrow's demo. Faraz is not adding new scope beyond what already exists; this is about validating and surfacing what's already built.\n\nDONE WHEN: every capability has an owner-written doc (claim + method + benchmark), Shrinjay has compiled them into one structured reference, claims are validated/benchmarked, and the dashboard + landing page accurately represent what's real.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-05",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "The Per Owner doc is shared with you on WhatsApp.",
                   "createdAt": "2026-06-30T13:22:44Z"
                 }
@@ -1105,17 +1105,17 @@
             },
             {
               "title": "Explore + pursue AWS Partner Network (APN) funding benefits",
-              "description": "Explore and pursue AWS Partner Network (APN) funding benefits for GeneGenius, and align them with the live Innovative Solutions engagement. Faraz flagged this (June 27); Matt is taking it on after the KPMG application. added for the technical side.\n\nTHE TWO THINGS THIS CONNECTS:\n\n1. APN partner funding (the page Faraz sent): https://aws.amazon.com/partners/funding/. AWS funds Partners on training, product/solution development, and go-to-market. Buckets: gain proficiency in AWS services, develop new products/solutions, enable go-to-market, accelerate sales cycle / build pipeline. We're well-positioned: platform already live on AWS GPU, NVIDIA Inception member, AWS Activate credits.\n\n2. The Innovative Solutions engagement (the live, time-sensitive one): a structured, milestone-based migration of our platform onto EKS GPU infrastructure, with Innovative's services AWS-funded. AJ Rivera's team (ajrivera@innovativesol.com) backs the technical case with us. Sarah at AWS is the funding contact. The real compute numbers, from Zuhra's email to Sarah (Matt was tagged):\n WO1 (Jul 1–15): assessment, nothing deployed, ~$0\n WO2 (Jul 15–Aug 15): EKS GPU environment, ~$21,750/mo\n WO3 (Aug 15–Sep 15): production platform, ~$21,750/mo\n WO4 (Sep 15–Oct 1): advanced orchestration, ~$22,750/mo\n\nSpend starts July 15, runs ~$21,750/mo, scales toward ~$261K/year at full production. Figures are Innovative's AWS estimate for the engagement.\n\n** THE LIVE DEADLINE: ** the first two weeks (WO1) are assessment-only, so there is a window BEFORE WO2 spend starts July 15 to get the compute-cost path sorted. Zuhra has asked Sarah for 20 minutes early next week to find a route through the compute cost (we're bootstrapped + pre-revenue, can't carry ~$261K/yr alone, but the platform is already live on AWS GPU and we'd rather scale on AWS than anywhere else). This APN funding track is a lever in that conversation.\n\nWHAT MATT + SAGAR DO:\n Matt: map which APN funding benefits we qualify for, and how they stack with (not double-claim against) the AWS-funded Innovative engagement. Goal: maximize what AWS covers across both tracks so the July 15 compute ramp is as funded as possible. Coordinate with the Sarah / AJ thread, don't cut across Zuhra's open conversation with Sarah, support it.\n (Sagar) - technical: the AWS services / architecture inputs needed to qualify for the build/proficiency and migration funding buckets (EKS GPU, the migration scope), and any technical detail a funding request or the AWS estimate needs. You also own the technical case alongside AJ's team on the Innovative side, so this is the same architecture story.\n\nFORMAT: use the same claim-sheet format as the other funding/grant applications (KPMG etc.) so everything is squared and consistent — Matt's call-out on WhatsApp.\n\nKEY CONTACTS: Sarah (AWS, funding) · AJ Rivera, ajrivera@innovativesol.com (Innovative Solutions) · Zuhra zuhra@genegenius.ai (owns the Sarah relationship/email) · Matt matthew@genegenius.ai.\n\nDONE WHEN: APN benefits we qualify for are identified and mapped against the Innovative engagement (stack, don't double-claim), the claim-sheet is drafted, and it's lined up to support Zuhra's funding conversation with Sarah BEFORE the July 15 WO2 spend starts. Post progress here.",
+              "description": "Explore and pursue AWS Partner Network (APN) funding benefits for GG, and align them with the live Innovative Solutions engagement. Faraz flagged this (June 27); Matt is taking it on after the KPMG application. added for the technical side.\n\nTHE TWO THINGS THIS CONNECTS:\n\n1. APN partner funding (the page Faraz sent): https://aws.amazon.com/partners/funding/. AWS funds Partners on training, product/solution development, and go-to-market. Buckets: gain proficiency in AWS services, develop new products/solutions, enable go-to-market, accelerate sales cycle / build pipeline. We're well-positioned: platform already live on AWS GPU, NVIDIA Inception member, AWS Activate credits.\n\n2. The Innovative Solutions engagement (the live, time-sensitive one): a structured, milestone-based migration of our platform onto EKS GPU infrastructure, with Innovative's services AWS-funded. AJ Rivera's team (ajrivera@innovativesol.com) backs the technical case with us. Sarah at AWS is the funding contact. The real compute numbers, from Zuhra's email to Sarah (Matt was tagged):\n WO1 (Jul 1–15): assessment, nothing deployed, ~$0\n WO2 (Jul 15–Aug 15): EKS GPU environment, ~$21,750/mo\n WO3 (Aug 15–Sep 15): production platform, ~$21,750/mo\n WO4 (Sep 15–Oct 1): advanced orchestration, ~$22,750/mo\n\nSpend starts July 15, runs ~$21,750/mo, scales toward ~$261K/year at full production. Figures are Innovative's AWS estimate for the engagement.\n\n** THE LIVE DEADLINE: ** the first two weeks (WO1) are assessment-only, so there is a window BEFORE WO2 spend starts July 15 to get the compute-cost path sorted. Zuhra has asked Sarah for 20 minutes early next week to find a route through the compute cost (we're bootstrapped + pre-revenue, can't carry ~$261K/yr alone, but the platform is already live on AWS GPU and we'd rather scale on AWS than anywhere else). This APN funding track is a lever in that conversation.\n\nWHAT MATT + SAGAR DO:\n Matt: map which APN funding benefits we qualify for, and how they stack with (not double-claim against) the AWS-funded Innovative engagement. Goal: maximize what AWS covers across both tracks so the July 15 compute ramp is as funded as possible. Coordinate with the Sarah / AJ thread, don't cut across Zuhra's open conversation with Sarah, support it.\n (Sagar) - technical: the AWS services / architecture inputs needed to qualify for the build/proficiency and migration funding buckets (EKS GPU, the migration scope), and any technical detail a funding request or the AWS estimate needs. You also own the technical case alongside AJ's team on the Innovative side, so this is the same architecture story.\n\nFORMAT: use the same claim-sheet format as the other funding/grant applications (KPMG etc.) so everything is squared and consistent — Matt's call-out on WhatsApp.\n\nKEY CONTACTS: Sarah (AWS, funding) · AJ Rivera, ajrivera@innovativesol.com (Innovative Solutions) · Zuhra zuhra@gg.ai (owns the Sarah relationship/email) · Matt matthew@gg.ai.\n\nDONE WHEN: APN benefits we qualify for are identified and mapped against the Innovative engagement (stack, don't double-claim), the claim-sheet is drafted, and it's lined up to support Zuhra's funding conversation with Sarah BEFORE the July 15 WO2 spend starts. Post progress here.",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "matthew@genegenius.ai"
+                "matthew@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-03",
               "completedAt": "2026-07-01",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1126,12 +1126,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1147,27 +1147,27 @@
               "labels": [],
               "dueDate": "2026-06-20",
               "completedAt": "2026-06-21",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
-              "title": "Update the Manuscipt - GENEGENIUS_TECHNICAL_ARCHITECTURE.md",
-              "description": "Context\nThe comprehensive GeneGenius technical architecture document\n(docs/GENEGENIUS_TECHNICAL_ARCHITECTURE.md, branch v2-accelerated) has been\nrefreshed with current modules, datasets, integrations, GPU usage, and the measured H100 benchmark/accuracy suite. It's the deliverable for Faraz. A new appendix — \"Open Items — Flagged for Sagar's Review\" (top of §23) — lists the points where source numbers diverge or aren't yet measured.\n\nAction\nReview the Open Items appendix (§23) and commit your additions/corrections\ndirectly to docs/GENEGENIUS_TECHNICAL_ARCHITECTURE.md on v2-accelerated. Each\nitem is cross-linked inline to the section it affects.\n\nDECISIONS NEEDED (your call):\n1. GIAB accuracy headline (§17.13) — feature BED vcfeval F1 (0.98) only, or also show the conservative strict-tuple F1 (0.87/0.77)?\n\n2. VUS framing (§17.14) — lead with 18.5% (clinical WGS), or present both that and 61.9% (ClinVar-270)?\n\n 3. Classifier accuracy (§17.13) — cite a measured precision/recall/AUROC vs a labeled truth set, or stay with concordance/parity only?\n\n4. ACMG criteria phrasing (§1.1 / §10 / §17.13) — canonical wording:\n \"15/28 fired\" vs \"27 implemented + 1 surrogate\" vs \"28-criteria\"?\n5. Document version (§1.3 / header) — bump 2.9.x → 3.0.0?\n\nDATA TO VERIFY / FILL:\n6. KG node/edge counts (§11.1) — current 45,123 / 123,456 are Nov-2025 frontend placeholders; replace with live counts from data/cache/knowledge_graph.pkl or GET /knowledge-graph/dashboard/stats.\n7. Whole-file SLA target (§17.2) — 10 vs 20 min (commit 07ab63c raised to 20; acceptance SLA still 600s). Confirm canonical value.\n8. DrugBank / PharmGKB record counts (§12.1) — confirm ~19,842 drugs / ~5,186 clinical annotations against the loaded data.\n9. Test count + coverage % (§18.1) — confirm canonical headline (113 files / ~410 fns vs \"1,546 collected\") and the actual measured coverage %.\n10. M1 unit-test count (§10.10) — reconcile \"44/44\" vs the 8-case suite.\n11. V2 integration liveness (§10 / §14) — confirm CIViC / KEGG /\n gnomAD-constraint paths + GTEx v8 / SpliceAI tabix are live vs stubbed.\n\nDeliverable: edits committed to v2-accelerated before the doc goes to Faraz.",
+              "title": "Update the Manuscipt - GG_TECHNICAL_ARCHITECTURE.md",
+              "description": "Context\nThe comprehensive GG technical architecture document\n(docs/GG_TECHNICAL_ARCHITECTURE.md, branch v2-accelerated) has been\nrefreshed with current modules, datasets, integrations, GPU usage, and the measured H100 benchmark/accuracy suite. It's the deliverable for Faraz. A new appendix — \"Open Items — Flagged for Sagar's Review\" (top of §23) — lists the points where source numbers diverge or aren't yet measured.\n\nAction\nReview the Open Items appendix (§23) and commit your additions/corrections\ndirectly to docs/GG_TECHNICAL_ARCHITECTURE.md on v2-accelerated. Each\nitem is cross-linked inline to the section it affects.\n\nDECISIONS NEEDED (your call):\n1. GIAB accuracy headline (§17.13) — feature BED vcfeval F1 (0.98) only, or also show the conservative strict-tuple F1 (0.87/0.77)?\n\n2. VUS framing (§17.14) — lead with 18.5% (clinical WGS), or present both that and 61.9% (ClinVar-270)?\n\n 3. Classifier accuracy (§17.13) — cite a measured precision/recall/AUROC vs a labeled truth set, or stay with concordance/parity only?\n\n4. ACMG criteria phrasing (§1.1 / §10 / §17.13) — canonical wording:\n \"15/28 fired\" vs \"27 implemented + 1 surrogate\" vs \"28-criteria\"?\n5. Document version (§1.3 / header) — bump 2.9.x → 3.0.0?\n\nDATA TO VERIFY / FILL:\n6. KG node/edge counts (§11.1) — current 45,123 / 123,456 are Nov-2025 frontend placeholders; replace with live counts from data/cache/knowledge_graph.pkl or GET /knowledge-graph/dashboard/stats.\n7. Whole-file SLA target (§17.2) — 10 vs 20 min (commit 07ab63c raised to 20; acceptance SLA still 600s). Confirm canonical value.\n8. DrugBank / PharmGKB record counts (§12.1) — confirm ~19,842 drugs / ~5,186 clinical annotations against the loaded data.\n9. Test count + coverage % (§18.1) — confirm canonical headline (113 files / ~410 fns vs \"1,546 collected\") and the actual measured coverage %.\n10. M1 unit-test count (§10.10) — reconcile \"44/44\" vs the 8-case suite.\n11. V2 integration liveness (§10 / §14) — confirm CIViC / KEGG /\n gnomAD-constraint paths + GTEx v8 / SpliceAI tabix are live vs stubbed.\n\nDeliverable: edits committed to v2-accelerated before the doc goes to Faraz.",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-20",
               "completedAt": "2026-06-21",
-              "createdBy": "shrinjayshresth@genegenius.ai",
+              "createdBy": "shrinjayshresth@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Hey the due date for this task was yesterday — could you share a quick update on where things stand? Let us know if you need anything to move it forward. Thanks!",
                   "createdAt": "2026-06-21T18:02:14Z"
                 }
@@ -1180,12 +1180,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-20",
               "completedAt": "2026-06-20",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1195,21 +1195,21 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-23",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "email'd you the status doc.",
                   "createdAt": "2026-06-23T08:01:56Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Please find them attached here too",
                   "createdAt": "2026-06-23T10:12:58Z"
                 }
@@ -1226,7 +1226,7 @@
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1237,12 +1237,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1253,12 +1253,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-25",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1274,7 +1274,7 @@
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1290,7 +1290,7 @@
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1305,7 +1305,7 @@
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-07-03",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1320,7 +1320,7 @@
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1330,12 +1330,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "matthew@genegenius.ai"
+                "matthew@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-05",
               "completedAt": "2026-06-30",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1345,12 +1345,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "matthew@genegenius.ai"
+                "matthew@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-20",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1361,12 +1361,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1381,7 +1381,7 @@
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-21",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
@@ -1406,7 +1406,7 @@
               ],
               "labels": [],
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1416,12 +1416,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1437,31 +1437,31 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-23",
               "completedAt": "2026-06-26",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "follow-up task was created from the June 21 production authentication incident report. Please review the scope, confirm ownership and dependencies, and add any blockers or proposed changes directly here before starting. Do not mark complete until the acceptance criteria and production verification are attached",
                   "createdAt": "2026-06-21T18:24:52Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Raised the PR for review.",
                   "createdAt": "2026-06-22T04:00:27Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "provide and attach the verification of the acceptance criteria & the production verification to mark this task as complete.",
                   "createdAt": "2026-06-22T14:05:57Z"
                 },
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Attaching the verification report shared by",
                   "createdAt": "2026-06-26T09:31:38Z"
                 }
@@ -1474,16 +1474,16 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "shrinjayshresth@genegenius.ai",
+                  "author": "shrinjayshresth@gg.ai",
                   "body": "Shared the manuscript with over to him to review and send me back the comments.",
                   "createdAt": "2026-06-25T07:12:56Z"
                 }
@@ -1496,12 +1496,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1512,12 +1512,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1528,12 +1528,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-21",
               "completedAt": "2026-06-21",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1555,12 +1555,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-17",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1571,28 +1571,28 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-14",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Counsel drafts provisional #1",
-              "description": "Counsel (Ramesh/DG) drafts provisional #1 from the technical disclosure package (GeneGenius_Provisional_Disclosure.pdf + Sagar's architecture diagrams, uploaded to the OneDrive Technical docs folder). Faraz is the liaison.\n\nA provisional does NOT need to be perfect (Ramesh's point on the call) - it captures a snapshot as of the filing date and secures priority. Counsel returns a draft for the team to review.\n\nDEPENDENCY: requires the disclosure to be finalized + validation findings resolved (see the disclosure tasks in the Technical Disclosure section) and uploaded to OneDrive first.\n\nDONE WHEN: draft provisional received from counsel, ready for technical review.",
+              "description": "Counsel (Ramesh/DG) drafts provisional #1 from the technical disclosure package (GG_Provisional_Disclosure.pdf + Sagar's architecture diagrams, uploaded to the OneDrive Technical docs folder). Faraz is the liaison.\n\nA provisional does NOT need to be perfect (Ramesh's point on the call) - it captures a snapshot as of the filing date and secures priority. Counsel returns a draft for the team to review.\n\nDEPENDENCY: requires the disclosure to be finalized + validation findings resolved (see the disclosure tasks in the Technical Disclosure section) and uploaded to OneDrive first.\n\nDONE WHEN: draft provisional received from counsel, ready for technical review.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-10",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1608,60 +1608,60 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-02",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Complete client information form + small-entity declaration",
-              "description": "Counsel's standard intake paperwork, which DG (Ramesh/Mehak) will send:\n1. Client information form - all inventor details (names, addresses, nationalities from the inventor-list task).\n2. Small-entity (or micro-entity) declaration - GeneGenius likely qualifies as a small entity, which reduces USPTO fees. Counsel will confirm which applies.\n\nThese come from counsel once engaged. Fill and return promptly so they do not sit on the critical path before filing.\n\nDONE WHEN: client information form + entity declaration completed and returned to counsel.",
+              "description": "Counsel's standard intake paperwork, which DG (Ramesh/Mehak) will send:\n1. Client information form - all inventor details (names, addresses, nationalities from the inventor-list task).\n2. Small-entity (or micro-entity) declaration - GG likely qualifies as a small entity, which reduces USPTO fees. Counsel will confirm which applies.\n\nThese come from counsel once engaged. Fill and return promptly so they do not sit on the critical path before filing.\n\nDONE WHEN: client information form + entity declaration completed and returned to counsel.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-08",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Sign inventor assignment agreements",
-              "description": "Each named inventor signs an assignment agreement assigning their rights in the patent to GeneGenius Inc. (the owner/applicant). These must be registered with the USPTO.\n\nDEPENDENCY: counsel generates these once the draft title is set, so this needs the draft provisional (and its title) first. Cannot be completed before the draft exists.\n\nNOTE: if Shrinjay is a named inventor, coordinate this with the India foreign-filing resolution (linked task) - the assignment and the foreign-filing path are related for an India-based inventor.\n\nDONE WHEN: all named inventors have signed their assignment agreements and they are returned to counsel for USPTO registration.",
+              "description": "Each named inventor signs an assignment agreement assigning their rights in the patent to GG Inc. (the owner/applicant). These must be registered with the USPTO.\n\nDEPENDENCY: counsel generates these once the draft title is set, so this needs the draft provisional (and its title) first. Cannot be completed before the draft exists.\n\nNOTE: if Shrinjay is a named inventor, coordinate this with the India foreign-filing resolution (linked task) - the assignment and the foreign-filing path are related for an India-based inventor.\n\nDONE WHEN: all named inventors have signed their assignment agreements and they are returned to counsel for USPTO registration.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-15",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Decide the inventor list and capture nationalities",
-              "description": "Counsel (Ramesh/DG) needs the list of inventors and their nationalities before filing.\n\nWHO: the applicant/owner is GeneGenius Inc. (the company). Inventors = every person who contributed to the conception of the invention (the architecture + MoE engine + modules). Up to 50 inventors allowed. From the June 26 call, the likely inventors are those who designed/built the architecture and the conflict-resolution engine - discuss internally to finalize (candidates include Faraz, Shrinjay, Sagar; confirm who contributed to conception vs pure implementation).\n\nNATIONALITIES MATTER: counsel specifically needs each inventor's nationality because of foreign-filing rules (see the linked India task). Capture nationality for each named inventor.\n\nDONE WHEN: final inventor list with each person's nationality is agreed internally and sent to counsel.",
+              "description": "Counsel (Ramesh/DG) needs the list of inventors and their nationalities before filing.\n\nWHO: the applicant/owner is GG Inc. (the company). Inventors = every person who contributed to the conception of the invention (the architecture + MoE engine + modules). Up to 50 inventors allowed. From the June 26 call, the likely inventors are those who designed/built the architecture and the conflict-resolution engine - discuss internally to finalize (candidates include Faraz, Shrinjay, Sagar; confirm who contributed to conception vs pure implementation).\n\nNATIONALITIES MATTER: counsel specifically needs each inventor's nationality because of foreign-filing rules (see the linked India task). Capture nationality for each named inventor.\n\nDONE WHEN: final inventor list with each person's nationality is agreed internally and sent to counsel.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-02",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1672,49 +1672,49 @@
           "tasks": [
             {
               "title": "Confirm the disclosure describes the MoE engine without revealing the trade-secret mechanism",
-              "description": "Per Ramesh's guidance on the June 26 call: describe the broad mechanism at a level that ENABLES the patent claim, but do NOT disclose the secret sauce.\n\nWHAT TO DISCLOSE (broad, claimable): the system detects inter-expert conflict, resolves it through a structured deterministic reconciliation step, and the same input always yields the same output (reproducibility = the claimable technical improvement).\n\nWHAT TO KEEP AS TRADE SECRET: the exact conflict-resolution logic, the specific weight constants, and the tuning. Ramesh's analogy: disclose that 'k can be 5–10' but keep the optimal value (e.g. 7) secret. Give competitors enough to understand the shape, but make them spend 2–3 years to actually reproduce a high-performing system.\n\nVERIFY in GeneGenius_Provisional_Disclosure.pdf: Section 6 (the MoE engine) and Section 6.3 (dynamic context-dependent weighting) explicitly state that the numeric weight constants are an implementation detail intentionally NOT recited — confirm that line holds and nothing downstream accidentally over-discloses the mechanism.\n\nDONE WHEN: confirmed the disclosure gives counsel enough to claim the invention while keeping the conflict-resolution mechanism and tuning protected as trade secret.",
+              "description": "Per Ramesh's guidance on the June 26 call: describe the broad mechanism at a level that ENABLES the patent claim, but do NOT disclose the secret sauce.\n\nWHAT TO DISCLOSE (broad, claimable): the system detects inter-expert conflict, resolves it through a structured deterministic reconciliation step, and the same input always yields the same output (reproducibility = the claimable technical improvement).\n\nWHAT TO KEEP AS TRADE SECRET: the exact conflict-resolution logic, the specific weight constants, and the tuning. Ramesh's analogy: disclose that 'k can be 5–10' but keep the optimal value (e.g. 7) secret. Give competitors enough to understand the shape, but make them spend 2–3 years to actually reproduce a high-performing system.\n\nVERIFY in GG_Provisional_Disclosure.pdf: Section 6 (the MoE engine) and Section 6.3 (dynamic context-dependent weighting) explicitly state that the numeric weight constants are an implementation detail intentionally NOT recited — confirm that line holds and nothing downstream accidentally over-discloses the mechanism.\n\nDONE WHEN: confirmed the disclosure gives counsel enough to claim the invention while keeping the conflict-resolution mechanism and tuning protected as trade secret.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Upload all technical docs to the DG OneDrive technical-docs folder",
-              "description": "Team committed to counsel (Ramesh/Mehak at DG) on the June 26 call: all technical documentation gets uploaded to the Innovance-hosted OneDrive, into the \"Technical docs\" folder specifically, by Monday June 30 — then send a confirmation email to Mehak/Ramesh saying the docs are up.\n\nEXACT LOCATION: Nilay's OneDrive → Client files → \"GeneGenius - Innovance files\" → \"Technical docs\" folder. (The other folders there — Business docs and Pitchdeck, Docs signed with Innovance, Invoices and Receipts, Meeting transcripts — are NOT where the disclosure goes. Technical docs only.)\n\nONEDRIVE LINK: https://innovanceai-my.sharepoint.com/personal/nilay_innovance_ai/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnilay%5Finnovance%5Fai%2FDocuments%2FClient%20files%2FGeneGenius%20%2D%20Innovance%20files\n\nLOGIN: when prompted for email, use mohdsarfaraz@genegenius.ai — a verification code will be sent to that address to complete sign-in.\n\nWHAT TO UPLOAD: the technical disclosure PDF (GeneGenius_Provisional_Disclosure.pdf) plus the architecture diagrams from Sagar.\n\nDONE WHEN: disclosure + architecture diagrams are in the Technical docs folder, AND a confirmation email has been sent to Mehak/Ramesh that the docs are uploaded.",
+              "description": "Team committed to counsel (Ramesh/Mehak at DG) on the June 26 call: all technical documentation gets uploaded to the Innovance-hosted OneDrive, into the \"Technical docs\" folder specifically, by Monday June 30 — then send a confirmation email to Mehak/Ramesh saying the docs are up.\n\nEXACT LOCATION: Nilay's OneDrive → Client files → \"GG - Innovance files\" → \"Technical docs\" folder. (The other folders there — Business docs and Pitchdeck, Docs signed with Innovance, Invoices and Receipts, Meeting transcripts — are NOT where the disclosure goes. Technical docs only.)\n\nONEDRIVE LINK: https://innovanceai-my.sharepoint.com/personal/nilay_innovance_ai/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fnilay%5Finnovance%5Fai%2FDocuments%2FClient%20files%2FGG%20%2D%20Innovance%20files\n\nLOGIN: when prompted for email, use mohdsarfaraz@gg.ai — a verification code will be sent to that address to complete sign-in.\n\nWHAT TO UPLOAD: the technical disclosure PDF (GG_Provisional_Disclosure.pdf) plus the architecture diagrams from Sagar.\n\nDONE WHEN: disclosure + architecture diagrams are in the Technical docs folder, AND a confirmation email has been sent to Mehak/Ramesh that the docs are uploaded.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-30",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Finalize the technical disclosure document for counsel",
-              "description": "The file GeneGenius_Provisional_Disclosure.pdf (17 pages, prepared by Shrinjay) is the technical disclosure counsel will draft the provisional from. Review it for accuracy before it goes to Ramesh.\n\nIt must accurately cover the four inventive aspects:\n(A) End-to-end variant-to-report pipeline (accepts VCF or FASTQ; GPU secondary-analysis path; staged time-budgeted funnel for whole-genome inputs).\n(B) The Explainability-Engine-mediated Mixture-of-Experts (MoE) evidence-fusion engine — THE CORE invention. Up to ten experts normalized to a common pathogenicity scale, context-dependent dynamic weighting, conflict detection, deterministic reconciliation, audit narrative, expert-review trigger.\n(C) Feature-gated M1–M8 augmentation modules (structural impact, splicing, expression outlier, continuous reanalysis, phenotype integration, therapeutic synthesis, metabolomic overlay, functional rectification).\n(D) Knowledge-graph reasoning layer (Variant→Gene→Pathway→Disease/Phenotype, multi-layer impact analysis).\n\nUPLOAD TARGET once finalized: OneDrive → Client files → GeneGenius - Innovance files → Technical docs (see the upload task in this project for the link).\n\nDONE WHEN: disclosure reviewed for technical accuracy, no incorrect claims, confirmed ready to hand to counsel.",
+              "description": "The file GG_Provisional_Disclosure.pdf (17 pages, prepared by Shrinjay) is the technical disclosure counsel will draft the provisional from. Review it for accuracy before it goes to Ramesh.\n\nIt must accurately cover the four inventive aspects:\n(A) End-to-end variant-to-report pipeline (accepts VCF or FASTQ; GPU secondary-analysis path; staged time-budgeted funnel for whole-genome inputs).\n(B) The Explainability-Engine-mediated Mixture-of-Experts (MoE) evidence-fusion engine — THE CORE invention. Up to ten experts normalized to a common pathogenicity scale, context-dependent dynamic weighting, conflict detection, deterministic reconciliation, audit narrative, expert-review trigger.\n(C) Feature-gated M1–M8 augmentation modules (structural impact, splicing, expression outlier, continuous reanalysis, phenotype integration, therapeutic synthesis, metabolomic overlay, functional rectification).\n(D) Knowledge-graph reasoning layer (Variant→Gene→Pathway→Disease/Phenotype, multi-layer impact analysis).\n\nUPLOAD TARGET once finalized: OneDrive → Client files → GG - Innovance files → Technical docs (see the upload task in this project for the link).\n\nDONE WHEN: disclosure reviewed for technical accuracy, no incorrect claims, confirmed ready to hand to counsel.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1725,28 +1725,28 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "sagar.gour@genegenius.ai"
+                "sagar.gour@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-30",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Resolve disclosure-validation findings before it goes to counsel",
-              "description": "Line-by-line validation of GeneGenius_Provisional_Disclosure.pdf was run before sending to counsel. Headline: the disclosure is sound, holds the trade-secret line correctly (Section 6.3 explicitly does not recite the weight constants - good), and has no wrong citations. But three things need confirmation/fix before it ships, ranked by cost if wrong:\n\n1. VERIFY VERBATIM - M1-M8 feature-flag names. Section 7 lists exact strings: v2_m1_structural_impact, v2_m2_splicing_validation, v2_m3_expression_outlier, v2_m4_continuous_reanalysis, v2_m5_phenotype_integration, v2_m6_therapeutic_synthesis, v2_m7_metabolomic_overlay, v2_m8_functional_rectification. These are exact strings in a legal filing - confirm each matches the repo verbatim. Cheap to check, embarrassing if wrong.\n\n2. FIX OR CONFIRM - the example variant. Section 4 (Definitions) uses 7:117559593:CTT>C as the example variant. That is a DELETION-style notation (resembles F508del = c.1521_1523delCTT). But our flagship case G551D is a single-nucleotide missense: NM_000492.4:c.1652G>A (verified against ClinVar + PharmGKB). So the example variant is NOT G551D. Decide: is 7:117559593:CTT>C a deliberate generic example, or should it be the real G551D coordinate? If it is meant to be G551D, it is wrong and must be corrected. An examiner cross-referencing our flagship case will notice the mismatch.\n\n3. DECIDE CONSCIOUSLY - 'up to ten experts' real vs planned. Section 6.1/6.3 list ten experts (curated clinical, population frequency, computational missense, genomic sequence model, literature synthesis, protein LM, tissue-context, splice-impact, structure-impact, docking). Confirm which are actually implemented vs planned. Fine for a provisional to cover intended embodiments, but you should know which is which, not disclose by accident.\n\nLOW-RISK GLANCE: Section 6.1 docking-energy normalization maps 'energies in a practical range' - confirm that range is not revealing tuning. 0.5 neutral-midpoint default is trivial/non-secret, fine.\n\nWHAT PASSED (no action): no trade-secret leak found; the 8-step MoE method (6.2) is described at method-level without the conflict-resolution math; the four inventive aspects (Sec 3) are consistent with their detail sections (5/6/7/8) and claim directions (Sec 9); ACMG/AMP 2015 framing and the G551D class III gating biology are accurate.\n\nDONE WHEN: M1-M8 flag names confirmed verbatim against repo; example-variant question resolved (fixed or confirmed deliberate); ten-experts real-vs-planned decided; then disclosure is cleared to send to Ramesh.",
+              "description": "Line-by-line validation of GG_Provisional_Disclosure.pdf was run before sending to counsel. Headline: the disclosure is sound, holds the trade-secret line correctly (Section 6.3 explicitly does not recite the weight constants - good), and has no wrong citations. But three things need confirmation/fix before it ships, ranked by cost if wrong:\n\n1. VERIFY VERBATIM - M1-M8 feature-flag names. Section 7 lists exact strings: v2_m1_structural_impact, v2_m2_splicing_validation, v2_m3_expression_outlier, v2_m4_continuous_reanalysis, v2_m5_phenotype_integration, v2_m6_therapeutic_synthesis, v2_m7_metabolomic_overlay, v2_m8_functional_rectification. These are exact strings in a legal filing - confirm each matches the repo verbatim. Cheap to check, embarrassing if wrong.\n\n2. FIX OR CONFIRM - the example variant. Section 4 (Definitions) uses 7:117559593:CTT>C as the example variant. That is a DELETION-style notation (resembles F508del = c.1521_1523delCTT). But our flagship case G551D is a single-nucleotide missense: NM_000492.4:c.1652G>A (verified against ClinVar + PharmGKB). So the example variant is NOT G551D. Decide: is 7:117559593:CTT>C a deliberate generic example, or should it be the real G551D coordinate? If it is meant to be G551D, it is wrong and must be corrected. An examiner cross-referencing our flagship case will notice the mismatch.\n\n3. DECIDE CONSCIOUSLY - 'up to ten experts' real vs planned. Section 6.1/6.3 list ten experts (curated clinical, population frequency, computational missense, genomic sequence model, literature synthesis, protein LM, tissue-context, splice-impact, structure-impact, docking). Confirm which are actually implemented vs planned. Fine for a provisional to cover intended embodiments, but you should know which is which, not disclose by accident.\n\nLOW-RISK GLANCE: Section 6.1 docking-energy normalization maps 'energies in a practical range' - confirm that range is not revealing tuning. 0.5 neutral-midpoint default is trivial/non-secret, fine.\n\nWHAT PASSED (no action): no trade-secret leak found; the 8-step MoE method (6.2) is described at method-level without the conflict-resolution math; the four inventive aspects (Sec 3) are consistent with their detail sections (5/6/7/8) and claim directions (Sec 9); ACMG/AMP 2015 framing and the G551D class III gating biology are accurate.\n\nDONE WHEN: M1-M8 flag names confirmed verbatim against repo; example-variant question resolved (fixed or confirmed deliberate); ten-experts real-vs-planned decided; then disclosure is cleared to send to Ramesh.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "shrinjayshresth@genegenius.ai"
+                "shrinjayshresth@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1762,12 +1762,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2027-01-15",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1778,12 +1778,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2027-07-10",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -1794,17 +1794,17 @@
           "tasks": [
             {
               "title": "Define what we file vs what we keep as trade secret",
-              "description": "The science/research team (led by Zuhra + Amina) already worked through what is safe to publish vs what must stay protected while writing the Genetics in Medicine benchmarking paper. Capture that split explicitly as a written file-vs-trade-secret boundary that counsel and the team can work against.\n\nWHAT STAYS TRADE SECRET (per Ramesh's June 26 guidance): the exact conflict-resolution mechanism in the MoE engine, the specific weight constants, and the tuning. Rule of thumb from counsel: disclose the range (e.g. 'k can be 5-10'), keep the optimal value secret.\n\nWHAT CAN BE FILED/PUBLISHED: the high-level architecture, the deterministic-reproducibility claim, the relative prioritization of experts (ordering, not numbers), the existence of the M1-M8 modules and the knowledge graph.\n\nCROSS-REFERENCE: this must line up with what the disclosure (GeneGenius_Provisional_Disclosure.pdf, Section 6.3) already says is intentionally not recited. The boundary doc should not contradict the disclosure.\n\nDONE WHEN: a written file-vs-trade-secret boundary exists, consistent with the disclosure, that counsel and the team can both work against.",
+              "description": "The science/research team (led by Zuhra + Amina) already worked through what is safe to publish vs what must stay protected while writing the Genetics in Medicine benchmarking paper. Capture that split explicitly as a written file-vs-trade-secret boundary that counsel and the team can work against.\n\nWHAT STAYS TRADE SECRET (per Ramesh's June 26 guidance): the exact conflict-resolution mechanism in the MoE engine, the specific weight constants, and the tuning. Rule of thumb from counsel: disclose the range (e.g. 'k can be 5-10'), keep the optimal value secret.\n\nWHAT CAN BE FILED/PUBLISHED: the high-level architecture, the deterministic-reproducibility claim, the relative prioritization of experts (ordering, not numbers), the existence of the M1-M8 modules and the knowledge graph.\n\nCROSS-REFERENCE: this must line up with what the disclosure (GG_Provisional_Disclosure.pdf, Section 6.3) already says is intentionally not recited. The boundary doc should not contradict the disclosure.\n\nDONE WHEN: a written file-vs-trade-secret boundary exists, consistent with the disclosure, that counsel and the team can both work against.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-03",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -1815,12 +1815,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-06",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }

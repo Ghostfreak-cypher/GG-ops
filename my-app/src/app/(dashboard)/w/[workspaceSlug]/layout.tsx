@@ -50,10 +50,10 @@ export default async function WorkspaceLayout({
     <>
       <div className="flex items-center gap-2 px-2 pt-1 group-data-[collapsed=true]/sidebar:justify-center group-data-[collapsed=true]/sidebar:px-0">
         <span className="grid size-7 shrink-0 place-items-center border-2 border-white bg-white p-0.5">
-          <Image src="/logo-icon.png" alt="GeneGenius" width={24} height={24} className="size-full object-contain" />
+          <Image src="/logo-icon.png" alt="GG" width={24} height={24} className="size-full object-contain" />
         </span>
         <span className="font-sans text-sm font-semibold uppercase tracking-wide text-sidebar-foreground group-data-[collapsed=true]/sidebar:hidden">
-          GeneGenius
+          GG
         </span>
       </div>
       <div className="group-data-[collapsed=true]/sidebar:hidden">

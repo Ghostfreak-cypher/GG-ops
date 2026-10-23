@@ -8,7 +8,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="hidden lg:flex lg:w-1/2 flex-col justify-between bg-black p-12 text-white border-r-[3px] border-black">
         <div className="flex items-center gap-3">
           <span className="grid size-9 shrink-0 place-items-center border-2 border-white bg-white p-1">
-            <Image src="/logo-icon.png" alt="GeneGenius" width={28} height={28} className="size-full object-contain" />
+            <Image src="/logo-icon.png" alt="GG" width={28} height={28} className="size-full object-contain" />
           </span>
           <span className="inline-block border-[3px] border-white px-3 py-1 font-display text-xs uppercase tracking-widest text-white">
             GGOps
@@ -46,7 +46,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         {/* Mobile wordmark */}
         <div className="mb-8 flex items-center gap-3 lg:hidden">
           <span className="grid size-9 shrink-0 place-items-center border-2 border-border bg-white p-1">
-            <Image src="/logo-icon.png" alt="GeneGenius" width={28} height={28} className="size-full object-contain" />
+            <Image src="/logo-icon.png" alt="GG" width={28} height={28} className="size-full object-contain" />
           </span>
           <span className="inline-block border-[3px] border-border px-3 py-1 font-display text-xs uppercase tracking-widest">
             GGOps

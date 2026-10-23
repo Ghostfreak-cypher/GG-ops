@@ -1,22 +1,22 @@
 {
   "workspace": {
-    "name": "genegenius.ai",
-    "description": "GeneGenius Asana workspace (scoped export: Zuhra Maksudi's assigned + followed/linked tasks)"
+    "name": "gg.ai",
+    "description": "GG Asana workspace (scoped export: Zuhra Maksudi's assigned + followed/linked tasks)"
   },
   "members": [
     {
       "name": "Faraz",
-      "email": "mohdsarfaraz@genegenius.ai",
+      "email": "mohdsarfaraz@gg.ai",
       "role": "OWNER"
     },
     {
       "name": "Sagar Gour",
-      "email": "sagar.gour@genegenius.ai",
+      "email": "sagar.gour@gg.ai",
       "role": "MEMBER"
     },
     {
       "name": "Shrinjay Shresth",
-      "email": "shrinjayshresth@genegenius.ai",
+      "email": "shrinjayshresth@gg.ai",
       "role": "MEMBER"
     },
     {
@@ -36,12 +36,12 @@
     },
     {
       "name": "Matthew Dingess",
-      "email": "matthew@genegenius.ai",
+      "email": "matthew@gg.ai",
       "role": "MEMBER"
     },
     {
       "name": "Zuhra Maksudi",
-      "email": "zuhra@genegenius.ai",
+      "email": "zuhra@gg.ai",
       "role": "MEMBER"
     },
     {
@@ -91,12 +91,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-29",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -107,16 +107,16 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "Gate decision — June 25 (GO/NO-GO #2). CFTR is close but not polished tonight. The mechanism note still needs its citations added (lands tomorrow AM), then scientific review. We are one day out — the planned fallback, not a problem.\nTomorrow's order: (1) Sakshi gets the cited mechanism note to Zuhra first thing AM (she needs runway to review before we freeze); (2) Zuhra reviews the same morning — the next link before we lock the demo; (3) Vansh wires it into the frontend once the JSON is locked. Keeps us on the June 26 internal full-draft from a frozen, tested branch.",
                   "createdAt": "2026-06-25T05:45:59Z"
                 }
@@ -134,21 +134,21 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-24",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": [
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "This checklist is quietly on tomorrow's critical path. It's overdue, but the bigger point is that it's the tool you use to review Sakshi's cited mechanism note tomorrow. Without it locked, the review has no defined bar. The good news: the description already contains the full checklist — all 20 verification items and the five review outcomes. So this is confirm-and-lock, not build-from-scratch. Lock it so it's ready when Sakshi's note lands in the AM. Confirm here once it's locked.",
                   "createdAt": "2026-06-25T06:20:06Z"
                 },
                 {
-                  "author": "mohdsarfaraz@genegenius.ai",
+                  "author": "mohdsarfaraz@gg.ai",
                   "body": "vish, picking this up since Sakshi's whole citation layer sits on it. The passages fixture is in and solid — cases/cftr/g551d_passages.json has STRIVE 22293454, VX-770 in-vitro 21083385, class III gating-defect review 16113672, modulator paper 23757338 (real PMIDs, relevance scores, F508del-vs-G551D distinction). But that's the retrieve() output, not the claim-to-source mapping. The mapping is the structured object tying each of the seven claims to its specific PMID with variant-specific-vs-gene-level flag, contradictory evidence, confidence, review status — the thing Sakshi's citations point into. I can't find that object on main (packages/rag only has init.py + literature_retrieval.py, both under Anushka). Two questions: (1) where's the mapping right now — exact file + branch, or doc link; (2) when Sakshi did her cited note, did she point at your mapping or straight at g551d_passages.json. If it's built and I'm looking in the wrong place, send the path. If it still needs doing on top of the passages, tell me straight and we get it done today — until it's locked Sakshi's citations point at something that can still move.",
                   "createdAt": "2026-06-27T00:48:45Z"
                 }
@@ -161,12 +161,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-25",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -177,12 +177,12 @@
               "priority": "HIGH",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-26",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -191,7 +191,7 @@
       ]
     },
     {
-      "name": "GeneGenius Sprint",
+      "name": "GG Sprint",
       "description": "Core product sprint + production incident remediation",
       "sections": [
         {
@@ -204,28 +204,28 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "mohdsarfaraz@genegenius.ai"
+                "mohdsarfaraz@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-06-22",
               "completedAt": "2026-06-27",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
             {
               "title": "Explore + pursue AWS Partner Network (APN) funding benefits",
-              "description": "Explore and pursue AWS Partner Network (APN) funding benefits for GeneGenius, aligned with the live Innovative Solutions engagement. Matt takes it on after KPMG; Sagar on the technical side.\n1. APN partner funding (https://aws.amazon.com/partners/funding/) — AWS funds Partners on training, product/solution development, go-to-market. We're well-positioned: platform live on AWS GPU, NVIDIA Inception member, AWS Activate credits.\n2. Innovative Solutions engagement — milestone-based migration onto EKS GPU, Innovative's services AWS-funded (AJ Rivera ajrivera@innovativesol.com; Sarah at AWS = funding contact). Compute from Zuhra's email to Sarah: WO1 (Jul 1-15) ~$0; WO2 (Jul 15-Aug 15) ~$21,750/mo; WO3 ~$21,750; WO4 ~$22,750; scaling toward ~$261K/yr.\nLIVE DEADLINE: WO1 is assessment-only — a window BEFORE WO2 spend starts July 15 to sort the compute-cost path. Zuhra asked Sarah for 20 min early next week.\nMatt: map which APN benefits we qualify for and how they stack with (not double-claim against) the funded Innovative engagement; support Zuhra's Sarah conversation. Sagar: AWS services/architecture inputs to qualify for build/proficiency + migration funding buckets.\nDONE WHEN: APN benefits identified and mapped, claim-sheet drafted, lined up to support Zuhra's funding conversation with Sarah BEFORE July 15 WO2 spend.",
+              "description": "Explore and pursue AWS Partner Network (APN) funding benefits for GG, aligned with the live Innovative Solutions engagement. Matt takes it on after KPMG; Sagar on the technical side.\n1. APN partner funding (https://aws.amazon.com/partners/funding/) — AWS funds Partners on training, product/solution development, go-to-market. We're well-positioned: platform live on AWS GPU, NVIDIA Inception member, AWS Activate credits.\n2. Innovative Solutions engagement — milestone-based migration onto EKS GPU, Innovative's services AWS-funded (AJ Rivera ajrivera@innovativesol.com; Sarah at AWS = funding contact). Compute from Zuhra's email to Sarah: WO1 (Jul 1-15) ~$0; WO2 (Jul 15-Aug 15) ~$21,750/mo; WO3 ~$21,750; WO4 ~$22,750; scaling toward ~$261K/yr.\nLIVE DEADLINE: WO1 is assessment-only — a window BEFORE WO2 spend starts July 15 to sort the compute-cost path. Zuhra asked Sarah for 20 min early next week.\nMatt: map which APN benefits we qualify for and how they stack with (not double-claim against) the funded Innovative engagement; support Zuhra's Sarah conversation. Sagar: AWS services/architecture inputs to qualify for build/proficiency + migration funding buckets.\nDONE WHEN: APN benefits identified and mapped, claim-sheet drafted, lined up to support Zuhra's funding conversation with Sarah BEFORE July 15 WO2 spend.",
               "status": "DONE",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "matthew@genegenius.ai"
+                "matthew@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-03",
               "completedAt": "2026-07-01",
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }
@@ -242,17 +242,17 @@
           "tasks": [
             {
               "title": "Define what we file vs what we keep as trade secret",
-              "description": "The science/research team (Zuhra + Amina) already worked through what is safe to publish vs what must stay protected while writing the Genetics in Medicine benchmarking paper. Capture that split as a written file-vs-trade-secret boundary counsel and the team can work against.\nTRADE SECRET (per Ramesh's June 26 guidance): the exact conflict-resolution mechanism in the MoE engine, the specific weight constants, the tuning. Rule of thumb: disclose the range (e.g. 'k can be 5-10'), keep the optimal value secret.\nCAN BE FILED/PUBLISHED: the high-level architecture, the deterministic-reproducibility claim, the relative prioritization of experts (ordering, not numbers), the existence of the M1-M8 modules and the knowledge graph.\nCROSS-REFERENCE: must line up with GeneGenius_Provisional_Disclosure.pdf Section 6.3 (intentionally not recited). Boundary doc must not contradict the disclosure.\nDONE WHEN: a written file-vs-trade-secret boundary exists, consistent with the disclosure, that counsel and the team can both work against.",
+              "description": "The science/research team (Zuhra + Amina) already worked through what is safe to publish vs what must stay protected while writing the Genetics in Medicine benchmarking paper. Capture that split as a written file-vs-trade-secret boundary counsel and the team can work against.\nTRADE SECRET (per Ramesh's June 26 guidance): the exact conflict-resolution mechanism in the MoE engine, the specific weight constants, the tuning. Rule of thumb: disclose the range (e.g. 'k can be 5-10'), keep the optimal value secret.\nCAN BE FILED/PUBLISHED: the high-level architecture, the deterministic-reproducibility claim, the relative prioritization of experts (ordering, not numbers), the existence of the M1-M8 modules and the knowledge graph.\nCROSS-REFERENCE: must line up with GG_Provisional_Disclosure.pdf Section 6.3 (intentionally not recited). Boundary doc must not contradict the disclosure.\nDONE WHEN: a written file-vs-trade-secret boundary exists, consistent with the disclosure, that counsel and the team can both work against.",
               "status": "TODO",
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-03",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             },
@@ -263,12 +263,12 @@
               "priority": "MEDIUM",
               "type": "TASK",
               "assignees": [
-                "zuhra@genegenius.ai"
+                "zuhra@gg.ai"
               ],
               "labels": [],
               "dueDate": "2026-07-06",
               "completedAt": null,
-              "createdBy": "mohdsarfaraz@genegenius.ai",
+              "createdBy": "mohdsarfaraz@gg.ai",
               "subtasks": [],
               "comments": []
             }

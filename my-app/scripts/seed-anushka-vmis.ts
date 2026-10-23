@@ -1,5 +1,5 @@
 /**
- * Seed Anushka's VMIS–CFTR G551D tasks into the existing genegenius.ai workspace.
+ * Seed Anushka's VMIS–CFTR G551D tasks into the existing gg.ai workspace.
  * Creates project, section, tasks, subtasks, and comments. Fully idempotent.
  * Run with: npx tsx scripts/seed-anushka-vmis.ts
  */
@@ -35,9 +35,9 @@ async function main() {
   // ── 2. Resolve emails → user IDs ─────────────────────────────────────────
   const emails = [
     "anushkagarg3008@gmail.com",
-    "mohdsarfaraz@genegenius.ai",
-    "zuhra@genegenius.ai",
-    "sagar.gour@genegenius.ai",
+    "mohdsarfaraz@gg.ai",
+    "zuhra@gg.ai",
+    "sagar.gour@gg.ai",
     "singh.guru.2712@gmail.com",
     "vishvakpune@gmail.com",
     "navdeepmkn@gmail.com",
@@ -53,7 +53,7 @@ async function main() {
   const missing = emails.filter((e) => !userByEmail.has(e));
   if (missing.length) console.warn(`  ⚠ Users not found (will skip as assignees): ${missing.join(", ")}`);
 
-  const farazId = userByEmail.get("mohdsarfaraz@genegenius.ai") ?? WORKSPACE_ID; // fallback to ws owner
+  const farazId = userByEmail.get("mohdsarfaraz@gg.ai") ?? WORKSPACE_ID; // fallback to ws owner
   const anushkaId = userByEmail.get("anushkagarg3008@gmail.com");
 
   // ── 3. Resolve / create labels ────────────────────────────────────────────
@@ -184,7 +184,7 @@ async function main() {
       dueDate: "2026-06-21",
       startDate: null,
       completedAt: "2026-06-21",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 1000,
       subtasks: [],
       comments: [
@@ -201,7 +201,7 @@ async function main() {
     {
       title: "Audit reusable annotation services",
       description:
-        "Review the existing GeneGenius annotation services and confirm what VMIS can reuse. Check: VEP, ClinVar, gnomAD, HGVS normalization, and any existing transcript or protein mapping services. Do not rebuild any existing service. For each service, document what already works, which endpoint is used, what information it returns, current limitations, whether VMIS can reuse it, what important information is still missing, and what change is required, if any. Deliverable: one simple reuse table with these columns: Existing capability, Current endpoint, Current output, Reusable for VMIS?, Missing information, Required change, Owner.",
+        "Review the existing GG annotation services and confirm what VMIS can reuse. Check: VEP, ClinVar, gnomAD, HGVS normalization, and any existing transcript or protein mapping services. Do not rebuild any existing service. For each service, document what already works, which endpoint is used, what information it returns, current limitations, whether VMIS can reuse it, what important information is still missing, and what change is required, if any. Deliverable: one simple reuse table with these columns: Existing capability, Current endpoint, Current output, Reusable for VMIS?, Missing information, Required change, Owner.",
       status: "DONE",
       priority: "HIGH",
       type: "TASK",
@@ -210,16 +210,16 @@ async function main() {
       dueDate: "2026-06-22",
       startDate: null,
       completedAt: "2026-06-27",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 2000,
       subtasks: [],
       comments: [
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "Closing the open thread from the 24th. The last update here was waiting on Vansh signing off the report-format check. That's done now. Verified across the board: Vansh signed off on the 25th, thin adapter not a schema merge, exactly as your pre-check predicted. It's recorded on the base data object.",
         },
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "Correction: format check is signed off, but review still had two open items, one of them assigned to Anushka.",
         },
         {
@@ -231,7 +231,7 @@ async function main() {
     {
       title: "Create CFTR base data object",
       description:
-        "Create the structured base data object for the CFTR G551D flagship case using existing GeneGenius services and verified scientific sources. Include gene symbol and approved gene name, genome assembly, chromosome and genomic coordinates, reference and alternate alleles, selected transcript and transcript version, HGVS genomic/coding/protein notation, variant type, ClinVar identifier and classification, dbSNP identifier if available, gnomAD population frequency, protein identifier and amino-acid change, existing ACMG classification output, and source/retrieval date for every field. Requirements: reuse existing VEP, ClinVar, gnomAD, HGVS, and ACMG services; do not rebuild or manually recreate existing annotation services; use one confirmed transcript consistently; mark missing or conflicting information clearly; do not include mechanism conclusions; add results to shared VMIS JSON structure; confirm field names with Faraz before finalizing. Deliverable: validated CFTR G551D base JSON object that can later be combined with Vish's evidence fields and Sakshi's mechanism fields. Final locked file: cases/cftr/g551d_base.json in genegenius-vmis repo, merged to main via PR #1.",
+        "Create the structured base data object for the CFTR G551D flagship case using existing GG services and verified scientific sources. Include gene symbol and approved gene name, genome assembly, chromosome and genomic coordinates, reference and alternate alleles, selected transcript and transcript version, HGVS genomic/coding/protein notation, variant type, ClinVar identifier and classification, dbSNP identifier if available, gnomAD population frequency, protein identifier and amino-acid change, existing ACMG classification output, and source/retrieval date for every field. Requirements: reuse existing VEP, ClinVar, gnomAD, HGVS, and ACMG services; do not rebuild or manually recreate existing annotation services; use one confirmed transcript consistently; mark missing or conflicting information clearly; do not include mechanism conclusions; add results to shared VMIS JSON structure; confirm field names with Faraz before finalizing. Deliverable: validated CFTR G551D base JSON object that can later be combined with Vish's evidence fields and Sakshi's mechanism fields. Final locked file: cases/cftr/g551d_base.json in gg-vmis repo, merged to main via PR #1.",
       status: "DONE",
       priority: "HIGH",
       type: "TASK",
@@ -240,12 +240,12 @@ async function main() {
       dueDate: "2026-06-22",
       startDate: null,
       completedAt: "2026-06-25",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 3000,
       subtasks: [],
       comments: [
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "The data and conflict catches are strong, especially flagging the ClinVar API misparse and correcting the case-pack VCV. One thing to resolve: locked version location at cases/cftr/g551d_base.json.",
         },
         {
@@ -253,15 +253,15 @@ async function main() {
           body: "Yes, done with that.",
         },
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
-          body: "Closing the loop on the where-does-it-live question from the 25th. Verified: locked file is at cases/cftr/g551d_base.json in the genegenius-vmis repo, merged to main via PR #1 (vmis-grounding sync). Pulled the live file and checked it directly. It is the corrected version, not the old draft.",
+          authorEmail: "mohdsarfaraz@gg.ai",
+          body: "Closing the loop on the where-does-it-live question from the 25th. Verified: locked file is at cases/cftr/g551d_base.json in the gg-vmis repo, merged to main via PR #1 (vmis-grounding sync). Pulled the live file and checked it directly. It is the corrected version, not the old draft.",
         },
       ],
     },
     {
       title: "Define VMIS identifiers and provenance fields",
       description:
-        "Define the standard identifiers and provenance fields that every VMIS scientific object must use. Include standards for gene identifier, transcript identifier and version, genomic HGVS, coding HGVS, protein HGVS, ClinVar Variation ID, dbSNP ID when available, protein identifier, disease and phenotype identifiers, publication identifier including PMID or DOI, source database, source URL, retrieval date, evidence type, evidence strength, review status, conflicting or contradictory evidence, and curator notes. Requirements: reuse current GeneGenius field names where possible; avoid duplicate identifiers for the same biological entity; clearly distinguish database facts from inferred VMIS conclusions; every scientific claim must be traceable to its source; missing information must be represented explicitly, not guessed; confirm final field names with Faraz before implementation; support Neo4j relationships and MongoDB workflow state. Deliverables locked under genegenius-vmis repo: docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json.",
+        "Define the standard identifiers and provenance fields that every VMIS scientific object must use. Include standards for gene identifier, transcript identifier and version, genomic HGVS, coding HGVS, protein HGVS, ClinVar Variation ID, dbSNP ID when available, protein identifier, disease and phenotype identifiers, publication identifier including PMID or DOI, source database, source URL, retrieval date, evidence type, evidence strength, review status, conflicting or contradictory evidence, and curator notes. Requirements: reuse current GG field names where possible; avoid duplicate identifiers for the same biological entity; clearly distinguish database facts from inferred VMIS conclusions; every scientific claim must be traceable to its source; missing information must be represented explicitly, not guessed; confirm final field names with Faraz before implementation; support Neo4j relationships and MongoDB workflow state. Deliverables locked under gg-vmis repo: docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json.",
       status: "DONE",
       priority: "HIGH",
       type: "TASK",
@@ -270,7 +270,7 @@ async function main() {
       dueDate: "2026-06-23",
       startDate: null,
       completedAt: "2026-06-24",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 4000,
       subtasks: [],
       comments: [
@@ -279,19 +279,19 @@ async function main() {
           body: "Field dictionary: VMIS Identifier & Provenance Dictionary. Standards covered for gene, transcript, HGVS g/c/p, ClinVar VCV, dbSNP, protein, disease/phenotype (MONDO/OMIM/HPO), PMID/DOI, evidence type/strength, review status, conflicts, and curator notes. Approved wrapper schema documented. Neo4j edge and MongoDB workflow_state patterns included. CFTR G551D examples: g551d_base.json and g551d_identifier_example.json. All three open issues tracked in VMIS Open Issues log tab. Conflict fields retained per instruction.",
         },
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "Reviewed. Field dictionary covers everything the task asked for, two example files are aligned to the wrapper, and conflict fields are retained as instructed. Confirm wrapper is corrected one: canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status.",
         },
         {
           authorEmail: "anushkagarg3008@gmail.com",
-          body: "Confirming approval: identifier dictionary is on the corrected wrapper, same nine fields as g551d_base.json: value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes. Dictionary + both CFTR examples are aligned; conflict fields retained. Locked for Sakshi/Vish under genegenius-vmis repo: docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json. Wrapper: Faraz-approved ScientificValue. ClinVar review string lives in clinvar_review_status, not wrapper review_status. Report path confirmed by Vansh: thin adapter, not schema merge. Still open then: ClinVar API / ACMG conflicts in base JSON until backend PR #59 merges + live re-run.",
+          body: "Confirming approval: identifier dictionary is on the corrected wrapper, same nine fields as g551d_base.json: value, canonical_id, source, source_object_id, version, retrieval_date, evidence_label, review_status, notes. Dictionary + both CFTR examples are aligned; conflict fields retained. Locked for Sakshi/Vish under gg-vmis repo: docs/vmis/IDENTIFIER_AND_PROVENANCE_DICTIONARY.md, cases/cftr/g551d_base.json, cases/cftr/g551d_identifier_example.json. Wrapper: Faraz-approved ScientificValue. ClinVar review string lives in clinvar_review_status, not wrapper review_status. Report path confirmed by Vansh: thin adapter, not schema merge. Still open then: ClinVar API / ACMG conflicts in base JSON until backend PR #59 merges + live re-run.",
         },
         {
           authorEmail: "anushkagarg3008@gmail.com",
           body: "PR #59 merged, so this is all set.",
         },
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "Validated against the actual deliverable. Dictionary covers every required field: gene, transcript+version, HGVS g/c/p, ClinVar VCV, dbSNP, protein, disease/phenotype, PMID/DOI, source DB, source URL, retrieval date, evidence type, evidence strength, review status, conflicts, curator notes. Wrapper is corrected nine-field one matching g551d_base.json. Example file handles conflict case correctly. One fix needed: §4.3 still has field labeled genome_assembly in genomic-HGVS table; rename to genome_build so doc does not contradict itself. Downstream items: case doc still had no job_id and backend variant_type enum confirmation. Schema validated and locked.",
         },
       ],
@@ -308,7 +308,7 @@ async function main() {
       dueDate: "2026-06-27",
       startDate: null,
       completedAt: "2026-06-30",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 5000,
       subtasks: [
         {
@@ -324,14 +324,14 @@ async function main() {
       comments: [
         {
           authorEmail: "anushkagarg3008@gmail.com",
-          body: "Blocker fixed in PR #59 (live Pathogenic for all 3 demos + VEP HGVS wired); waiting merge. Full audit closure still needs staging gnomAD/ClinVar VCF deploy + genegenius-vmis doc/fixture updates (HBB/LMNA base JSONs, CFTR conflicts_and_gaps refresh).",
+          body: "Blocker fixed in PR #59 (live Pathogenic for all 3 demos + VEP HGVS wired); waiting merge. Full audit closure still needs staging gnomAD/ClinVar VCF deploy + gg-vmis doc/fixture updates (HBB/LMNA base JSONs, CFTR conflicts_and_gaps refresh).",
         },
         {
           authorEmail: "anushkagarg3008@gmail.com",
-          body: "ClinVar parser blocker fixed. PR #59 merged. All 3 demos (CFTR G551D, HBB E6V, LMNA) now return Pathogenic from the ClinVar API. VEP annotate_hgvs done, added to existing VEPService in PR #59; RefSeq pin enforced in case pack fixtures. LMNA coord fixed to chr1:156138613 C>T in case packs. Identifier map committed in genegenius-vmis with canonical UniProt P13569 / P68871 / P02545, HGNC, and ClinVar VCVs. Not relying on gene_to_uniprot. gene_to_uniprot isoform bug fixed in PR #59 with reviewed:true filter. CFTR demo ClinVar data is trustworthy on API path. Still open ops, not code: gnomAD tabix + ClinVar local VCF on staging handed off to Sagar; smoke script ready. genegenius-vmis docs updated. Separate PR #61 open for actionability /analyze 500 on dev, Sagar to merge and deploy.",
+          body: "ClinVar parser blocker fixed. PR #59 merged. All 3 demos (CFTR G551D, HBB E6V, LMNA) now return Pathogenic from the ClinVar API. VEP annotate_hgvs done, added to existing VEPService in PR #59; RefSeq pin enforced in case pack fixtures. LMNA coord fixed to chr1:156138613 C>T in case packs. Identifier map committed in gg-vmis with canonical UniProt P13569 / P68871 / P02545, HGNC, and ClinVar VCVs. Not relying on gene_to_uniprot. gene_to_uniprot isoform bug fixed in PR #59 with reviewed:true filter. CFTR demo ClinVar data is trustworthy on API path. Still open ops, not code: gnomAD tabix + ClinVar local VCF on staging handed off to Sagar; smoke script ready. gg-vmis docs updated. Separate PR #61 open for actionability /analyze 500 on dev, Sagar to merge and deploy.",
         },
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
+          authorEmail: "mohdsarfaraz@gg.ai",
           body: "Staging deploy done. ClinVar + gnomAD tabix + analyze-500 fix are live on :8100. Deployed v2-accelerated HEAD to dev/staging, restarted, health 200. PR #63 gnomAD local tabix wiring merged + deployed. Smoke real data: all 24 gnomAD chroms register; CFTR G551D resolves gnomAD via source=local_file tier=local_tabix AF=0.000276. ClinVar Pathogenic for all 3 demos. PR #61 already merged; /actionability/analyze returns 422 on bad input instead of 500. ClinVar VCF present and used. gnomAD has benign hts_idx_load3 index older than data warnings; indexes valid, ignore. Task ready for validation.",
         },
         {
@@ -352,7 +352,7 @@ async function main() {
       dueDate: "2026-06-27",
       startDate: null,
       completedAt: "2026-06-30",
-      createdByEmail: "mohdsarfaraz@genegenius.ai",
+      createdByEmail: "mohdsarfaraz@gg.ai",
       position: 6000,
       subtasks: [
         {
@@ -367,8 +367,8 @@ async function main() {
       ],
       comments: [
         {
-          authorEmail: "mohdsarfaraz@genegenius.ai",
-          body: "job_id Option A pinned clean demo job: 7b13a5ff-47a6-45a3-bc39-72f2bac3267f. Created a single-variant CFTR G551D job on dev/staging :8100. Variant: CFTR chr7:117587806 G>A = 7:117587806:G>A, coords confirmed and stored chr-prefixed as chr7. GET /api/v1/variant-report/{job_id}/status returns 200. Put this in cases/cftr/g551d_base.json → report_integration.job_id and close ISSUE-005. Backend has no case_id concept; job_id UUID is the only key. VMIS owns case_id to job_id mapping. If fresh-run resolution is needed, query variants collection by coords → job_id field; no API endpoint exists for case_id to job_id. Caveat: job lives in genegenius_dev; if dev gets reseeded UUID needs re-pinning.",
+          authorEmail: "mohdsarfaraz@gg.ai",
+          body: "job_id Option A pinned clean demo job: 7b13a5ff-47a6-45a3-bc39-72f2bac3267f. Created a single-variant CFTR G551D job on dev/staging :8100. Variant: CFTR chr7:117587806 G>A = 7:117587806:G>A, coords confirmed and stored chr-prefixed as chr7. GET /api/v1/variant-report/{job_id}/status returns 200. Put this in cases/cftr/g551d_base.json → report_integration.job_id and close ISSUE-005. Backend has no case_id concept; job_id UUID is the only key. VMIS owns case_id to job_id mapping. If fresh-run resolution is needed, query variants collection by coords → job_id field; no API endpoint exists for case_id to job_id. Caveat: job lives in gg_dev; if dev gets reseeded UUID needs re-pinning.",
         },
         {
           authorEmail: "anushkagarg3008@gmail.com",

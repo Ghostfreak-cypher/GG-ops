@@ -32,7 +32,7 @@ async function main() {
   // --- Invite email ---
   const invite = inviteEmail({
     inviterName: "Matthew Dingess",
-    workspaceName: "GenegeniusAI",
+    workspaceName: "GGAI",
     inviteUrl,
     memberNames: [
       "Anushka Garg",

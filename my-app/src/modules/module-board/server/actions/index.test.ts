@@ -88,7 +88,7 @@ vi.mock("@/lib/db", () => ({
 
 vi.mock("@/modules/module-board/access", () => ({
   requireModuleBoardWorkspace: vi.fn(async () => ({
-    workspace: { id: WORKSPACE_ID, name: "GeneGenius", slug: "genegenius" },
+    workspace: { id: WORKSPACE_ID, name: "GG", slug: "gg" },
     role: state.role,
     userId: OWNER_ID,
   })),
@@ -119,7 +119,7 @@ describe("module board actions: permissions", () => {
     const { updateModuleBoardCardAction } = await import("@/modules/module-board/server/actions");
     state.role = "MEMBER";
 
-    const result = await updateModuleBoardCardAction("genegenius", "finishLines", "finish-1", {
+    const result = await updateModuleBoardCardAction("gg", "finishLines", "finish-1", {
       title: "Sunday completeness",
       note: "confirmed by owner",
       status: "WORKING",
@@ -133,7 +133,7 @@ describe("module board actions: permissions", () => {
     const { updateModuleBoardCardAction } = await import("@/modules/module-board/server/actions");
     state.role = "GUEST";
 
-    const result = await updateModuleBoardCardAction("genegenius", "finishLines", "finish-1", {
+    const result = await updateModuleBoardCardAction("gg", "finishLines", "finish-1", {
       title: "Sunday completeness",
       note: "attempted edit",
       status: "WORKING",
@@ -146,7 +146,7 @@ describe("module board actions: permissions", () => {
     const { updateModuleBoardCardAction } = await import("@/modules/module-board/server/actions");
     state.role = "ADMIN";
 
-    const result = await updateModuleBoardCardAction("genegenius", "finishLines", "finish-1", {
+    const result = await updateModuleBoardCardAction("gg", "finishLines", "finish-1", {
       title: "Sunday completeness",
       note: "confirmed ready",
       status: "WORKING",
@@ -161,7 +161,7 @@ describe("module board actions: permissions", () => {
     const { updateModuleBoardCardAction } = await import("@/modules/module-board/server/actions");
     state.role = "MAINTAINER";
 
-    const result = await updateModuleBoardCardAction("genegenius", "finishLines", "finish-1", {
+    const result = await updateModuleBoardCardAction("gg", "finishLines", "finish-1", {
       title: "Sunday completeness",
       note: "confirmed ready",
       status: "WORKING",
@@ -179,7 +179,7 @@ describe("module board actions: task link scoping", () => {
     state.role = "ADMIN";
     state.taskCount = 0; // simulates the task existing in a different workspace or archived
 
-    const result = await updateModuleBoardStructuredRowAction("genegenius", "pilotRoadmap", "pilot-1", {
+    const result = await updateModuleBoardStructuredRowAction("gg", "pilotRoadmap", "pilot-1", {
       title: "Flagship case",
       ownerUserId: null,
       status: "UNSET",
@@ -201,7 +201,7 @@ describe("module board actions: task link scoping", () => {
     state.role = "ADMIN";
     state.taskCount = 1;
 
-    const result = await updateModuleBoardStructuredRowAction("genegenius", "pilotRoadmap", "pilot-1", {
+    const result = await updateModuleBoardStructuredRowAction("gg", "pilotRoadmap", "pilot-1", {
       title: "Flagship case",
       ownerUserId: null,
       status: "UNSET",
@@ -222,7 +222,7 @@ describe("module board actions: input validation", () => {
     );
     state.role = "ADMIN";
 
-    const result = await updateModuleBoardStructuredRowAction("genegenius", "pilotRoadmap", "pilot-1", {
+    const result = await updateModuleBoardStructuredRowAction("gg", "pilotRoadmap", "pilot-1", {
       title: "Flagship case",
       ownerUserId: null,
       status: "UNSET",
@@ -238,7 +238,7 @@ describe("module board actions: input validation", () => {
     const { updateModuleBoardModuleAction } = await import("@/modules/module-board/server/actions");
     state.role = "ADMIN";
 
-    const result = await updateModuleBoardModuleAction("genegenius", "module-m1", {
+    const result = await updateModuleBoardModuleAction("gg", "module-m1", {
       ownerUserId: OWNER_ID,
       validatorUserId: OWNER_ID,
       status: "UNSET",
@@ -259,7 +259,7 @@ describe("module board actions: input validation", () => {
     const { updateModuleBoardModuleAction } = await import("@/modules/module-board/server/actions");
     state.role = "ADMIN";
 
-    const result = await updateModuleBoardModuleAction("genegenius", "module-m1", {
+    const result = await updateModuleBoardModuleAction("gg", "module-m1", {
       ownerUserId: OWNER_ID,
       validatorUserId: VALIDATOR_ID,
       status: "UNSET",

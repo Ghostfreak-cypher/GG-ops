@@ -93,7 +93,7 @@ export function ModuleBoardView({
                 </Badge>
                 <div>
                   <h1 className="font-display text-2xl uppercase tracking-wide">
-                    GeneGenius Module Board
+                    GG Module Board
                   </h1>
                   <p className="max-w-3xl text-sm text-muted-foreground">
                     The readable source of truth for module status, finish lines, pilot

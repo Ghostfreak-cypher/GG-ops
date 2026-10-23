@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 // No env reads here — that keeps this route statically prerendered.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "GGOps — GeneGenius Ops",
+    name: "GGOps — GG Ops",
     short_name: "GGOps",
     id: "/",
     start_url: "/",

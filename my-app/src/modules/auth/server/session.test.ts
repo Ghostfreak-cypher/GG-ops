@@ -34,7 +34,7 @@ function activeUser(overrides: Record<string, unknown> = {}) {
   return {
     _id: USER_ID,
     name: "Agent Owner",
-    email: "owner@genegenius.ai",
+    email: "owner@gg.ai",
     image: null,
     isActive: true,
     authVersion: 3,
@@ -72,7 +72,7 @@ describe("getCurrentUser — API key path", () => {
 
     expect(user).toMatchObject({
       id: USER_ID,
-      email: "owner@genegenius.ai",
+      email: "owner@gg.ai",
       via: "apikey",
       scopes: ["read"],
       apiKeyId: KEY_ID,

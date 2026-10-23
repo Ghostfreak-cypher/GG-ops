@@ -27,7 +27,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "GGOps",
-  description: "GGOps — project management for GeneGenius teams",
+  description: "GGOps — project management for GG teams",
   applicationName: "GGOps",
   appleWebApp: {
     capable: true,

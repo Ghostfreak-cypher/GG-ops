@@ -1,6 +1,6 @@
-# GeneGenius OpsHub
+# GG OpsHub
 
-Internal operations and project coordination app for GeneGenius demos.
+Internal operations and project coordination app for GG demos.
 
 ## Runtime
 

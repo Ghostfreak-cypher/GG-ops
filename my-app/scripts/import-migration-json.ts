@@ -25,11 +25,11 @@ const POSITION_STEP = 1000;
 
 // Known duplicate/personal emails in source exports -> canonical account.
 const EMAIL_OVERRIDES: Record<string, string> = {
-  "shrinjayshresth@gmail.com": "shrinjayshresth@genegenius.ai",
+  "shrinjayshresth@gmail.com": "shrinjayshresth@gg.ai",
 };
 
 // Used when a task's createdBy can't be resolved at all.
-const FALLBACK_CREATOR_EMAIL = "mohdsarfaraz@genegenius.ai";
+const FALLBACK_CREATOR_EMAIL = "mohdsarfaraz@gg.ai";
 
 // Real assignees in this dataset with no account yet — created once, idempotently.
 const PLACEHOLDER_USERS: { email: string; name: string; role: string }[] = [
@@ -75,7 +75,7 @@ async function main() {
   const args = process.argv.slice(2);
   const commit = args.includes("--commit");
   const wsFlagIdx = args.indexOf("--workspace");
-  const workspaceName = wsFlagIdx >= 0 ? args[wsFlagIdx + 1] : "GeneGenius-sprint";
+  const workspaceName = wsFlagIdx >= 0 ? args[wsFlagIdx + 1] : "GG-sprint";
   const jsonPath = args.find((a, i) => !a.startsWith("--") && args[i - 1] !== "--workspace");
   if (!jsonPath) {
     console.error('Usage: import-migration-json.ts <jsonPath> [--workspace "Name"] [--commit]');

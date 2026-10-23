@@ -87,7 +87,7 @@ describe("resolveMentionRecipients", () => {
 });
 
 describe("rankMentionCandidates", () => {
-  // The real GeneGenius-sprint workspace has 16 members; the old hard-coded
+  // The real GG-sprint workspace has 16 members; the old hard-coded
   // `.slice(0, 6)` hid 10 of them, which is what made people unmentionable.
   const sixteen = Array.from({ length: 16 }, (_, i) => ({
     name: `Person ${String(i).padStart(2, "0")}`,

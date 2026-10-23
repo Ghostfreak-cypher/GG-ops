@@ -41,14 +41,14 @@ describe("issuerUrl", () => {
 
   // RFC 9207 compares the `iss` we redirect with against the metadata issuer by exact
   // string match, so a trailing slash on either side aborts the authorization.
-  it.each(["https://ggops.genegenius.ai", "https://ggops.genegenius.ai/"])(
+  it.each(["https://ggops.gg.ai", "https://ggops.gg.ai/"])(
     "has no trailing slash for APP_URL %s",
     async (appUrl) => {
       setBaseEnv();
       process.env.APP_URL = appUrl;
       vi.resetModules();
       const { issuerUrl } = await import("@/lib/urls");
-      expect(issuerUrl()).toBe("https://ggops.genegenius.ai");
+      expect(issuerUrl()).toBe("https://ggops.gg.ai");
     },
   );
 });
