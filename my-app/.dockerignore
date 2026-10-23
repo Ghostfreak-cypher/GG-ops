@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+# development settings never go into a build; .env.production is read by the build stage only (see Dockerfile)
+.env
+.env.local
+.env.development*
+.env.test*
+*.log
