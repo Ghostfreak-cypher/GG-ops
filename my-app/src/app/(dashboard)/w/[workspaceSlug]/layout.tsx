@@ -66,6 +66,11 @@ export default async function WorkspaceLayout({
         projects={projects}
         role={ws.role}
         financeWorkspaceSlug={env.FINANCE_WORKSPACE_SLUG ?? null}
+        ggDocsHref={
+          env.GGDOCS_URL
+            ? `${new URL("/connect/ggops", env.GGDOCS_URL)}?workspace=${encodeURIComponent(ws.slug)}`
+            : null
+        }
       />
     </>
   );

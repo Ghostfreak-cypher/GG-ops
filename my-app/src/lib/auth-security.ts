@@ -5,8 +5,10 @@ import { absoluteUrl } from "@/lib/urls";
 import { parseObjectIdOrThrow } from "@/lib/mongo/ids";
 import { enqueue } from "@/lib/queue";
 import { logger } from "@/lib/logger";
+import { ApiKey } from "@/models/ApiKey";
 import { AuthToken } from "@/models/AuthToken";
 import { LoginEvent } from "@/models/LoginEvent";
+import { OAuthGrant } from "@/models/OAuthGrant";
 import { User } from "@/models/User";
 
 export const PASSWORD_RESET_TTL_MS = 60 * 60 * 1000;
@@ -186,10 +188,19 @@ export async function sendPasswordChangedEmail(userId: string): Promise<void> {
   });
 }
 
+/**
+ * The authVersion bump kills sessions and PATs, but an OAuth refresh mints a fresh token
+ * at the new version — so connected apps' grants are revoked explicitly. Revoked first:
+ * if the user update then fails, the worst case is a reconnect, never a live grant.
+ */
 export async function bumpAuthVersion(userId: string, passwordHash: string): Promise<void> {
   await connectDB();
+  const id = parseObjectIdOrThrow(userId);
+  const revoked = { $set: { revokedAt: new Date() } };
+  await OAuthGrant.updateMany({ userId: id, revokedAt: null }, revoked);
+  await ApiKey.updateMany({ userId: id, kind: "OAUTH", revokedAt: null }, revoked);
   await User.updateOne(
-    { _id: parseObjectIdOrThrow(userId) },
+    { _id: id },
     {
       $set: { passwordHash, lastPasswordChangedAt: new Date() },
       $inc: { authVersion: 1 },

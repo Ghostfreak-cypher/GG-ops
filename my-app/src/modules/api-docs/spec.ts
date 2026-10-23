@@ -4,6 +4,8 @@ import { toComponentSchema } from "@/modules/api-docs/json-schema";
 import { createTaskSchema, updateTaskSchema, moveTaskSchema } from "@/modules/task/schemas";
 import { createCommentSchema } from "@/modules/comment/schemas";
 import {
+  currentUserSchema,
+  boardSummarySchema,
   workspaceSummarySchema,
   memberDtoSchema,
   projectSummarySchema,
@@ -122,6 +124,7 @@ export function buildOpenApiSpec(): Record<string, unknown> {
     },
     servers: [{ url: issuer, description: "This deployment" }],
     tags: [
+      { name: "Account", description: "The account behind the credential" },
       { name: "Workspaces", description: "Workspaces, their projects, members, and search" },
       { name: "Tasks", description: "Task boards, detail, mutation, and reordering" },
       { name: "Comments", description: "Task comment threads" },
@@ -159,6 +162,7 @@ export function buildOpenApiSpec(): Record<string, unknown> {
           properties: { ok: { const: false }, error: { type: "string" } },
           description: "The failure half of the response envelope.",
         },
+        CurrentUser: toComponentSchema(currentUserSchema),
         WorkspaceSummary: toComponentSchema(workspaceSummarySchema),
         MemberDTO: toComponentSchema(memberDtoSchema),
         ProjectSummary: toComponentSchema(projectSummarySchema),
@@ -171,10 +175,23 @@ export function buildOpenApiSpec(): Record<string, unknown> {
         // would emit as an unused type.
         TaskDetailDTO: toComponentSchema(taskDetailDtoSchema),
         BoardData: toComponentSchema(boardDataSchema),
+        BoardSummary: toComponentSchema(boardSummarySchema),
         CommentDTO: toComponentSchema(commentDtoSchema),
       },
     },
     paths: {
+      "/api/v1/me": {
+        get: {
+          tags: ["Account"],
+          operationId: "getCurrentUser",
+          summary: "Get the caller's account",
+          description: "The user this API key or OAuth token acts as.",
+          responses: {
+            "200": okResponse("The caller.", ref("CurrentUser")),
+            ...commonErrors,
+          },
+        },
+      },
       "/api/v1/workspaces": {
         get: {
           tags: ["Workspaces"],
@@ -267,6 +284,20 @@ export function buildOpenApiSpec(): Record<string, unknown> {
           responses: {
             "201": okResponse("Created.", { type: "object", required: ["id"], properties: { id: { type: "string" } } }),
             ...writeErrors,
+          },
+        },
+      },
+      "/api/v1/projects/{projectId}/summary": {
+        get: {
+          tags: ["Tasks"],
+          operationId: "getProjectSummary",
+          summary: "Get a project's status and task counts",
+          description: "Counts only — no task titles, descriptions, or assignees. Same access rule as the board.",
+          parameters: [projectIdParam],
+          responses: {
+            "200": okResponse("Project status plus task counts.", ref("BoardSummary")),
+            "404": errorResponse("No such project, or the caller has no access."),
+            ...commonErrors,
           },
         },
       },

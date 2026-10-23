@@ -19,6 +19,7 @@ import {
   ClipboardCheck,
   ClipboardPen,
   Sparkles,
+  ExternalLink,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -138,6 +139,7 @@ export function SidebarNav({
   projects,
   role,
   financeWorkspaceSlug,
+  ggDocsHref,
 }: {
   slug: string;
   unread: number;
@@ -148,6 +150,8 @@ export function SidebarNav({
   role: WorkspaceRole;
   /** Only workspace allowed to see the "Spend Report" link; null disables it everywhere. */
   financeWorkspaceSlug: string | null;
+  /** GG-Docs connect link for this workspace; null when GGDOCS_URL is unset. */
+  ggDocsHref: string | null;
 }) {
   const pathname = usePathname();
   const { collapsed } = useSidebar();
@@ -162,6 +166,7 @@ export function SidebarNav({
     ...(canEditTasks(role)
       ? [{ label: "Task Drafts", href: `${base}/drafts`, icon: Sparkles, badge: pendingDrafts }]
       : []),
+    ...(ggDocsHref ? [{ label: "Open in GG-Docs", href: ggDocsHref, icon: ExternalLink }] : []),
   ];
 
   const peopleItems: NavItem[] = [

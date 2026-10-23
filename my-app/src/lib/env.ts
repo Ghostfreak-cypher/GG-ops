@@ -43,6 +43,8 @@ export const envSchema = z.object({
   NEXT_PUBLIC_SENTRY_DSN: z.url().optional(),
   // Slug of the single private workspace allowed to see the AWS spend report feature.
   FINANCE_WORKSPACE_SLUG: z.string().min(1).optional(),
+  // GG-Docs base URL. Shows the "Open in GG-Docs" sidebar link; unset hides it.
+  GGDOCS_URL: z.url().optional(),
 
   // ── Inbound email → task (V5) ──────────────────────────────────────────────
   // Off unless explicitly enabled. This feature ingests attacker-controllable content

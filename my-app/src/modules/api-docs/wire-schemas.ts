@@ -20,6 +20,10 @@ const isoDate = z.string().datetime().describe("ISO 8601 timestamp");
 const isoDateOrNull = isoDate.nullable();
 const objectId = z.string().regex(/^[0-9a-fA-F]{24}$/, "Mongo ObjectId");
 
+export const currentUserSchema = z
+  .object({ id: objectId, name: z.string(), email: z.string() })
+  .describe("The account this credential acts as.");
+
 export const workspaceSummarySchema = z
   .object({
     id: objectId,
@@ -129,6 +133,24 @@ export const boardDataSchema = z
     unsectioned: z.array(taskDtoSchema).describe("Tasks with no section"),
   })
   .describe("A full project board.");
+
+export const boardSummarySchema = boardDataSchema
+  .pick({
+    projectId: true,
+    projectName: true,
+    projectStatusColor: true,
+    projectStatusNote: true,
+    projectStatusUpdatedAt: true,
+    memberCount: true,
+  })
+  .extend({
+    taskCount: z.number().int(),
+    countsByStatus: z
+      .record(z.enum(TASK_STATUSES), z.number().int())
+      .describe("Every status is present; a status with no tasks is 0."),
+    blockedCount: z.number().int().describe("Tasks with at least one unresolved blocking dependency"),
+  })
+  .describe("A project's status and task counts, without task content.");
 
 const commentAttachmentSchema = z.object({
   fileUrl: z.string(),
